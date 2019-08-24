@@ -3,7 +3,6 @@ title: "Example Projects Post"
 date: 2019-08-12
 tags: [data wrangling, data science, messy data]
 header:
-  image: "/images/fort point.png"
 excerpt: "Data Wrangling, Data Science, Messy Data"
 mathjax: "true"
 ---
