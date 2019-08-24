@@ -84,7 +84,7 @@ analytics:
 
 # Site Author
 author:
-  name             : "Rishabh Nimje"
+  name             : "Rishabh"
   avatar           : "/images/bio-pic-2.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Data Science Portfolio"
   location         : "Nagpur, Maharashtra, India"
