@@ -8,19 +8,18 @@ excerpt: "Hindi Dataset, Hindi Recognition, Computer Vision, Keras, Machine Lear
 mathjax: "true"
 ---
 
-# HINDI HANDWRITING RECOGNITION
-
 ## Objective
 
-Classify hindi alphabets using Convolutional Neural Network.
+Classify Hindi alphabets using Convolutional Neural Network.
 
 ## In this project
 
 We will use Devnagiri Handwritten Character Dataset which can be downloaded [here](https://archive.ics.uci.edu/ml/datasets/Devanagari+Handwritten+Character+Dataset).
 
-This project is implemented in Python 3.7.
+Also, this project is implemented in Python 3.7.
 
-Libraries used:
+And, libraries used are-
+
 1. [Numpy](https://numpy.org/)
 2. [Pandas](https://pandas.pydata.org/)
 3. [TensorFlow](https://www.tensorflow.org/)
@@ -30,11 +29,11 @@ Libraries used:
 ## Design
 
 We will create two classes here.
+
 1. Model
 2. Application
 
 Model class will be responsible for creating a model using character dataset.
-
 Application class will recognize Hindi characters in runtime.
 
 ## Diagram
@@ -43,12 +42,10 @@ Application class will recognize Hindi characters in runtime.
 
 ## Creating model (model.py)
 
-
 ```python
 import numpy as np
 import pandas as pd
 ```
-
 
 ```python
 from keras import layers
@@ -58,7 +55,6 @@ from keras.utils import np_utils, print_summary
 from keras.models import Sequential
 from keras.callbacks import ModelCheckpoint
 ```
-
 
 ```python
 data = pd.read_csv("data.csv")
@@ -72,14 +68,12 @@ Y = Y[:, 1024]
 
 ### Train and Test data variables
 
-
 ```python
 X_train = X[0:70000, :]
 X_train = X_train / 255.
 X_test = X[70000:72001, :]
 X_test = X_test / 255.
 ```
-
 
 ```python
 # Reshape
@@ -90,7 +84,6 @@ Y_test = Y[70000:72001, :]
 Y_test = Y_test.T
 ```
 
-
 ```python
 print("number of training examples = " + str(X_train.shape[0]))
 print("number of test examples = " + str(X_test.shape[0]))
@@ -100,9 +93,7 @@ print("X_test shape: " + str(X_test.shape))
 print("Y_test shape: " + str(Y_test.shape))
 ```
 
-
 ### Lets see what we have 
-
 
     number of training examples = 70000
     number of test examples = 2000
@@ -110,16 +101,16 @@ print("Y_test shape: " + str(Y_test.shape))
     Y_train shape: (1, 70000)
     X_test shape: (2000, 1024)
     Y_test shape: (1, 2000)
-    
 
 ### Back to code...
-
 
 ```python
 image_x = 32
 image_y = 32
 ```
 
+    X_train shape: (70000, 32, 32, 1)
+    Y_train shape: (70000, 37)
 
 ```python
 train_y = np_utils.to_categorical(Y_train)
@@ -130,12 +121,10 @@ X_train = X_train.reshape(X_train.shape[0],image_x, image_y,1)
 X_test = X_test.reshape(X_test.shape[0],image_x, image_y,1)
 ```
 
-
 ```python
 print("X_train shape: " + str(X_train.shape))
 print("Y_train shape: " + str(train_y.shape))
 ```
-
 
 ```python
 def keras_model(image_x,image_y):
@@ -154,7 +143,6 @@ def keras_model(image_x,image_y):
     return model, callbacks_list
 ```
 
-
 ```python
 model, callbacks_list = keras_model(image_x, image_y)
 model.fit(X_train, train_y, validation_data=(X_test, test_y), epochs=8, batch_size=64,callbacks=callbacks_list)
@@ -164,12 +152,35 @@ print_summary(model)
 model.save('devanagari.h5')
 ```
 
+CNN Error: 2.20%
+Model: "sequential_1"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d_1 (Conv2D)            (None, 28, 28, 32)        832       
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 14, 14, 32)        0         
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 10, 10, 64)        51264     
+_________________________________________________________________
+max_pooling2d_2 (MaxPooling2 (None, 2, 2, 64)          0         
+_________________________________________________________________
+flatten_1 (Flatten)          (None, 256)               0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 37)                9509      
+=================================================================
+Total params: 61,605
+Trainable params: 61,605
+Non-trainable params: 0
+_________________________________________________________________
+
+
+
 ### h5
 
 ### h5
 
 ## Creating application (application.py)
-
 
 ```python
 import numpy as np
@@ -178,12 +189,10 @@ import cv2
 from collections import deque
 ```
 
-
 ```python
 model1 = load_model('devanagari.h5')
 print(model1)
 ```
-
 
 ```python
 letter_count = {0: 'CHECK', 1: '01_ka', 2: '02_kha', 3: '03_ga', 4: '04_gha', 5: '05_kna', 6: '06_cha',
@@ -194,7 +203,6 @@ letter_count = {0: 'CHECK', 1: '01_ka', 2: '02_kha', 3: '03_ga', 4: '04_gha', 5:
                 34: '34_kshya', 35: '35_tra', 36: '36_gya', 37: 'CHECK'}
 ```
 
-
 ```python
 def keras_predict(model, image):
     processed = keras_process_image(image)
@@ -203,7 +211,6 @@ def keras_predict(model, image):
     pred_class = list(pred_probab).index(max(pred_probab))
     return max(pred_probab), pred_class
 ```
-
 
 ```python
 def keras_process_image(img):
@@ -216,7 +223,6 @@ def keras_process_image(img):
 ```
 
 ### Capturing characters 
-
 
 ```python
 cap = cv2.VideoCapture(0)
@@ -277,11 +283,8 @@ while (cap.isOpened()):
         break
 ```
 
-
 ## That's it...
 
-
 ## So? What's next?
-
 
 ## This will open system's webcam and start capturing the characters.
