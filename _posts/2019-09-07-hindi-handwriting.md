@@ -1,14 +1,14 @@
 ---
 title: "Hindi Handwriting Recognition"
 date: 2019-09-07
-tags: [data wrangling, data science, messy data]
+tags: [hindi dataset, hindi recognition, computer vision, keras, machine learning]
 header:
   image: #"/images/perceptron/percept.jpg"
-excerpt: "Data Wrangling, Data Science, Messy Data"
+excerpt: "Hindi Dataset, Hindi Recognition, Computer Vision, Keras, Machine Learning"
 mathjax: "true"
 ---
 
-# HINDI HANDWRITING RECOGNIZER
+# HINDI HANDWRITING RECOGNITION
 
 ## Objective
 
@@ -34,13 +34,14 @@ We will create two classes here.
 2. Application
 
 Model class will be responsible for creating a model using character dataset.
+
 Application class will recognize Hindi characters in runtime.
 
 ## Diagram
 
 ## We begin here...
 
-### Creating model (model.py)
+## Creating model (model.py)
 
 
 ```python
@@ -57,9 +58,6 @@ from keras.utils import np_utils, print_summary
 from keras.models import Sequential
 from keras.callbacks import ModelCheckpoint
 ```
-
-    Using TensorFlow backend.
-    
 
 
 ```python
@@ -92,8 +90,6 @@ Y_test = Y[70000:72001, :]
 Y_test = Y_test.T
 ```
 
-### Lets see what we have 
-
 
 ```python
 print("number of training examples = " + str(X_train.shape[0]))
@@ -104,6 +100,10 @@ print("X_test shape: " + str(X_test.shape))
 print("Y_test shape: " + str(Y_test.shape))
 ```
 
+
+### Lets see what we have 
+
+
     number of training examples = 70000
     number of test examples = 2000
     X_train shape: (70000, 1024)
@@ -111,6 +111,8 @@ print("Y_test shape: " + str(Y_test.shape))
     X_test shape: (2000, 1024)
     Y_test shape: (1, 2000)
     
+
+### Back to code...
 
 
 ```python
@@ -166,7 +168,7 @@ model.save('devanagari.h5')
 
 ### h5
 
-### Creating application (application.py)
+## Creating application (application.py)
 
 
 ```python
@@ -185,11 +187,11 @@ print(model1)
 
 ```python
 letter_count = {0: 'CHECK', 1: '01_ka', 2: '02_kha', 3: '03_ga', 4: '04_gha', 5: '05_kna', 6: '06_cha',
-                    7: '07_chha', 8: '08_ja', 9: '09_jha', 10: '10_yna', 11: '11_taa', 12: '12_thaa', 13: '13_daa', 
-                    14: '14_dhaa', 15: '15_adna', 16: '16_ta', 17: '17_tha', 18: '18_da', 19: '19_dha', 20: '20_na', 
-                    21: '21_pa', 22: '22_pha', 23: '23_ba', 24: '24_bha', 25: '25_ma', 26: '26_yaw', 27: '27_ra', 
-                    28: '28_la', 29: '29_waw', 30: '30_sha', 31: '31_sha',32: '32_sa', 33: '33_ha',
-                    34: '34_kshya', 35: '35_tra', 36: '36_gya', 37: 'CHECK'}
+                7: '07_chha', 8: '08_ja', 9: '09_jha', 10: '10_yna', 11: '11_taa', 12: '12_thaa', 13: '13_daa', 
+                14: '14_dhaa', 15: '15_adna', 16: '16_ta', 17: '17_tha', 18: '18_da', 19: '19_dha', 20: '20_na', 
+                21: '21_pa', 22: '22_pha', 23: '23_ba', 24: '24_bha', 25: '25_ma', 26: '26_yaw', 27: '27_ra', 
+                28: '28_la', 29: '29_waw', 30: '30_sha', 31: '31_sha',32: '32_sa', 33: '33_ha',
+                34: '34_kshya', 35: '35_tra', 36: '36_gya', 37: 'CHECK'}
 ```
 
 
@@ -274,3 +276,12 @@ while (cap.isOpened()):
     if k == 27:
         break
 ```
+
+
+## That's it...
+
+
+## So? What's next?
+
+
+## This will open system's webcam and start capturing the characters.
