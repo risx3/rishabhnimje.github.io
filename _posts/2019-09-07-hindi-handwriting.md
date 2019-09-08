@@ -1,5 +1,6 @@
 ---
 title: "Hindi Handwriting Recognition"
+layout: default
 classes: wide
 date: 2019-09-07
 tags: [hindi dataset, hindi recognition, computer vision, keras, machine learning]
