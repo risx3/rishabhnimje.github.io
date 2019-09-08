@@ -33,8 +33,7 @@ We will create two classes here.
 1. Model
 2. Application
 
-Model class will be responsible for creating a model using character dataset.
-Application class will recognize Hindi characters in runtime.
+Model class will be responsible for creating a model using character dataset and Application class will recognize Hindi characters in runtime.
 
 ## Diagram
 
@@ -124,7 +123,7 @@ print("X_train shape: " + str(X_train.shape))
 print("Y_train shape: " + str(train_y.shape))
 ```
 
-### What we got here...
+### What we got here
 
     X_train shape: (70000, 32, 32, 1)
     Y_train shape: (70000, 37)
