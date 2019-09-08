@@ -3,7 +3,7 @@ title: "Hindi Handwriting Recognition"
 date: 2019-09-07
 tags: [hindi dataset, hindi recognition, computer vision, keras, machine learning]
 header:
-  image: #"/images/perceptron/percept.jpg"
+  image: "/images/hindi-handwriting/hindi-handwriting.webp"
 excerpt: "Hindi Dataset, Hindi Recognition, Computer Vision, Keras, Machine Learning"
 mathjax: "true"
 ---
