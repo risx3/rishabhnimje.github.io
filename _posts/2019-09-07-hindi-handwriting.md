@@ -293,8 +293,6 @@ while (cap.isOpened()):
 
 ### Like this...
 
-!video[]( /videos/hindi-handwriting.mp4 ){ size=10 }
-
-<video width="640" height="480" controls="controls">
+<video width="640" height="360" controls="controls">
   <source src="/videos/hindi-handwriting.mp4" type="video/mp4">
 </video>
