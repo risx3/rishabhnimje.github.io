@@ -1,6 +1,6 @@
 ---
 title: "Hindi Handwriting Recognition"
-layout: archive
+layout: single
 classes: wide
 date: 2019-09-07
 tags: [hindi dataset, hindi recognition, computer vision, keras, machine learning]
@@ -295,6 +295,6 @@ while (cap.isOpened()):
 
 ### Like this...
 
-<video width="640" height="360" controls="controls">
+<video controls="controls">
   <source src="/videos/hindi-handwriting.mp4" type="video/mp4">
 </video>
