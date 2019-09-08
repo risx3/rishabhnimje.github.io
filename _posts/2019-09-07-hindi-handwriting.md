@@ -1,5 +1,6 @@
 ---
 title: "Hindi Handwriting Recognition"
+classes: wide
 date: 2019-09-07
 tags: [hindi dataset, hindi recognition, computer vision, keras, machine learning]
 header:
@@ -47,7 +48,6 @@ import pandas as pd
 ```
 
 ```python
-classes: wide
 from keras import layers
 from keras.layers import Input, Dense, Activation, ZeroPadding2D, BatchNormalization, Flatten, Conv2D
 from keras.layers import AveragePooling2D, MaxPooling2D, Dropout, GlobalMaxPooling2D, GlobalAveragePooling2D
