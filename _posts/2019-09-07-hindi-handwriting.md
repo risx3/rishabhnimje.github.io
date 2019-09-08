@@ -49,6 +49,7 @@ import pandas as pd
 ```
 
 ```python
+classes: wide
 from keras import layers
 from keras.layers import Input, Dense, Activation, ZeroPadding2D, BatchNormalization, Flatten, Conv2D
 from keras.layers import AveragePooling2D, MaxPooling2D, Dropout, GlobalMaxPooling2D, GlobalAveragePooling2D
@@ -295,6 +296,6 @@ while (cap.isOpened()):
 
 ### Like this...
 
-<video controls="controls">
+<video width="640" height="360" controls="controls">
   <source src="/videos/hindi-handwriting.mp4" type="video/mp4">
 </video>
