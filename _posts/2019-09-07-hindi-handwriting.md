@@ -92,7 +92,7 @@ print("X_test shape: " + str(X_test.shape))
 print("Y_test shape: " + str(Y_test.shape))
 ```
 
-### Lets see what we have 
+### Lets see what we have
 
     number of training examples = 70000
     number of test examples = 2000
@@ -107,7 +107,6 @@ print("Y_test shape: " + str(Y_test.shape))
 image_x = 32
 image_y = 32
 ```
-
 
 ```python
 train_y = np_utils.to_categorical(Y_train)
@@ -179,11 +178,9 @@ model.save('devanagari.h5')
     Non-trainable params: 0
     _________________________________________________________________
 
+### This program will create devnagari.h5 file
 
-
-### h5
-
-### h5
+### So, now we have our .h5 model file, let's create our Application
 
 ## Creating application (application.py)
 
@@ -293,3 +290,5 @@ while (cap.isOpened()):
 ## So? What's next?
 
 ## This will open system's webcam and start capturing the characters.
+
+![](/videos/hindi-handwriting.mp4)
