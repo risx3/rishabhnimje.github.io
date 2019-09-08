@@ -6,6 +6,8 @@ header:
   image: "/images/hindi-handwriting/hindi-handwriting.webp"
 excerpt: "Hindi Dataset, Hindi Recognition, Computer Vision, Keras, Machine Learning"
 mathjax: "true"
+layout: single
+classes: wide
 ---
 
 ## Objective
