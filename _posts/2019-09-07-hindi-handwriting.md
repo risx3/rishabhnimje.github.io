@@ -291,5 +291,4 @@ while (cap.isOpened()):
 
 ## This will open system's webcam and start capturing the characters.
 
-![]()
 !video[]( /videos/hindi-handwriting.mp4 ){ size=10 }
