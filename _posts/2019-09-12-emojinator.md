@@ -31,13 +31,11 @@ And, libraries used are-
 
 ## Creating Gestures (creategestures.py)
 
-
 ```python
 import cv2
 import numpy as np
 import os
 ```
-
 
 ```python
 image_x, image_y = 50, 50
@@ -109,7 +107,6 @@ def store_images(g_id):
             break
 ```
 
-
 ```python
 g_id = input("Enter gesture number: ")
 store_images(g_id)
@@ -126,7 +123,6 @@ import pandas as pd
 import os
 root = './gestures' # or ‘./test’ depending on for which the CSV is being created
 ```
-
 
 ```python
 # go through each directory in the root folder given above
@@ -162,7 +158,6 @@ import keras.backend as K
 
     Using TensorFlow backend.
     
-
 ```python
 data = pd.read_csv("train_foo.csv")
 dataset = np.array(data)
@@ -176,7 +171,6 @@ X_train = X_train / 255.
 X_test = X[12000:13201, :]
 X_test = X_test / 255.
 ```
-
 
 ```python
 # Reshape
@@ -203,7 +197,6 @@ print("Y_test shape: " + str(Y_test.shape))
     X_test shape: (1199, 2500)
     Y_test shape: (1, 1199)
     
-
 ```python
 image_x = 50
 image_y = 50
@@ -223,7 +216,6 @@ print("Y_train shape: " + str(train_y.shape))
     X_test shape: (1199, 50, 50, 1)
     Y_train shape: (12000, 12)
     
-
 
 ```python
 def keras_model(image_x, image_y):
@@ -245,7 +237,6 @@ def keras_model(image_x, image_y):
     
     return model, callbacks_list
 ```
-
 
 ```python
 model, callbacks_list = keras_model(image_x, image_y)
@@ -282,9 +273,7 @@ model.save('handEmo.h5')
     Non-trainable params: 0
     _________________________________________________________________
     
-
 ## Application (application.py)
-
 
 ```python
 import cv2
@@ -293,11 +282,9 @@ import numpy as np
 import os
 ```
 
-
 ```python
 model = load_model('handEmo.h5')
 ```
-
 
 ```python
 def get_emojis():
@@ -309,7 +296,6 @@ def get_emojis():
     return emojis
 ```
 
-
 ```python
 def keras_predict(model, image):
     processed = keras_process_image(image)
@@ -317,7 +303,6 @@ def keras_predict(model, image):
     pred_class = list(pred_probab).index(max(pred_probab))
     return max(pred_probab), pred_class
 ```
-
 
 ```python
 def keras_process_image(img):
@@ -329,7 +314,6 @@ def keras_process_image(img):
     return img
 ```
 
-
 ```python
 def overlay(image, emoji, x,y,w,h):
     emoji = cv2.resize(emoji, (w, h))
@@ -339,7 +323,6 @@ def overlay(image, emoji, x,y,w,h):
         pass
     return image
 ```
-
 
 ```python
 def blend_transparent(face_img, overlay_t_img):
@@ -363,13 +346,11 @@ def blend_transparent(face_img, overlay_t_img):
     return np.uint8(cv2.addWeighted(face_part, 255.0, overlay_part, 255.0, 0.0))
 ```
 
-
 ```python
 emojis = get_emojis()
 cap = cv2.VideoCapture(0)
 x, y, w, h = 300, 50, 350, 350
 ```
-
 
 ```python
 while (cap.isOpened()):
@@ -404,11 +385,10 @@ while (cap.isOpened()):
     k = cv2.waitKey(10)
     if k == 27:
         break
-
 ```
-## That's it...
+## We are done here...
 
-## This will open system's webcam and start capturing the characters
+## This will open system's webcam and start capturing the hand gestures
 
 ### Like this...
 
