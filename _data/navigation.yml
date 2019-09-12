@@ -2,7 +2,7 @@
 main:
   - title: "About"
     url: /about/
-  - title: "Machine Learning Projects"
+  - title: "Projects"
     url: /machine-learning/
-  - title: "Data Wrangling Projects"
-    url: /data-wrangling/
+  # - title: "Data Wrangling Projects"
+  #   url: /data-wrangling/
