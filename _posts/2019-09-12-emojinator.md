@@ -16,9 +16,11 @@ Classify Emojis using Convolutional Neural Network.
 
 ## In this project
 
-Also, this project is implemented in Python 3.7.
+In this project, we will create our data set of emojis that can be created through hand gestures. We will collect hundreds of image samples for particular emoji.
 
-And, libraries used are-
+This project is implemented in Python 3.7.
+
+And, the libraries used are-
 
 1. Numpy
 2. Pandas
@@ -28,9 +30,15 @@ And, libraries used are-
 
 ## Design
 
+First, we will create a program that will capture all the gestures for our dataset. 
+
+Next, we will convert that dataset into CSV format which we will use in our code.
+
+We will use this file in creating our model. Once the model is created, we will implement the classification of our real-time gestures.
+
 ## Diagram
 
-## Creating Gestures (creategestures.py)
+## Creating Gestures (CreateGestures.py)
 
 ```python
 import cv2
@@ -113,8 +121,6 @@ g_id = input("Enter gesture number: ")
 store_images(g_id)
 ```
 
-    Enter gesture number: 1
-    
 ## Create CSV (createcsv.py)
 
 ```python
@@ -157,8 +163,6 @@ import pandas as pd
 import keras.backend as K
 ```
 
-    Using TensorFlow backend.
-    
 ```python
 data = pd.read_csv("train_foo.csv")
 dataset = np.array(data)
@@ -198,6 +202,9 @@ print("Y_test shape: " + str(Y_test.shape))
     X_test shape: (1199, 2500)
     Y_test shape: (1, 1199)
     
+
+### Back to code...
+
 ```python
 image_x = 50
 image_y = 50
@@ -217,6 +224,7 @@ print("Y_train shape: " + str(train_y.shape))
     X_test shape: (1199, 50, 50, 1)
     Y_train shape: (12000, 12)
     
+### Back to code...
 
 ```python
 def keras_model(image_x, image_y):
@@ -230,12 +238,10 @@ def keras_model(image_x, image_y):
     model.add(Dense(1024, activation='relu'))
     model.add(Dropout(0.6))
     model.add(Dense(num_of_classes, activation='softmax'))
-    
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     filepath = "handEmo.h5"
     checkpoint1 = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
     callbacks_list = [checkpoint1]
-    
     return model, callbacks_list
 ```
 
@@ -274,6 +280,10 @@ model.save('handEmo.h5')
     Non-trainable params: 0
     _________________________________________________________________
     
+### So this program will create handEmo.h5 file.
+
+### Now we have our model file, lets implement it to classify realtime emojis...
+
 ## Application (application.py)
 
 ```python
@@ -389,7 +399,7 @@ while (cap.isOpened()):
 ```
 ## We are done here...
 
-## This will open system's webcam and start capturing the hand gestures
+## On executing application.py file, this will open system's webcam and start capturing the hand gestures
 
 ### Like this...
 
