@@ -22,11 +22,11 @@ This project is implemented in Python 3.7.
 
 And, the libraries used are-
 
-1. Numpy
-2. Pandas
-3. TensorFlow
-4. Keras
-5. OpenCV
+1. [Numpy](https://numpy.org/)
+2. [Pandas](https://pandas.pydata.org/)
+3. [TensorFlow](https://www.tensorflow.org/)
+4. [Keras](https://keras.io/)
+5. [OpenCV](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_image_display/py_image_display.html)
 
 ## Design
 
@@ -406,3 +406,5 @@ while (cap.isOpened()):
 <video width="640" height="360" controls="controls">
   <source src="/videos/emojinator.mp4" type="video/mp4">
 </video>
+
+## Complete Code [here](https://github.com/risx3/emojinator-repository)
