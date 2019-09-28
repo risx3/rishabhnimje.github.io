@@ -36,7 +36,7 @@ We will create two classes here.
 
 Model class will be responsible for creating a model using character dataset and Application class will recognize Hindi characters in runtime.
 
-## Diagram
+<img src="{{ site.url }}{{ site.baseurl }}/images/hindi-handwriting/hh_diagram.jpg" alt="linearly separable data">
 
 ## We begin here...
 
