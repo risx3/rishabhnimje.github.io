@@ -5,7 +5,7 @@ layout: single
 date: 2019-09-12
 tags: [Emojinator, emoji, computer vision, keras, machine learning]
 header:
-  image: #"/images/hindi-handwriting/hindi-handwriting.webp"
+  image: "/images/emojinator/emojinator.jpg"
 excerpt: "Emojinator, Computer Vision, Keras, Machine Learning"
 mathjax: "true"
 ---
