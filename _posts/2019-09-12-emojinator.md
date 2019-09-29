@@ -2,7 +2,7 @@
 title: "Emojinator"
 date: 2019-09-12
 tags: [Emojinator, emoji, computer vision, keras, machine learning]
-excerpt: " "
+excerpt: "                                                                                                                                                                                                                                                                                                                                                                                                                                                                      "
 header:
   overlay_image: "/images/emojinator/emojinator.jpg"
   caption: "Emojinator"
