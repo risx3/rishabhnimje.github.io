@@ -1,7 +1,5 @@
 ---
 title: "Emojinator"
-classes: wide
-layout: single
 date: 2019-09-12
 tags: [Emojinator, emoji, computer vision, keras, machine learning]
 header:

@@ -1,6 +1,9 @@
 ---
+layout: splash
+classes:
+  - landing
+  - dark-theme
 title: "Hindi Handwriting Recognition"
-classes: wide
 date: 2019-09-07
 tags: [hindi dataset, hindi recognition, computer vision, keras, machine learning]
 header:
