@@ -1,12 +1,10 @@
 ---
 title: "Hindi Handwriting Recognition"
-layout: splash
 date: 2019-09-07
 tags: [hindi dataset, hindi recognition, computer vision, keras, machine learning]
 #excerpt: " "
 header:
   image: "/images/hindi-handwriting/hindi-handwriting.webp"
-  #overlay_image: "/images/hindi-handwriting/hindi-handwriting.webp"
 mathjax: "true"
 ---
 
