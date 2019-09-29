@@ -37,7 +37,7 @@ Next, we will convert that dataset into CSV format which we will use in our code
 
 We will use this file in creating our model. Once the model is created, we will implement the classification of our real-time gestures.
 
-<img src="{{ site.url }}{{ site.baseurl }}/images/emojinator/emojinator_diagram.jpg" alt="linearly separable data">
+<img src="{{ site.url }}{{ site.baseurl }}/images/emojinator/emojinator_diagram.jpg" alt="emojinator flow">
 
 ## Creating Gestures (CreateGestures.py)
 

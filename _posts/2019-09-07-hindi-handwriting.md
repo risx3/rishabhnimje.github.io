@@ -1,6 +1,7 @@
 ---
 title: "Hindi Handwriting Recognition"
-classes: wide
+layout: single
+    classes: wide
 date: 2019-09-07
 tags: [hindi dataset, hindi recognition, computer vision, keras, machine learning]
 header:
@@ -36,7 +37,7 @@ We will create two classes here.
 
 Model class will be responsible for creating a model using character dataset and Application class will recognize Hindi characters in runtime.
 
-<img src="{{ site.url }}{{ site.baseurl }}/images/hindi-handwriting/hh_diagram.jpg" alt="linearly separable data">
+<img src="{{ site.url }}{{ site.baseurl }}/images/hindi-handwriting/hh_diagram.jpg" alt="hindi handwriting flow">
 
 ## We begin here...
 
