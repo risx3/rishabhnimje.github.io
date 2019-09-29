@@ -4,7 +4,7 @@ permalink: /machine-learning/
 title: "Machine Learning / Data Wrangling Projects"
 author_profile: true
 header:
-  image: "/images/fort point.png"
+  image: "/images/vertical-matrix.jpg"
 ---
 
 
