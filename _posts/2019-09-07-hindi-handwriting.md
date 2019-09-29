@@ -1,9 +1,4 @@
 ---
-layout: splash
-author_profile: true
-read_time: true
-share: true
-related: true
 title: "Hindi Handwriting Recognition"
 date: 2019-09-07
 tags: [hindi dataset, hindi recognition, computer vision, keras, machine learning]
