@@ -4,7 +4,7 @@ date: 2019-09-12
 tags: [Emojinator, emoji, computer vision, keras, machine learning]
 #excerpt: " "
 header:
-  image: "/images/emojinator/emojinator.jpg"
+  overlay_image: "/images/emojinator/emojinator.jpg"
   caption: "Emojinator"
 mathjax: "true"
 ---
