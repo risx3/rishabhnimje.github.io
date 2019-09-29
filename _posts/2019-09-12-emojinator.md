@@ -2,16 +2,12 @@
 title: "Emojinator"
 date: 2019-09-12
 tags: [Emojinator, emoji, computer vision, keras, machine learning]
-excerpt: "                                                                                                                                                                                                                                                                                                                                                                                                                                                                      "
+excerpt: "Classification of Emojis using Convolutional Neural Network."
 header:
   overlay_image: "/images/emojinator/emojinator.jpg"
   caption: "Emojinator"
 mathjax: "true"
 ---
-
-## Objective
-
-Classify Emojis using Convolutional Neural Network.
 
 ## In this project
 

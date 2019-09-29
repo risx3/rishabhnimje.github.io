@@ -2,15 +2,11 @@
 title: "Hindi Handwriting Recognition"
 date: 2019-09-07
 tags: [hindi dataset, hindi recognition, computer vision, keras, machine learning]
-excerpt: "hindi dataset, hindi recognition, computer vision, keras, machine learning"
+excerpt: "Classification of Hindi alphabets using Convolutional Neural Network."
 header:
   overlay_image: "/images/hindi-handwriting/hindi-handwriting.webp"
 mathjax: "true"
 ---
-
-## Objective
-
-Classify Hindi alphabets using Convolutional Neural Network.
 
 ## In this project
 
