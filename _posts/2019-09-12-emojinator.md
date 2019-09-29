@@ -27,6 +27,7 @@ And, the libraries used are-
 3. [TensorFlow](https://www.tensorflow.org/)
 4. [Keras](https://keras.io/)
 5. [OpenCV](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_image_display/py_image_display.html)
+6. [imageio](https://pypi.org/project/imageio/)
 
 ## Design
 
@@ -36,7 +37,7 @@ Next, we will convert that dataset into CSV format which we will use in our code
 
 We will use this file in creating our model. Once the model is created, we will implement the classification of our real-time gestures.
 
-## Diagram
+<img src="{{ site.url }}{{ site.baseurl }}/images/emojinator/emojinator_diagram.jpg" alt="linearly separable data">
 
 ## Creating Gestures (CreateGestures.py)
 
@@ -124,7 +125,7 @@ store_images(g_id)
 ## Create CSV (createcsv.py)
 
 ```python
-from scipy.misc import imread
+import imageio
 import numpy as np
 import pandas as pd
 import os
@@ -138,7 +139,7 @@ for directory, subdirectories, files in os.walk(root):
     for file in files:
     # read the image file and extract its pixels
         print(file)
-        im = imread(os.path.join(directory,file))
+        im = imageio.imread(os.path.join(directory,file))
         value = im.flatten()
         # I renamed the folders containing digits to the contained digit itself. For example, digit_0 folder was renamed to 0.
         # so taking the 9th value of the folder gave the digit (i.e. "./gestures/8" ==> 9th value is 8), which was inserted into the first column of the dataset.
