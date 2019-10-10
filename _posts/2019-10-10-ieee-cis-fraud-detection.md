@@ -51,8 +51,9 @@ You can find the dataset [here](https://www.kaggle.com/c/ieee-fraud-detection/da
 2. test_{transaction, identity}.csv - the test set (you must predict the isFraud value for these observations)
 
 # So lets begin with complete EDA...
-```python
 
+
+```python
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -84,11 +85,11 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 ```
 ### We have the locations for our files
 
-/kaggle/input/ieee-fraud-detection/sample_submission.csv
-/kaggle/input/ieee-fraud-detection/test_identity.csv
-/kaggle/input/ieee-fraud-detection/train_transaction.csv
-/kaggle/input/ieee-fraud-detection/test_transaction.csv
-/kaggle/input/ieee-fraud-detection/train_identity.csv
+  /kaggle/input/ieee-fraud-detection/sample_submission.csv
+  /kaggle/input/ieee-fraud-detection/test_identity.csv
+  /kaggle/input/ieee-fraud-detection/train_transaction.csv
+  /kaggle/input/ieee-fraud-detection/test_transaction.csv
+  /kaggle/input/ieee-fraud-detection/train_identity.csv
 
 ```python
 # Memory saving function credit to https://www.kaggle.com/gemartin/load-data-reduce-memory-usage
@@ -120,8 +121,6 @@ def reduce_mem_usage(df):
                     df[col] = df[col].astype(np.float32)
                 else:
                     df[col] = df[col].astype(np.float64)
-        #else:
-            #df[col] = df[col].astype('category')
 
     end_mem = df.memory_usage().sum() / 1024**2
     print('Memory usage of dataframe is {:.2f} MB --> {:.2f} MB (Decreased by {:.1f}%)'.format(
