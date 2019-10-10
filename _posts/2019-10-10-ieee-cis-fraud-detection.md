@@ -135,7 +135,6 @@ def reduce_mem_usage(df):
 
 ## Load Data
 
-
 ```python
 %%time
 train_id = pd.read_csv('../input/ieee-fraud-detection/train_identity.csv')
@@ -153,6 +152,7 @@ train_trn = reduce_mem_usage(train_trn)
 test_id = reduce_mem_usage(test_id)
 test_trn = reduce_mem_usage(test_trn)
 ```
+### Reducing memory usage
 
 Memory usage of dataframe is 45.12 MB --> 25.86 MB (Decreased by 42.7%)
 
@@ -169,6 +169,7 @@ print(train_trn.shape, test_trn.shape)
 ```
 
 (144233, 41) (141907, 41)
+
 (590540, 394) (506691, 393)
     
 
@@ -176,16 +177,12 @@ print(train_trn.shape, test_trn.shape)
 
 ### isFraud count
 
-
 ```python
 fc = train_trn['isFraud'].value_counts(normalize=True).to_frame()
 fc.plot.bar()
 # Also print a table
 fc.T
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -220,13 +217,10 @@ fc.T
 </div>
 
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_8_1.png)
 
 
 ### Fraud Transaction rate per day and per week
-
 
 ```python
 fig,ax = plt.subplots(2, 1, figsize=(16,8))
@@ -237,19 +231,10 @@ train_trn.groupby('_seq_day')['isFraud'].mean().to_frame().plot.line(ax=ax[0])
 train_trn.groupby('_seq_week')['isFraud'].mean().to_frame().plot.line(ax=ax[1])
 ```
 
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x7f01227e90f0>
-
-
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_10_1.png)
 
 
 ### Fraud transaction rate by weekday, hour, month-day, and year-month
-
 
 ```python
 import datetime
@@ -271,27 +256,14 @@ train_trn.groupby('_day')['isFraud'].mean().to_frame().plot.bar(ax=ax[2])
 train_trn.groupby('_year_month')['isFraud'].mean().to_frame().plot.bar(ax=ax[3])
 ```
 
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x7f0116032f60>
-
-
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_12_1.png)
 
-
 ### Fraud transaction rate by day
-
 
 ```python
 df = train_trn.groupby(['_ymd'])['isFraud'].agg(['count','mean','sum'])
 df.sort_values(by='mean',ascending=False)[:10].T
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -368,14 +340,9 @@ df.sort_values(by='mean',ascending=False)[:10].T
 </div>
 
 
-
-
 ```python
 df.sort_values(by='count',ascending=False)[:10].T
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -452,23 +419,12 @@ df.sort_values(by='count',ascending=False)[:10].T
 </div>
 
 
-
-
 ```python
 # transaction-count X fraud-rate
 plt.scatter(df['count'], df['mean'], s=10)
 ```
 
-
-
-
-    <matplotlib.collections.PathCollection at 0x7f01226edba8>
-
-
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_16_1.png)
-
 
 
 ```python
@@ -476,46 +432,25 @@ plt.scatter(df['count'], df['mean'], s=10)
 plt.scatter(df['count'], df['sum'], s=10)
 ```
 
-
-
-
-    <matplotlib.collections.PathCollection at 0x7f012246b8d0>
-
-
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_17_1.png)
 
 
 ### Fraud transaction rate by weekday-hour
-
 
 ```python
 train_trn['_weekday_hour'] = train_trn['_weekday'].astype(str) + '_' + train_trn['_hour'].astype(str)
 train_trn.groupby('_weekday_hour')['isFraud'].mean().to_frame().plot.line(figsize=(16,3))
 ```
 
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x7f0122412588>
-
-
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_19_1.png)
 
 
 ### Fraud rate by weekday
 
-
 ```python
 df = train_trn.groupby('_weekday')['isFraud'].mean().to_frame()
 df.sort_values(by='isFraud', ascending=False)
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -576,17 +511,12 @@ df.sort_values(by='isFraud', ascending=False)
 </div>
 
 
-
 ### Fraud rate by hour
-
 
 ```python
 df = train_trn.groupby('_hour')['isFraud'].mean().to_frame()
 df.sort_values(by='isFraud', ascending=False).head(10)
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -659,17 +589,12 @@ df.sort_values(by='isFraud', ascending=False).head(10)
 </div>
 
 
-
 ### Fraud rate by weekday-hour
-
 
 ```python
 df = train_trn.groupby('_weekday_hour')['isFraud'].mean().to_frame()
 df.sort_values(by='isFraud', ascending=False).head(10)
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -742,18 +667,13 @@ df.sort_values(by='isFraud', ascending=False).head(10)
 </div>
 
 
-
 ### Fraud rate by amount bin
-
 
 ```python
 train_trn['_amount_qcut10'] = pd.qcut(train_trn['TransactionAmt'],10)
 df = train_trn.groupby('_amount_qcut10')['isFraud'].mean().to_frame()
 df.sort_values(by='isFraud', ascending=False)
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -826,9 +746,7 @@ df.sort_values(by='isFraud', ascending=False)
 </div>
 
 
-
 ### TransactionId
-
 
 ```python
 # Not all transactions have corresponding identity information.
@@ -841,11 +759,10 @@ fraud_id_in_trn = [i for i in fraud_id if i in train_id['TransactionID'].values]
 print(f'fraud data count:{len(fraud_id)}, and in trn:{len(fraud_id_in_trn)}')
 ```
 
-    fraud data count:20663, and in trn:11318
+fraud data count:20663, and in trn:11318
     
 
 ## Identity Data
-
 
 ```python
 train_id_trn = pd.merge(train_id, train_trn[['isFraud','TransactionAmt','TransactionID']])
@@ -869,11 +786,10 @@ def plotCategoryRateBar(col, topN=np.nan, figsize=(8,3)):
     df.sort_values('fraud', ascending=False).plot.bar(figsize=figsize)
 ```
 
-    (132915, 43) (11318, 43)
+(132915, 43) (11318, 43)
     
 
 ### id_01 - id_11
-
 
 ```python
 plotHistByFraud('id_01')
@@ -933,14 +849,10 @@ plotHistByFraud('id_11')
 ![png](/images/ieee-cis-fraud-detection/analysis_33_10.png)
 
 
-
 ```python
 numid_cols = [f'id_{str(i).zfill(2)}' for i in range(1,12)]
 train_id_trn[numid_cols].isna().sum().to_frame().T / len(train_id)
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -993,20 +905,10 @@ train_id_trn[numid_cols].isna().sum().to_frame().T / len(train_id)
 </div>
 
 
-
-
 ```python
 plt.figure(figsize=(10, 5))
 sns.heatmap(train_id_trn[['isFraud','TransactionAmt']+numid_cols].corr(), annot=True, fmt='.2f')
 ```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x7f0122a14780>
-
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_35_1.png)
 
@@ -1015,9 +917,6 @@ sns.heatmap(train_id_trn[['isFraud','TransactionAmt']+numid_cols].corr(), annot=
 ```python
 train_id_f1[['isFraud'] + numid_cols].head(10)
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -1207,14 +1106,9 @@ train_id_f1[['isFraud'] + numid_cols].head(10)
 </div>
 
 
-
-
 ```python
 train_id_f0[['isFraud'] + numid_cols].head(10)
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -1403,10 +1297,7 @@ train_id_f0[['isFraud'] + numid_cols].head(10)
 </table>
 </div>
 
-
-
 ### id_12 - id_38
-
 
 ```python
 plotCategoryRateBar('id_12')
@@ -1419,7 +1310,6 @@ plotCategoryRateBar('id_18')
 plotCategoryRateBar('id_19',10)
 plotCategoryRateBar('id_20',10)
 ```
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_39_0.png)
 
@@ -1454,7 +1344,6 @@ plotCategoryRateBar('id_20',10)
 
 
 ![png](/images/ieee-cis-fraud-detection/analysis_39_8.png)
-
 
 
 ```python
@@ -1510,7 +1399,6 @@ plotCategoryRateBar('id_30',10)
 ![png](/images/ieee-cis-fraud-detection/analysis_40_9.png)
 
 
-
 ```python
 plotCategoryRateBar('id_31', 20)
 
@@ -1518,7 +1406,6 @@ train_id_f0['_id_31_ua'] = train_id_f0['id_31'].apply(lambda x: x.split()[0] if 
 train_id_f1['_id_31_ua'] = train_id_f1['id_31'].apply(lambda x: x.split()[0] if x == x else 'unknown')
 plotCategoryRateBar('_id_31_ua', 10)
 ```
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_41_0.png)
 
@@ -1568,7 +1455,6 @@ plotCategoryRateBar('id_38')
 
 ### DeviceType, DeviceInfo
 
-
 ```python
 plotCategoryRateBar('DeviceType')
 plotCategoryRateBar('DeviceInfo',10)
@@ -1583,7 +1469,6 @@ plotCategoryRateBar('DeviceInfo',10)
 
 
 ## Transaction data
-
 
 ```python
 ccols = [f'C{i}' for i in range(1,15)]
@@ -1637,8 +1522,9 @@ print('train date:', train_date.min(), '-', train_date.max())
 print('test  date:', test_date.min(), '-', test_date.max())
 ```
 
-    train date: 2017-12-02 00:00:00 - 2018-06-01 23:58:51
-    test  date: 2018-07-02 00:00:24 - 2018-12-31 23:59:05
+train date: 2017-12-02 00:00:00 - 2018-06-01 23:58:51
+
+test  date: 2018-07-02 00:00:24 - 2018-12-31 23:59:05
     
 
 
@@ -1647,13 +1533,6 @@ plt.figure(figsize=(12,4))
 train_trn['TransactionDT'].hist(bins=20)
 test_trn['TransactionDT'].hist(bins=20)
 ```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x7f01230f6ef0>
-
-
 
 
 ![png](/images/ieee-cis-fraud-detection/analysis_50_1.png)
@@ -1675,8 +1554,6 @@ train_trn_f1 = train_trn[train_trn['isFraud'] == 1]
 pd.concat([train_trn_f0['_date_lag'].describe(), 
            train_trn_f1['_date_lag'].describe()], axis=1)
 ```
-
-
 
 
 <div>
@@ -1773,14 +1650,11 @@ plotTrnLogHistByFraud('TransactionAmt')
 ![png](/images/ieee-cis-fraud-detection/analysis_55_1.png)
 
 
-
 ```python
 amt_desc = pd.concat([train_trn_f0['TransactionAmt'].describe(), train_trn_f1['TransactionAmt'].describe()], axis=1)
 amt_desc.columns = ['normal','fraud']
 amt_desc
 ```
-
-
 
 
 <div>
@@ -1851,8 +1725,6 @@ amt_desc
 </div>
 
 
-
-
 ```python
 def appendLagAmt(df):
     df = df.assign(_amt_lag = df['TransactionAmt'] - df.groupby(['card1','card2'])['TransactionAmt'].shift(1))
@@ -1889,13 +1761,10 @@ plotTrnCategoryRateBar('ProductCD')
 ![png](/images/ieee-cis-fraud-detection/analysis_60_0.png)
 
 
-
 ```python
 cols = ['ProductCD','addr1','addr2','dist1','dist2']
 train_trn[cols].head(20)
 ```
-
-
 
 
 <div>
@@ -2090,7 +1959,6 @@ train_trn[cols].head(20)
 
 
 
-
 ```python
 cols = ['addr1','addr2','dist1','dist2']
 for f in cols:
@@ -2101,8 +1969,6 @@ for f in cols:
 ```python
 pd.crosstab(train_trn['ProductCD'], train_trn['addr1_isna'])
 ```
-
-
 
 
 <div>
@@ -2163,13 +2029,9 @@ pd.crosstab(train_trn['ProductCD'], train_trn['addr1_isna'])
 </div>
 
 
-
-
 ```python
 pd.crosstab(train_trn['ProductCD'], train_trn['dist1_isna'])
 ```
-
-
 
 
 <div>
@@ -2230,13 +2092,9 @@ pd.crosstab(train_trn['ProductCD'], train_trn['dist1_isna'])
 </div>
 
 
-
-
 ```python
 pd.crosstab(train_trn['ProductCD'], train_trn['dist2_isna'])
 ```
-
-
 
 
 <div>
@@ -2297,13 +2155,9 @@ pd.crosstab(train_trn['ProductCD'], train_trn['dist2_isna'])
 </div>
 
 
-
-
 ```python
 train_trn[(train_trn['dist1_isna'] == False) & (train_trn['dist2_isna'] == False)][cols]
 ```
-
-
 
 
 <div>
@@ -2336,14 +2190,10 @@ train_trn[(train_trn['dist1_isna'] == False) & (train_trn['dist2_isna'] == False
 </div>
 
 
-
-
 ```python
 train_trn = pd.concat([train_trn, pd.get_dummies(train_trn[['ProductCD']])], axis=1)
 train_trn.head(5)
 ```
-
-
 
 
 <div>
@@ -2514,13 +2364,10 @@ train_trn.head(5)
 </div>
 
 
-
-
 ```python
 cols = ['ProductCD_W','ProductCD_C','ProductCD_H','ProductCD_R','ProductCD_S','dist1_isna','dist2_isna','addr1_isna','addr2_isna']
 train_trn[cols].corr()
 ```
-
 
 
 
@@ -2667,14 +2514,10 @@ train_trn[cols].corr()
 </div>
 
 
-
-
 ```python
 train_trn['_amount_max_ProductCD'] = train_trn.groupby(['ProductCD'])['TransactionAmt'].transform('max')
 train_trn[['ProductCD','_amount_max_ProductCD']].drop_duplicates().sort_values(by='_amount_max_ProductCD', ascending=False)
 ```
-
-
 
 
 <div>
@@ -2739,16 +2582,13 @@ cols = [f'card{n}' for n in range(1,7)]
 train_trn[cols].isnull().sum()
 ```
 
-
-
-
-    card1       0
-    card2    8933
-    card3    1565
-    card4    1577
-    card5    4259
-    card6    1571
-    dtype: int64
+card1       0
+card2    8933
+card3    1565
+card4    1577
+card5    4259
+card6    1571
+dtype: int64
 
 
 
@@ -2758,24 +2598,18 @@ train_trn[cols].nunique()
 ```
 
 
-
-
-    card1    13553
-    card2      500
-    card3      114
-    card4        4
-    card5      119
-    card6        4
-    dtype: int64
-
-
+card1    13553
+card2      500
+card3      114
+card4        4
+card5      119
+card6        4
+dtype: int64
 
 
 ```python
 train_trn[cols].head(10)
 ```
-
-
 
 
 <div>
@@ -2900,19 +2734,10 @@ train_trn[cols].head(10)
 </div>
 
 
-
-
 ```python
 train_trn[train_trn['card4']=='visa']['card1'].hist(bins=50)
 train_trn[train_trn['card4']=='mastercard']['card1'].hist(bins=50)
 ```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x7f0120a35d68>
-
-
 
 
 ![png](/images/ieee-cis-fraud-detection/analysis_74_1.png)
@@ -2923,13 +2748,6 @@ train_trn[train_trn['card4']=='mastercard']['card1'].hist(bins=50)
 train_trn[train_trn['card4']=='visa']['card2'].hist(bins=50)
 train_trn[train_trn['card4']=='mastercard']['card2'].hist(bins=50)
 ```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x7f01203a2080>
-
-
 
 
 ![png](/images/ieee-cis-fraud-detection/analysis_75_1.png)
@@ -3011,7 +2829,6 @@ plotTrnCategoryRateBar('card6')
 ![png](/images/ieee-cis-fraud-detection/analysis_82_0.png)
 
 
-
 ```python
 print(len(train_trn))
 print(train_trn['card1'].nunique(), train_trn['card2'].nunique(), train_trn['card3'].nunique(), train_trn['card5'].nunique())
@@ -3021,23 +2838,15 @@ train_trn['card_n'] = (train_trn['card1'].astype(str) + '_' + train_trn['card2']
 print('unique cards:', train_trn['card_n'].nunique())
 ```
 
-    590540
-    13553 500 114 119
-    unique cards: 14845
+590540
+13553 500 114 119
+unique cards: 14845
     
-
 
 ```python
 vc = train_trn['card_n'].value_counts()
 vc[vc > 3000].plot.bar()
 ```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x7f012048fcf8>
-
-
 
 
 ![png](/images/ieee-cis-fraud-detection/analysis_84_1.png)
@@ -3047,8 +2856,6 @@ vc[vc > 3000].plot.bar()
 ```python
 train_trn.groupby(['card_n'])['isFraud'].mean().sort_values(ascending=False)
 ```
-
-
 
 
     card_n
@@ -3074,12 +2881,7 @@ train_trn.groupby(['card_n'])['isFraud'].mean().sort_values(ascending=False)
 train_trn['addr1'].nunique(), train_trn['addr2'].nunique()
 ```
 
-
-
-
-    (332, 74)
-
-
+(332, 74)
 
 
 ```python
@@ -3099,8 +2901,6 @@ plotTrnHistByFraud('addr1', bins=30)
 ```python
 train_trn['addr1'].value_counts(dropna=False).to_frame().iloc[:10]
 ```
-
-
 
 
 <div>
@@ -3171,25 +2971,21 @@ train_trn['addr1'].value_counts(dropna=False).to_frame().iloc[:10]
 
 
 
-
 ```python
 plotTrnCategoryRateBar('addr2', 10)
 print('addr2 nunique:', train_trn['addr2'].nunique())
 ```
 
-    addr2 nunique: 74
+addr2 nunique: 74
     
 
 
 ![png](/images/ieee-cis-fraud-detection/analysis_90_1.png)
 
 
-
 ```python
 train_trn['addr2'].value_counts(dropna=False).to_frame().iloc[:10]
 ```
-
-
 
 
 <div>
@@ -3313,7 +3109,6 @@ plotTrnCategoryRateBar('R_emaildomain',10)
 ![png](/images/ieee-cis-fraud-detection/analysis_97_1.png)
 
 
-
 ```python
 train_trn['P_emaildomain'].fillna('unknown',inplace=True)
 train_trn['R_emaildomain'].fillna('unknown',inplace=True)
@@ -3326,8 +3121,6 @@ for n in (train_trn['P_emaildomain'] + ' ' + train_trn['R_emaildomain']).unique(
 
 inf.sort_values(by='isFraud', ascending=False).head(10)
 ```
-
-
 
 
 <div>
@@ -3430,14 +3223,10 @@ inf.sort_values(by='isFraud', ascending=False).head(10)
 </div>
 
 
-
-
 ```python
 train_trn_f1['P_emaildomain_prefix'] = train_trn_f1['P_emaildomain'].fillna('unknown').apply(lambda x: x.split('.')[0])
 pd.crosstab(train_trn_f1['P_emaildomain_prefix'], train_trn_f1['ProductCD']).T
 ```
-
-
 
 
 <div>
@@ -3632,21 +3421,12 @@ pd.crosstab(train_trn_f1['P_emaildomain_prefix'], train_trn_f1['ProductCD']).T
 </div>
 
 
-
-
 ```python
 train_trn['P_emaildomain_prefix'] = train_trn['P_emaildomain'].apply(lambda x: x.split('.')[0])
 ct = pd.crosstab(train_trn['P_emaildomain_prefix'], train_trn['ProductCD'])
 ct = ct.sort_values(by='W')[-15:]
 ct.plot.barh(stacked=True, figsize=(12,4))
 ```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x7f011dcf06a0>
-
-
 
 
 ![png](/images/ieee-cis-fraud-detection/analysis_100_1.png)
@@ -3720,9 +3500,6 @@ for i in range(1,15):
 ```python
 train_trn[ccols].describe().loc[['count','mean','std','min','max']]
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -3849,21 +3626,12 @@ train_trn[ccols].describe().loc[['count','mean','std','min','max']]
 </div>
 
 
-
-
 ```python
 plt.figure(figsize=(10,5))
 
 corr = train_trn[['isFraud'] + ccols].corr()
 sns.heatmap(corr, annot=True, fmt='.2f')
 ```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x7f011d9ab5c0>
-
-
 
 
 ![png](/images/ieee-cis-fraud-detection/analysis_104_1.png)
@@ -3876,8 +3644,6 @@ sns.heatmap(corr, annot=True, fmt='.2f')
 cols = ['TransactionDT','TransactionAmt','isFraud'] + ccols
 train_trn[train_trn['card1'] == 9500][cols].head(20)
 ```
-
-
 
 
 <div>
@@ -4323,14 +4089,10 @@ train_trn[train_trn['card1'] == 9500][cols].head(20)
 </div>
 
 
-
-
 ```python
 cols = ['TransactionDT','TransactionAmt','isFraud'] + ccols
 train_trn[train_trn['card1'] == 4774][cols].head(20)
 ```
-
-
 
 
 <div>
@@ -4496,13 +4258,9 @@ train_trn[train_trn['card1'] == 4774][cols].head(20)
 </div>
 
 
-
-
 ```python
 train_trn[train_trn['card1'] == 14770][cols].head(20)
 ```
-
-
 
 
 <div>
@@ -4588,7 +4346,6 @@ train_trn[train_trn['card1'] == 14770][cols].head(20)
 </div>
 
 
-
 ### D1-D15
 
 
@@ -4661,9 +4418,6 @@ for i in range(1,16):
 ```python
 train_trn[dcols].describe().loc[['count','mean','std','min','max']]
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -4796,8 +4550,6 @@ train_trn[dcols].describe().loc[['count','mean','std','min','max']]
 </div>
 
 
-
-
 ```python
 plt.figure(figsize=(12,4))
 
@@ -4805,13 +4557,6 @@ plt.scatter(train_trn_f0['TransactionDT'], train_trn_f0['D1'], s=2)
 plt.scatter(train_trn_f1['TransactionDT'], train_trn_f1['D1'], s=2, c='r')
 plt.scatter(test_trn['TransactionDT'], test_trn['D1'], s=2, c='g')
 ```
-
-
-
-
-    <matplotlib.collections.PathCollection at 0x7f012048f320>
-
-
 
 
 ![png](/images/ieee-cis-fraud-detection/analysis_112_1.png)
@@ -4828,13 +4573,6 @@ plt.scatter(test_trn['TransactionDT'], test_trn['D15'], s=2, c='g')
 ```
 
 
-
-
-    <matplotlib.collections.PathCollection at 0x7f0120496cf8>
-
-
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_113_1.png)
 
 
@@ -4845,13 +4583,6 @@ plt.figure(figsize=(10,5))
 corr = train_trn[['isFraud'] + dcols].corr()
 sns.heatmap(corr, annot=True, fmt='.2f')
 ```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x7f011d434ac8>
-
-
 
 
 ![png](/images/ieee-cis-fraud-detection/analysis_114_1.png)
@@ -4865,14 +4596,6 @@ train_trn.loc[train_trn['isFraud']==1, dcols].isnull().sum(axis=1).to_frame().hi
 ```
 
 
-
-
-    array([<matplotlib.axes._subplots.AxesSubplot object at 0x7f011da82b70>],
-          dtype=object)
-
-
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_115_1.png)
 
 
@@ -4883,8 +4606,6 @@ train_trn.loc[train_trn['isFraud']==1, dcols].isnull().sum(axis=1).to_frame().hi
 cols = ['TransactionDT','TransactionAmt','isFraud'] + dcols
 train_trn[train_trn['card1'] == 9500][cols].head(20)
 ```
-
-
 
 
 <div>
@@ -5351,14 +5072,10 @@ train_trn[train_trn['card1'] == 9500][cols].head(20)
 </div>
 
 
-
-
 ```python
 cols = ['TransactionDT','TransactionAmt','isFraud'] + dcols
 train_trn[train_trn['card1'] == 4774][cols].head(20)
 ```
-
-
 
 
 <div>
@@ -5531,14 +5248,9 @@ train_trn[train_trn['card1'] == 4774][cols].head(20)
 </div>
 
 
-
-
 ```python
 train_trn[train_trn['card1'] == 14770][cols].head(20)
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -5723,13 +5435,6 @@ plt.scatter(train_trn_f1['_ymd'], vsum1, s=5, c='r')
 ```
 
 
-
-
-    <matplotlib.collections.PathCollection at 0x7f011d686080>
-
-
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_124_1.png)
 
 
@@ -5738,9 +5443,6 @@ plt.scatter(train_trn_f1['_ymd'], vsum1, s=5, c='r')
 m = train_trn_f1[vcols].describe().T['max']
 m[m >= 10000]
 ```
-
-
-
 
     V127    19,860.000
     V128    10,162.000
@@ -5765,20 +5467,10 @@ m[m >= 10000]
     Name: max, dtype: float64
 
 
-
-
 ```python
 plt.scatter(train_trn_f0['_ymd'], train_trn_f0['V160'], s=5)
 plt.scatter(train_trn_f1['_ymd'], train_trn_f1['V160'], s=5, c='r')
 ```
-
-
-
-
-    <matplotlib.collections.PathCollection at 0x7f011d1fed30>
-
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_126_1.png)
 
@@ -5793,15 +5485,7 @@ plt.scatter(train_trn_f1['_ymd'], vsum1, s=5, c='r')
 ```
 
 
-
-
-    <matplotlib.collections.PathCollection at 0x7f0120766a90>
-
-
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_127_1.png)
-
 
 
 ```python
@@ -5809,29 +5493,24 @@ train_trn[vcols].isnull().sum() / len(train_trn)
 ```
 
 
-
-
-    V1     0.473
-    V2     0.473
-    V3     0.473
-    V4     0.473
-    V5     0.473
-            ... 
-    V335   0.861
-    V336   0.861
-    V337   0.861
-    V338   0.861
-    V339   0.861
-    Length: 339, dtype: float64
-
+V1     0.473
+V2     0.473
+V3     0.473
+V4     0.473
+V5     0.473
+        ... 
+V335   0.861
+V336   0.861
+V337   0.861
+V338   0.861
+V339   0.861
+Length: 339, dtype: float64
 
 
 
 ```python
 train_trn.loc[train_trn['V1'].isnull(), vcols].head(10)
 ```
-
-
 
 
 <div>
@@ -6122,13 +5801,9 @@ train_trn.loc[train_trn['V1'].isnull(), vcols].head(10)
 </div>
 
 
-
-
 ```python
 train_trn.loc[train_trn['V1'].isnull() == False, vcols].head(10)
 ```
-
-
 
 
 <div>
@@ -6419,22 +6094,11 @@ train_trn.loc[train_trn['V1'].isnull() == False, vcols].head(10)
 </div>
 
 
-
-
 ```python
 fig, ax = plt.subplots(1, 2, figsize=(15, 3))
 train_trn.loc[train_trn['isFraud']==0, vcols].isnull().sum(axis=1).to_frame().hist(ax=ax[0], bins=20)
 train_trn.loc[train_trn['isFraud']==1, vcols].isnull().sum(axis=1).to_frame().hist(ax=ax[1], bins=20)
 ```
-
-
-
-
-    array([<matplotlib.axes._subplots.AxesSubplot object at 0x7f011dc38ba8>],
-          dtype=object)
-
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_131_1.png)
 
@@ -6443,9 +6107,6 @@ train_trn.loc[train_trn['isFraud']==1, vcols].isnull().sum(axis=1).to_frame().hi
 ```python
 train_trn[vcols].describe().T[['min','max']].T
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -6543,8 +6204,6 @@ train_trn[vcols].describe().T[['min','max']].T
 </div>
 
 
-
-
 ```python
 vcols = [f'V{i}' for i in range(1,340)]
 
@@ -6559,13 +6218,10 @@ vcol_pca = pca.fit_transform(train_trn[vcols].fillna(-1))
 print(vcol_pca.ndim)
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_133_0.png)
 
-
-    2
+2
     
-
 
 ```python
 del train_trn_f0,train_trn_f1,train_id_f0,train_id_f1
@@ -6574,17 +6230,17 @@ print(pd.DataFrame([[val for val in dir()], [sys.getsizeof(eval(val)) for val in
                    index=['name','size']).T.sort_values('size', ascending=False).reset_index(drop=True)[:10])
 ```
 
-               name        size
-    0     train_trn  1243551195
-    1      test_trn   820917583
-    2  train_id_trn   157073961
-    3      train_id   155487526
-    4       test_id   146112147
-    5         vsum0     6838548
-    6    train_date     4724472
-    7     test_date     4053680
-    8            vc     1951187
-    9           _65     1951187
+           name        size
+0     train_trn  1243551195
+1      test_trn   820917583
+2  train_id_trn   157073961
+3      train_id   155487526
+4       test_id   146112147
+5         vsum0     6838548
+6    train_date     4724472
+7     test_date     4053680
+8            vc     1951187
+9           _65     1951187    
     
 # Feature engineering
 
@@ -6610,8 +6266,9 @@ del train_id,train_trn,test_id,test_trn
 all_data = X_train.append(X_test, sort=False).reset_index(drop=True)
 ```
 
-    Memory usage of dataframe is 1959.88 MB --> 650.48 MB (Decreased by 66.8%)
-    Memory usage of dataframe is 1677.73 MB --> 565.37 MB (Decreased by 66.3%)
+Memory usage of dataframe is 1959.88 MB --> 650.48 MB (Decreased by 66.8%)
+
+Memory usage of dataframe is 1677.73 MB --> 565.37 MB (Decreased by 66.3%)
     
 
 
@@ -6669,9 +6326,6 @@ all_data['_amount_decimal_len'] = all_data['TransactionAmt'].apply(lambda x: len
 all_data['_amount_fraction'] = all_data['TransactionAmt'].apply(lambda x: float('0.'+re.sub('^[0-9]|\.|0+$', '', str(x))))
 all_data[['TransactionAmt','_amount_decimal','_amount_decimal_len','_amount_fraction']].head(10)
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -6772,9 +6426,6 @@ all_data[['TransactionAmt','_amount_decimal','_amount_decimal_len','_amount_frac
 </table>
 </div>
 
-
-
-
 ```python
 cols = ['ProductCD','card1','card2','card5','card6','P_emaildomain','_card_all__addr1']
 #,'card3','card4','addr1','dist2','R_emaildomain'
@@ -6791,15 +6442,12 @@ for f in cols:
     all_data[f'_count_{f}'] = all_data[f].map(vc)
 ```
 
-
 ```python
 print('features:', all_data.shape[1])
 ```
 
-    features: 137
+features: 137
     
-
-
 ```python
 _='''
 cat_cols = ['ProductCD','card1','card2','card3','card4','card5','card6','addr1','addr2','P_emaildomain','R_emaildomain',
@@ -6822,8 +6470,7 @@ for i, t in all_data.loc[:, all_data.columns != 'isFraud'].dtypes.iteritems():
 print(enc_cols)
 ```
 
-    ['ProductCD', 'card4', 'card6', 'P_emaildomain', 'R_emaildomain', 'M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'id_12', 'id_13', 'id_14', 'id_15', 'id_16', 'id_17', 'id_18', 'id_19', 'id_20', 'id_21', 'id_22', 'id_23', 'id_24', 'id_25', 'id_26', 'id_27', 'id_28', 'id_29', 'id_30', 'id_31', 'id_32', 'id_33', 'id_34', 'id_35', 'id_36', 'id_37', 'id_38', 'DeviceType', 'DeviceInfo', '_weekday', '_hour', '_weekday__hour', '_P_emaildomain__addr1', '_card1__card2', '_card1__addr1', '_card2__addr1', '_card12__addr1', '_card_all__addr1']
-    
+['ProductCD', 'card4', 'card6', 'P_emaildomain', 'R_emaildomain', 'M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'id_12', 'id_13', 'id_14', 'id_15', 'id_16', 'id_17', 'id_18', 'id_19', 'id_20', 'id_21', 'id_22', 'id_23', 'id_24', 'id_25', 'id_26', 'id_27', 'id_28', 'id_29', 'id_30', 'id_31', 'id_32', 'id_33', 'id_34', 'id_35', 'id_36', 'id_37', 'id_38', 'DeviceType', 'DeviceInfo', '_weekday', '_hour', '_weekday__hour', '_P_emaildomain__addr1', '_card1__card2', '_card1__addr1', '_card2__addr1', '_card12__addr1', '_card_all__addr1']
 
 
 ```python
@@ -6834,7 +6481,6 @@ del all_data
 ```
 
 # Predict
-
 
 ```python
 %%time
@@ -6861,10 +6507,10 @@ oof_preds = clf.predict_proba(X_train, num_iteration=clf.best_iteration_)[:,1]
 sub_preds = clf.predict_proba(X_test, num_iteration=clf.best_iteration_)[:,1]
 ```
 
-    CPU times: user 1h 19min 25s, sys: 44.8 s, total: 1h 20min 10s
-    Wall time: 41min 29s
-    
+CPU times: user 1h 19min 25s, sys: 44.8 s, total: 1h 20min 10s
 
+Wall time: 41min 29s
+    
 
 ```python
 fpr, tpr, thresholds = metrics.roc_curve(Y_train, oof_preds)
@@ -6878,9 +6524,7 @@ plt.ylabel('True Positive Rate')
 plt.grid(True)
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/prediction_14_0.png)
-
 
 
 ```python
@@ -6901,8 +6545,6 @@ plt.show()
 
 
 ![png](/images/ieee-cis-fraud-detection/prediction_15_0.png)
-
-
 
 ```python
 prediction = pd.DataFrame()
