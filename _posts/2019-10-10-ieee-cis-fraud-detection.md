@@ -30,6 +30,7 @@ In this, you are predicting the probability that an online transaction is fraudu
 The data is broken into two files identity and transaction, which are joined by TransactionID. Not all transactions have corresponding identity information.
 
 Categorical Features - Transaction
+
 1. ProductCD
 2. card1 - card6
 3. addr1, addr2
@@ -38,6 +39,7 @@ Categorical Features - Transaction
 6. M1 - M9
 
 Categorical Features - Identity
+
 1. DeviceType
 2. DeviceInfo
 3. id_12 - id_38
@@ -47,12 +49,11 @@ The TransactionDT feature is a timedelta from a given reference datetime (not an
 You can find the dataset [here](https://www.kaggle.com/c/ieee-fraud-detection/data).
 
 # Files
+
 1. train_{transaction, identity}.csv - the training set
 2. test_{transaction, identity}.csv - the test set (you must predict the isFraud value for these observations)
 
-
 # So lets begin with complete EDA...
-
 
 ```python
 import numpy as np
@@ -86,9 +87,13 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 ### We have the locations for our files
 
 /kaggle/input/ieee-fraud-detection/sample_submission.csv
+
 /kaggle/input/ieee-fraud-detection/test_identity.csv
+
 /kaggle/input/ieee-fraud-detection/train_transaction.csv
+
 /kaggle/input/ieee-fraud-detection/test_transaction.csv
+
 /kaggle/input/ieee-fraud-detection/train_identity.csv
 
 ```python
@@ -139,6 +144,7 @@ test_id = pd.read_csv('../input/ieee-fraud-detection/test_identity.csv')
 test_trn = pd.read_csv('../input/ieee-fraud-detection/test_transaction.csv')
 ```
 CPU times: user 40.3 s, sys: 4.38 s, total: 44.7 s
+
 Wall time: 44.8 s
 
 ```python
@@ -149,8 +155,11 @@ test_trn = reduce_mem_usage(test_trn)
 ```
 
 Memory usage of dataframe is 45.12 MB --> 25.86 MB (Decreased by 42.7%)
+
 Memory usage of dataframe is 1775.15 MB --> 542.35 MB (Decreased by 69.4%)
+
 Memory usage of dataframe is 44.39 MB --> 25.44 MB (Decreased by 42.7%)
+
 Memory usage of dataframe is 1519.24 MB --> 472.59 MB (Decreased by 68.9%)
 
 
