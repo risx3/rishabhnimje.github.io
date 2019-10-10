@@ -219,7 +219,7 @@ fc.T
 
 
 
-![png](analysis_files/analysis_8_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_8_1.png)
 
 
 ### Fraud Transaction rate per day and per week
@@ -242,7 +242,7 @@ train_trn.groupby('_seq_week')['isFraud'].mean().to_frame().plot.line(ax=ax[1])
 
 
 
-![png](analysis_files/analysis_10_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_10_1.png)
 
 
 ### Fraud transaction rate by weekday, hour, month-day, and year-month
@@ -276,7 +276,7 @@ train_trn.groupby('_year_month')['isFraud'].mean().to_frame().plot.bar(ax=ax[3])
 
 
 
-![png](analysis_files/analysis_12_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_12_1.png)
 
 
 ### Fraud transaction rate by day
@@ -464,7 +464,7 @@ plt.scatter(df['count'], df['mean'], s=10)
 
 
 
-![png](analysis_files/analysis_16_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_16_1.png)
 
 
 
@@ -481,7 +481,7 @@ plt.scatter(df['count'], df['sum'], s=10)
 
 
 
-![png](analysis_files/analysis_17_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_17_1.png)
 
 
 ### Fraud transaction rate by weekday-hour
@@ -500,7 +500,7 @@ train_trn.groupby('_weekday_hour')['isFraud'].mean().to_frame().plot.line(figsiz
 
 
 
-![png](analysis_files/analysis_19_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_19_1.png)
 
 
 ### Fraud rate by weekday
@@ -887,47 +887,47 @@ plotHistByFraud('id_11')
 ```
 
 
-![png](analysis_files/analysis_33_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_33_0.png)
 
 
 
-![png](analysis_files/analysis_33_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_33_1.png)
 
 
 
-![png](analysis_files/analysis_33_2.png)
+![png](/images/ieee-cis-fraud-detection/analysis_33_2.png)
 
 
 
-![png](analysis_files/analysis_33_3.png)
+![png](/images/ieee-cis-fraud-detection/analysis_33_3.png)
 
 
 
-![png](analysis_files/analysis_33_4.png)
+![png](/images/ieee-cis-fraud-detection/analysis_33_4.png)
 
 
 
-![png](analysis_files/analysis_33_5.png)
+![png](/images/ieee-cis-fraud-detection/analysis_33_5.png)
 
 
 
-![png](analysis_files/analysis_33_6.png)
+![png](/images/ieee-cis-fraud-detection/analysis_33_6.png)
 
 
 
-![png](analysis_files/analysis_33_7.png)
+![png](/images/ieee-cis-fraud-detection/analysis_33_7.png)
 
 
 
-![png](analysis_files/analysis_33_8.png)
+![png](/images/ieee-cis-fraud-detection/analysis_33_8.png)
 
 
 
-![png](analysis_files/analysis_33_9.png)
+![png](/images/ieee-cis-fraud-detection/analysis_33_9.png)
 
 
 
-![png](analysis_files/analysis_33_10.png)
+![png](/images/ieee-cis-fraud-detection/analysis_33_10.png)
 
 
 
@@ -1005,7 +1005,7 @@ sns.heatmap(train_id_trn[['isFraud','TransactionAmt']+numid_cols].corr(), annot=
 
 
 
-![png](analysis_files/analysis_35_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_35_1.png)
 
 
 
@@ -1418,39 +1418,39 @@ plotCategoryRateBar('id_20',10)
 ```
 
 
-![png](analysis_files/analysis_39_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_39_0.png)
 
 
 
-![png](analysis_files/analysis_39_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_39_1.png)
 
 
 
-![png](analysis_files/analysis_39_2.png)
+![png](/images/ieee-cis-fraud-detection/analysis_39_2.png)
 
 
 
-![png](analysis_files/analysis_39_3.png)
+![png](/images/ieee-cis-fraud-detection/analysis_39_3.png)
 
 
 
-![png](analysis_files/analysis_39_4.png)
+![png](/images/ieee-cis-fraud-detection/analysis_39_4.png)
 
 
 
-![png](analysis_files/analysis_39_5.png)
+![png](/images/ieee-cis-fraud-detection/analysis_39_5.png)
 
 
 
-![png](analysis_files/analysis_39_6.png)
+![png](/images/ieee-cis-fraud-detection/analysis_39_6.png)
 
 
 
-![png](analysis_files/analysis_39_7.png)
+![png](/images/ieee-cis-fraud-detection/analysis_39_7.png)
 
 
 
-![png](analysis_files/analysis_39_8.png)
+![png](/images/ieee-cis-fraud-detection/analysis_39_8.png)
 
 
 
@@ -1468,43 +1468,43 @@ plotCategoryRateBar('id_30',10)
 ```
 
 
-![png](analysis_files/analysis_40_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_40_0.png)
 
 
 
-![png](analysis_files/analysis_40_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_40_1.png)
 
 
 
-![png](analysis_files/analysis_40_2.png)
+![png](/images/ieee-cis-fraud-detection/analysis_40_2.png)
 
 
 
-![png](analysis_files/analysis_40_3.png)
+![png](/images/ieee-cis-fraud-detection/analysis_40_3.png)
 
 
 
-![png](analysis_files/analysis_40_4.png)
+![png](/images/ieee-cis-fraud-detection/analysis_40_4.png)
 
 
 
-![png](analysis_files/analysis_40_5.png)
+![png](/images/ieee-cis-fraud-detection/analysis_40_5.png)
 
 
 
-![png](analysis_files/analysis_40_6.png)
+![png](/images/ieee-cis-fraud-detection/analysis_40_6.png)
 
 
 
-![png](analysis_files/analysis_40_7.png)
+![png](/images/ieee-cis-fraud-detection/analysis_40_7.png)
 
 
 
-![png](analysis_files/analysis_40_8.png)
+![png](/images/ieee-cis-fraud-detection/analysis_40_8.png)
 
 
 
-![png](analysis_files/analysis_40_9.png)
+![png](/images/ieee-cis-fraud-detection/analysis_40_9.png)
 
 
 
@@ -1517,11 +1517,11 @@ plotCategoryRateBar('_id_31_ua', 10)
 ```
 
 
-![png](analysis_files/analysis_41_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_41_0.png)
 
 
 
-![png](analysis_files/analysis_41_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_41_1.png)
 
 
 
@@ -1536,31 +1536,31 @@ plotCategoryRateBar('id_38')
 ```
 
 
-![png](analysis_files/analysis_42_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_42_0.png)
 
 
 
-![png](analysis_files/analysis_42_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_42_1.png)
 
 
 
-![png](analysis_files/analysis_42_2.png)
+![png](/images/ieee-cis-fraud-detection/analysis_42_2.png)
 
 
 
-![png](analysis_files/analysis_42_3.png)
+![png](/images/ieee-cis-fraud-detection/analysis_42_3.png)
 
 
 
-![png](analysis_files/analysis_42_4.png)
+![png](/images/ieee-cis-fraud-detection/analysis_42_4.png)
 
 
 
-![png](analysis_files/analysis_42_5.png)
+![png](/images/ieee-cis-fraud-detection/analysis_42_5.png)
 
 
 
-![png](analysis_files/analysis_42_6.png)
+![png](/images/ieee-cis-fraud-detection/analysis_42_6.png)
 
 
 ### DeviceType, DeviceInfo
@@ -1572,11 +1572,11 @@ plotCategoryRateBar('DeviceInfo',10)
 ```
 
 
-![png](analysis_files/analysis_44_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_44_0.png)
 
 
 
-![png](analysis_files/analysis_44_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_44_1.png)
 
 
 ## Transaction data
@@ -1653,7 +1653,7 @@ test_trn['TransactionDT'].hist(bins=20)
 
 
 
-![png](analysis_files/analysis_50_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_50_1.png)
 
 
 
@@ -1751,7 +1751,7 @@ plotTrnLogHistByFraud('_date_lag')
 ```
 
 
-![png](analysis_files/analysis_53_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_53_0.png)
 
 
 ### TransactionAmt
@@ -1763,11 +1763,11 @@ plotTrnLogHistByFraud('TransactionAmt')
 ```
 
 
-![png](analysis_files/analysis_55_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_55_0.png)
 
 
 
-![png](analysis_files/analysis_55_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_55_1.png)
 
 
 
@@ -1868,11 +1868,11 @@ plotTrnCategoryRateBar('_amt_lag_sig')
 ```
 
 
-![png](analysis_files/analysis_58_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_58_0.png)
 
 
 
-![png](analysis_files/analysis_58_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_58_1.png)
 
 
 ### ProductCD
@@ -1883,7 +1883,7 @@ plotTrnCategoryRateBar('ProductCD')
 ```
 
 
-![png](analysis_files/analysis_60_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_60_0.png)
 
 
 
@@ -2912,7 +2912,7 @@ train_trn[train_trn['card4']=='mastercard']['card1'].hist(bins=50)
 
 
 
-![png](analysis_files/analysis_74_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_74_1.png)
 
 
 
@@ -2929,7 +2929,7 @@ train_trn[train_trn['card4']=='mastercard']['card2'].hist(bins=50)
 
 
 
-![png](analysis_files/analysis_75_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_75_1.png)
 
 
 
@@ -2939,11 +2939,11 @@ plotTrnHistByFraud('card1', bins=30)
 ```
 
 
-![png](analysis_files/analysis_76_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_76_0.png)
 
 
 
-![png](analysis_files/analysis_76_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_76_1.png)
 
 
 
@@ -2953,11 +2953,11 @@ plotTrnHistByFraud('card2', bins=30)
 ```
 
 
-![png](analysis_files/analysis_77_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_77_0.png)
 
 
 
-![png](analysis_files/analysis_77_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_77_1.png)
 
 
 
@@ -2969,7 +2969,7 @@ plotTrnCategoryRateBar('_card1_card2', 50, figsize=(15,3))
 ```
 
 
-![png](analysis_files/analysis_78_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_78_0.png)
 
 
 
@@ -2978,7 +2978,7 @@ plotTrnCategoryRateBar('card3', 10)
 ```
 
 
-![png](analysis_files/analysis_79_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_79_0.png)
 
 
 
@@ -2987,7 +2987,7 @@ plotTrnCategoryRateBar('card4')
 ```
 
 
-![png](analysis_files/analysis_80_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_80_0.png)
 
 
 
@@ -2996,7 +2996,7 @@ plotTrnCategoryRateBar('card5', 10)
 ```
 
 
-![png](analysis_files/analysis_81_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_81_0.png)
 
 
 
@@ -3005,7 +3005,7 @@ plotTrnCategoryRateBar('card6')
 ```
 
 
-![png](analysis_files/analysis_82_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_82_0.png)
 
 
 
@@ -3037,7 +3037,7 @@ vc[vc > 3000].plot.bar()
 
 
 
-![png](analysis_files/analysis_84_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_84_1.png)
 
 
 
@@ -3085,11 +3085,11 @@ plotTrnHistByFraud('addr1', bins=30)
 ```
 
 
-![png](analysis_files/analysis_88_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_88_0.png)
 
 
 
-![png](analysis_files/analysis_88_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_88_1.png)
 
 
 
@@ -3178,7 +3178,7 @@ print('addr2 nunique:', train_trn['addr2'].nunique())
     
 
 
-![png](analysis_files/analysis_90_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_90_1.png)
 
 
 
@@ -3265,7 +3265,7 @@ plotTrnCategoryRateBar('dist1', 20)
 ```
 
 
-![png](analysis_files/analysis_93_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_93_0.png)
 
 
 
@@ -3274,7 +3274,7 @@ plotTrnCategoryRateBar('dist2', 20)
 ```
 
 
-![png](analysis_files/analysis_94_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_94_0.png)
 
 
 
@@ -3287,11 +3287,11 @@ plotTrnLogHistByFraud('dist3')
 ```
 
 
-![png](analysis_files/analysis_95_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_95_0.png)
 
 
 
-![png](analysis_files/analysis_95_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_95_1.png)
 
 
 ### P_emaildomain, R_emaildomain
@@ -3303,11 +3303,11 @@ plotTrnCategoryRateBar('R_emaildomain',10)
 ```
 
 
-![png](analysis_files/analysis_97_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_97_0.png)
 
 
 
-![png](analysis_files/analysis_97_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_97_1.png)
 
 
 
@@ -3646,7 +3646,7 @@ ct.plot.barh(stacked=True, figsize=(12,4))
 
 
 
-![png](analysis_files/analysis_100_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_100_1.png)
 
 
 ### C1 - C14
@@ -3658,59 +3658,59 @@ for i in range(1,15):
 ```
 
 
-![png](analysis_files/analysis_102_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_102_0.png)
 
 
 
-![png](analysis_files/analysis_102_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_102_1.png)
 
 
 
-![png](analysis_files/analysis_102_2.png)
+![png](/images/ieee-cis-fraud-detection/analysis_102_2.png)
 
 
 
-![png](analysis_files/analysis_102_3.png)
+![png](/images/ieee-cis-fraud-detection/analysis_102_3.png)
 
 
 
-![png](analysis_files/analysis_102_4.png)
+![png](/images/ieee-cis-fraud-detection/analysis_102_4.png)
 
 
 
-![png](analysis_files/analysis_102_5.png)
+![png](/images/ieee-cis-fraud-detection/analysis_102_5.png)
 
 
 
-![png](analysis_files/analysis_102_6.png)
+![png](/images/ieee-cis-fraud-detection/analysis_102_6.png)
 
 
 
-![png](analysis_files/analysis_102_7.png)
+![png](/images/ieee-cis-fraud-detection/analysis_102_7.png)
 
 
 
-![png](analysis_files/analysis_102_8.png)
+![png](/images/ieee-cis-fraud-detection/analysis_102_8.png)
 
 
 
-![png](analysis_files/analysis_102_9.png)
+![png](/images/ieee-cis-fraud-detection/analysis_102_9.png)
 
 
 
-![png](analysis_files/analysis_102_10.png)
+![png](/images/ieee-cis-fraud-detection/analysis_102_10.png)
 
 
 
-![png](analysis_files/analysis_102_11.png)
+![png](/images/ieee-cis-fraud-detection/analysis_102_11.png)
 
 
 
-![png](analysis_files/analysis_102_12.png)
+![png](/images/ieee-cis-fraud-detection/analysis_102_12.png)
 
 
 
-![png](analysis_files/analysis_102_13.png)
+![png](/images/ieee-cis-fraud-detection/analysis_102_13.png)
 
 
 
@@ -3863,7 +3863,7 @@ sns.heatmap(corr, annot=True, fmt='.2f')
 
 
 
-![png](analysis_files/analysis_104_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_104_1.png)
 
 
 ### Cx & card
@@ -4595,63 +4595,63 @@ for i in range(1,16):
 ```
 
 
-![png](analysis_files/analysis_110_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_110_0.png)
 
 
 
-![png](analysis_files/analysis_110_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_110_1.png)
 
 
 
-![png](analysis_files/analysis_110_2.png)
+![png](/images/ieee-cis-fraud-detection/analysis_110_2.png)
 
 
 
-![png](analysis_files/analysis_110_3.png)
+![png](/images/ieee-cis-fraud-detection/analysis_110_3.png)
 
 
 
-![png](analysis_files/analysis_110_4.png)
+![png](/images/ieee-cis-fraud-detection/analysis_110_4.png)
 
 
 
-![png](analysis_files/analysis_110_5.png)
+![png](/images/ieee-cis-fraud-detection/analysis_110_5.png)
 
 
 
-![png](analysis_files/analysis_110_6.png)
+![png](/images/ieee-cis-fraud-detection/analysis_110_6.png)
 
 
 
-![png](analysis_files/analysis_110_7.png)
+![png](/images/ieee-cis-fraud-detection/analysis_110_7.png)
 
 
 
-![png](analysis_files/analysis_110_8.png)
+![png](/images/ieee-cis-fraud-detection/analysis_110_8.png)
 
 
 
-![png](analysis_files/analysis_110_9.png)
+![png](/images/ieee-cis-fraud-detection/analysis_110_9.png)
 
 
 
-![png](analysis_files/analysis_110_10.png)
+![png](/images/ieee-cis-fraud-detection/analysis_110_10.png)
 
 
 
-![png](analysis_files/analysis_110_11.png)
+![png](/images/ieee-cis-fraud-detection/analysis_110_11.png)
 
 
 
-![png](analysis_files/analysis_110_12.png)
+![png](/images/ieee-cis-fraud-detection/analysis_110_12.png)
 
 
 
-![png](analysis_files/analysis_110_13.png)
+![png](/images/ieee-cis-fraud-detection/analysis_110_13.png)
 
 
 
-![png](analysis_files/analysis_110_14.png)
+![png](/images/ieee-cis-fraud-detection/analysis_110_14.png)
 
 
 
@@ -4811,7 +4811,7 @@ plt.scatter(test_trn['TransactionDT'], test_trn['D1'], s=2, c='g')
 
 
 
-![png](analysis_files/analysis_112_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_112_1.png)
 
 
 
@@ -4832,7 +4832,7 @@ plt.scatter(test_trn['TransactionDT'], test_trn['D15'], s=2, c='g')
 
 
 
-![png](analysis_files/analysis_113_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_113_1.png)
 
 
 
@@ -4851,7 +4851,7 @@ sns.heatmap(corr, annot=True, fmt='.2f')
 
 
 
-![png](analysis_files/analysis_114_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_114_1.png)
 
 
 
@@ -4870,7 +4870,7 @@ train_trn.loc[train_trn['isFraud']==1, dcols].isnull().sum(axis=1).to_frame().hi
 
 
 
-![png](analysis_files/analysis_115_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_115_1.png)
 
 
 ### Dx & card
@@ -5640,39 +5640,39 @@ plotTrnCategoryRateBar('M9')
 ```
 
 
-![png](analysis_files/analysis_121_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_121_0.png)
 
 
 
-![png](analysis_files/analysis_121_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_121_1.png)
 
 
 
-![png](analysis_files/analysis_121_2.png)
+![png](/images/ieee-cis-fraud-detection/analysis_121_2.png)
 
 
 
-![png](analysis_files/analysis_121_3.png)
+![png](/images/ieee-cis-fraud-detection/analysis_121_3.png)
 
 
 
-![png](analysis_files/analysis_121_4.png)
+![png](/images/ieee-cis-fraud-detection/analysis_121_4.png)
 
 
 
-![png](analysis_files/analysis_121_5.png)
+![png](/images/ieee-cis-fraud-detection/analysis_121_5.png)
 
 
 
-![png](analysis_files/analysis_121_6.png)
+![png](/images/ieee-cis-fraud-detection/analysis_121_6.png)
 
 
 
-![png](analysis_files/analysis_121_7.png)
+![png](/images/ieee-cis-fraud-detection/analysis_121_7.png)
 
 
 
-![png](analysis_files/analysis_121_8.png)
+![png](/images/ieee-cis-fraud-detection/analysis_121_8.png)
 
 
 ### Vxxx
@@ -5684,31 +5684,31 @@ for f in ['V1','V14','V41','V65','V88','V107','V305']:
 ```
 
 
-![png](analysis_files/analysis_123_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_123_0.png)
 
 
 
-![png](analysis_files/analysis_123_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_123_1.png)
 
 
 
-![png](analysis_files/analysis_123_2.png)
+![png](/images/ieee-cis-fraud-detection/analysis_123_2.png)
 
 
 
-![png](analysis_files/analysis_123_3.png)
+![png](/images/ieee-cis-fraud-detection/analysis_123_3.png)
 
 
 
-![png](analysis_files/analysis_123_4.png)
+![png](/images/ieee-cis-fraud-detection/analysis_123_4.png)
 
 
 
-![png](analysis_files/analysis_123_5.png)
+![png](/images/ieee-cis-fraud-detection/analysis_123_5.png)
 
 
 
-![png](analysis_files/analysis_123_6.png)
+![png](/images/ieee-cis-fraud-detection/analysis_123_6.png)
 
 
 
@@ -5727,7 +5727,7 @@ plt.scatter(train_trn_f1['_ymd'], vsum1, s=5, c='r')
 
 
 
-![png](analysis_files/analysis_124_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_124_1.png)
 
 
 
@@ -5777,7 +5777,7 @@ plt.scatter(train_trn_f1['_ymd'], train_trn_f1['V160'], s=5, c='r')
 
 
 
-![png](analysis_files/analysis_126_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_126_1.png)
 
 
 
@@ -5797,7 +5797,7 @@ plt.scatter(train_trn_f1['_ymd'], vsum1, s=5, c='r')
 
 
 
-![png](analysis_files/analysis_127_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_127_1.png)
 
 
 
@@ -6433,7 +6433,7 @@ train_trn.loc[train_trn['isFraud']==1, vcols].isnull().sum(axis=1).to_frame().hi
 
 
 
-![png](analysis_files/analysis_131_1.png)
+![png](/images/ieee-cis-fraud-detection/analysis_131_1.png)
 
 
 
@@ -6557,7 +6557,7 @@ print(vcol_pca.ndim)
 ```
 
 
-![png](analysis_files/analysis_133_0.png)
+![png](/images/ieee-cis-fraud-detection/analysis_133_0.png)
 
 
     2
