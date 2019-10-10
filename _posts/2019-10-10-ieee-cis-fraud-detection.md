@@ -50,6 +50,7 @@ You can find the dataset [here](https://www.kaggle.com/c/ieee-fraud-detection/da
 1. train_{transaction, identity}.csv - the training set
 2. test_{transaction, identity}.csv - the test set (you must predict the isFraud value for these observations)
 
+
 # So lets begin with complete EDA...
 
 
@@ -74,7 +75,6 @@ sns.set_style('darkgrid')
 pd.options.display.float_format = '{:,.3f}'.format
 
 # Input data files are available in the "../input/" directory.
-# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
 
 import os
 for dirname, _, filenames in os.walk('/kaggle/input'):
@@ -85,11 +85,11 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 ```
 ### We have the locations for our files
 
-  /kaggle/input/ieee-fraud-detection/sample_submission.csv
-  /kaggle/input/ieee-fraud-detection/test_identity.csv
-  /kaggle/input/ieee-fraud-detection/train_transaction.csv
-  /kaggle/input/ieee-fraud-detection/test_transaction.csv
-  /kaggle/input/ieee-fraud-detection/train_identity.csv
+/kaggle/input/ieee-fraud-detection/sample_submission.csv
+/kaggle/input/ieee-fraud-detection/test_identity.csv
+/kaggle/input/ieee-fraud-detection/train_transaction.csv
+/kaggle/input/ieee-fraud-detection/test_transaction.csv
+/kaggle/input/ieee-fraud-detection/train_identity.csv
 
 ```python
 # Memory saving function credit to https://www.kaggle.com/gemartin/load-data-reduce-memory-usage
@@ -138,8 +138,8 @@ train_trn = pd.read_csv('../input/ieee-fraud-detection/train_transaction.csv')
 test_id = pd.read_csv('../input/ieee-fraud-detection/test_identity.csv')
 test_trn = pd.read_csv('../input/ieee-fraud-detection/test_transaction.csv')
 ```
-    CPU times: user 40.3 s, sys: 4.38 s, total: 44.7 s
-    Wall time: 44.8 s
+CPU times: user 40.3 s, sys: 4.38 s, total: 44.7 s
+Wall time: 44.8 s
 
 ```python
 train_id = reduce_mem_usage(train_id)
@@ -148,10 +148,10 @@ test_id = reduce_mem_usage(test_id)
 test_trn = reduce_mem_usage(test_trn)
 ```
 
-    Memory usage of dataframe is 45.12 MB --> 25.86 MB (Decreased by 42.7%)
-    Memory usage of dataframe is 1775.15 MB --> 542.35 MB (Decreased by 69.4%)
-    Memory usage of dataframe is 44.39 MB --> 25.44 MB (Decreased by 42.7%)
-    Memory usage of dataframe is 1519.24 MB --> 472.59 MB (Decreased by 68.9%)
+Memory usage of dataframe is 45.12 MB --> 25.86 MB (Decreased by 42.7%)
+Memory usage of dataframe is 1775.15 MB --> 542.35 MB (Decreased by 69.4%)
+Memory usage of dataframe is 44.39 MB --> 25.44 MB (Decreased by 42.7%)
+Memory usage of dataframe is 1519.24 MB --> 472.59 MB (Decreased by 68.9%)
 
 
 ```python
@@ -159,8 +159,8 @@ print(train_id.shape, test_id.shape)
 print(train_trn.shape, test_trn.shape)
 ```
 
-    (144233, 41) (141907, 41)
-    (590540, 394) (506691, 393)
+(144233, 41) (141907, 41)
+(590540, 394) (506691, 393)
     
 
 ## Data Analysis
