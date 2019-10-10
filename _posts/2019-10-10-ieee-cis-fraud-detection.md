@@ -6602,4 +6602,4 @@ prediction['isFraud'] = sub_preds
 prediction.to_csv('prediction.csv', index=False)
 ```
 
-## Download [prediction.csv]()
+## Download [prediction.csv](https://drive.google.com/file/d/1-NltqHuSTrxwWQO7HboGnLN1VPiHKUBX/view?usp=sharing)
