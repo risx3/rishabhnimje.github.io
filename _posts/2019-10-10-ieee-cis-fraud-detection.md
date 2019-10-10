@@ -6601,3 +6601,5 @@ prediction['TransactionID'] = X_test_id
 prediction['isFraud'] = sub_preds
 prediction.to_csv('prediction.csv', index=False)
 ```
+
+## Download [prediction.csv]()
