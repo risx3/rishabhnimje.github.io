@@ -29,7 +29,7 @@ In this, you are predicting the probability that an online transaction is fraudu
 
 The data is broken into two files identity and transaction, which are joined by TransactionID. Not all transactions have corresponding identity information.
 
-Categorical Features - Transaction
+**Categorical Features - Transaction**
 
 1. ProductCD
 2. card1 - card6
@@ -38,7 +38,7 @@ Categorical Features - Transaction
 5. R_emaildomain
 6. M1 - M9
 
-Categorical Features - Identity
+**Categorical Features - Identity**
 
 1. DeviceType
 2. DeviceInfo
@@ -86,15 +86,11 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 ```
 ### We have the locations for our files
 
-/kaggle/input/ieee-fraud-detection/sample_submission.csv
-
-/kaggle/input/ieee-fraud-detection/test_identity.csv
-
-/kaggle/input/ieee-fraud-detection/train_transaction.csv
-
-/kaggle/input/ieee-fraud-detection/test_transaction.csv
-
-/kaggle/input/ieee-fraud-detection/train_identity.csv
+> /kaggle/input/ieee-fraud-detection/sample_submission.csv
+> /kaggle/input/ieee-fraud-detection/test_identity.csv
+> /kaggle/input/ieee-fraud-detection/train_transaction.csv
+> /kaggle/input/ieee-fraud-detection/test_transaction.csv
+> /kaggle/input/ieee-fraud-detection/train_identity.csv
 
 ```python
 # Memory saving function credit to https://www.kaggle.com/gemartin/load-data-reduce-memory-usage
@@ -144,9 +140,8 @@ train_trn = pd.read_csv('../input/ieee-fraud-detection/train_transaction.csv')
 test_id = pd.read_csv('../input/ieee-fraud-detection/test_identity.csv')
 test_trn = pd.read_csv('../input/ieee-fraud-detection/test_transaction.csv')
 ```
-CPU times: user 40.3 s, sys: 4.38 s, total: 44.7 s
-
-Wall time: 44.8 s
+> CPU times: user 40.3 s, sys: 4.38 s, total: 44.7 s
+> Wall time: 44.8 s
 
 ```python
 train_id = reduce_mem_usage(train_id)
@@ -155,23 +150,18 @@ test_id = reduce_mem_usage(test_id)
 test_trn = reduce_mem_usage(test_trn)
 ```
 
-Memory usage of dataframe is 45.12 MB --> 25.86 MB (Decreased by 42.7%)
-
-Memory usage of dataframe is 1775.15 MB --> 542.35 MB (Decreased by 69.4%)
-
-Memory usage of dataframe is 44.39 MB --> 25.44 MB (Decreased by 42.7%)
-
-Memory usage of dataframe is 1519.24 MB --> 472.59 MB (Decreased by 68.9%)
-
+> Memory usage of dataframe is 45.12 MB --> 25.86 MB (Decreased by 42.7%)
+> Memory usage of dataframe is 1775.15 MB --> 542.35 MB (Decreased by 69.4%)
+> Memory usage of dataframe is 44.39 MB --> 25.44 MB (Decreased by 42.7%)
+> Memory usage of dataframe is 1519.24 MB --> 472.59 MB (Decreased by 68.9%)
 
 ```python
 print(train_id.shape, test_id.shape)
 print(train_trn.shape, test_trn.shape)
 ```
 
-(144233, 41) (141907, 41)
-
-(590540, 394) (506691, 393)
+> (144233, 41) (141907, 41)
+> (590540, 394) (506691, 393)
     
 ## Data Analysis
 
@@ -763,6 +753,14 @@ fraud data count:20663, and in trn:11318
     
 
 ## Identity Data
+
+Variables in this table are identity information – network connection information (IP, ISP, Proxy, etc) and digital signature (UA/browser/os/version, etc) associated with transactions. They're collected by Vesta’s fraud protection system and digital security partners. (The field names are masked and pairwise dictionary will not be provided for privacy protection and contract agreement)
+
+**Categorical Features:**
+
+1. DeviceType
+2. DeviceInfo
+3. id12 - id38
 
 ```python
 train_id_trn = pd.merge(train_id, train_trn[['isFraud','TransactionAmt','TransactionID']])
@@ -1468,7 +1466,19 @@ plotCategoryRateBar('DeviceInfo',10)
 ![png](/images/ieee-cis-fraud-detection/analysis_44_1.png)
 
 
-## Transaction data
+## Transaction Data
+
+*TransactionDT: timedelta from a given reference datetime (not an actual timestamp)
+*TransactionAMT: transaction payment amount in USD
+*ProductCD: product code, the product for each transaction
+*card1 - card6: payment card information, such as card type, card category, issue bank, country, etc.
+*addr: address
+*dist: distance
+*P_ and (R__) emaildomain: purchaser and recipient email domain
+*C1-C14: counting, such as how many addresses are found to be associated with the payment card, etc. The actual meaning is masked.
+*D1-D15: timedelta, such as days between previous transaction, etc.
+*M1-M9: match, such as names on card and address, etc.
+*Vxxx: Vesta engineered rich features, including ranking, counting, and other entity relations.
 
 ```python
 ccols = [f'C{i}' for i in range(1,15)]
@@ -6445,8 +6455,14 @@ prediction['isFraud'] = sub_preds
 prediction.to_csv('prediction.csv', index=False)
 ```
 
-## Download prediction.csv
+## Downloads
+
+prediction.csv
 
 [Google Drive](https://drive.google.com/file/d/16u6y8S1uN7HI-uWHnKtTAzv6jeG9B-eT/view?usp=sharing)
+
 [OneDrive](https://1drv.ms/u/s!AjWO46TOTFj4p1ZgMNzSHudoDLEl?e=LS6Lqy)
+
 [Mediafire](http://www.mediafire.com/file/6p2pqb5dgv6klfp/ieee-cis-fraud-detection-prediction.zip/file)
+
+[Mega Upload](https://mega.nz/#!buxzVQoI!tpE8DjDmJ2QbmUsE3PsMUbkknbq_z5rDooAK1Qnql74)
