@@ -140,8 +140,8 @@ train_trn = pd.read_csv('../input/ieee-fraud-detection/train_transaction.csv')
 test_id = pd.read_csv('../input/ieee-fraud-detection/test_identity.csv')
 test_trn = pd.read_csv('../input/ieee-fraud-detection/test_transaction.csv')
 ```
-> CPU times: user 40.3 s, sys: 4.38 s, total: 44.7 s
 
+> CPU times: user 40.3 s, sys: 4.38 s, total: 44.7 s<br/>
 > Wall time: 44.8 s
 
 ```python
@@ -6463,7 +6463,7 @@ prediction.to_csv('prediction.csv', index=False)
 
 ## Download prediction.csv
 
-> ![Google Drive](/images/gd-logo.png)(https://drive.google.com/file/d/16u6y8S1uN7HI-uWHnKtTAzv6jeG9B-eT/view?usp=sharing)<br/>
-> ![OneDrive](/images/odrive-logo.jpg https://1drv.ms/u/s!AjWO46TOTFj4p1ZgMNzSHudoDLEl?e=LS6Lqy)<br/>
-> ![Mediafire](/images/mf-logo.png http://www.mediafire.com/file/6p2pqb5dgv6klfp/ieee-cis-fraud-detection-prediction.zip/file)<br/>
-> [Mega Upload](https://mega.nz/#!buxzVQoI!tpE8DjDmJ2QbmUsE3PsMUbkknbq_z5rDooAK1Qnql74)
+> [Google Drive](https://drive.google.com/file/d/16u6y8S1uN7HI-uWHnKtTAzv6jeG9B-eT/view?usp=sharing)<br/>
+> ![OneDrive](https://1drv.ms/u/s!AjWO46TOTFj4p1ZgMNzSHudoDLEl?e=LS6Lqy)<br/>
+> ![Mediafire](http://www.mediafire.com/file/6p2pqb5dgv6klfp/ieee-cis-fraud-detection-prediction.zip/file)<br/>
+> [Mega Upload](https://mega.nz/#!buxzVQoI!tpE8DjDmJ2QbmUsE3PsMUbkknbq_z5rDooAK1Qnql74)<br/>
