@@ -86,15 +86,11 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 ```
 ### We have the locations for our files
 
-> /kaggle/input/ieee-fraud-detection/sample_submission.csv
-
-> /kaggle/input/ieee-fraud-detection/test_identity.csv
-
-> /kaggle/input/ieee-fraud-detection/train_transaction.csv
-
-> /kaggle/input/ieee-fraud-detection/test_transaction.csv
-
-> /kaggle/input/ieee-fraud-detection/train_identity.csv
+> /kaggle/input/ieee-fraud-detection/sample_submission.csv<br/>
+> /kaggle/input/ieee-fraud-detection/test_identity.csv<br/>
+> /kaggle/input/ieee-fraud-detection/train_transaction.csv<br/>
+> /kaggle/input/ieee-fraud-detection/test_transaction.csv<br/>
+> /kaggle/input/ieee-fraud-detection/train_identity.csv<br/>
 
 ```python
 # Memory saving function credit to https://www.kaggle.com/gemartin/load-data-reduce-memory-usage
@@ -155,21 +151,17 @@ test_id = reduce_mem_usage(test_id)
 test_trn = reduce_mem_usage(test_trn)
 ```
 
-> Memory usage of dataframe is 45.12 MB --> 25.86 MB (Decreased by 42.7%)
-
-> Memory usage of dataframe is 1775.15 MB --> 542.35 MB (Decreased by 69.4%)
-
-> Memory usage of dataframe is 44.39 MB --> 25.44 MB (Decreased by 42.7%)
-
-> Memory usage of dataframe is 1519.24 MB --> 472.59 MB (Decreased by 68.9%)
+> Memory usage of dataframe is 45.12 MB --> 25.86 MB (Decreased by 42.7%)<br/>
+> Memory usage of dataframe is 1775.15 MB --> 542.35 MB (Decreased by 69.4%)<br/>
+> Memory usage of dataframe is 44.39 MB --> 25.44 MB (Decreased by 42.7%)<br/>
+> Memory usage of dataframe is 1519.24 MB --> 472.59 MB (Decreased by 68.9%)<br/>
 
 ```python
 print(train_id.shape, test_id.shape)
 print(train_trn.shape, test_trn.shape)
 ```
 
-> (144233, 41) (141907, 41)
-
+> (144233, 41) (141907, 41)<br/>
 > (590540, 394) (506691, 393)
     
 ## Data Analysis
@@ -1540,8 +1532,7 @@ print('train date:', train_date.min(), '-', train_date.max())
 print('test  date:', test_date.min(), '-', test_date.max())
 ```
 
-> train date: 2017-12-02 00:00:00 - 2018-06-01 23:58:51
-
+> train date: 2017-12-02 00:00:00 - 2018-06-01 23:58:51<br/>
 > test  date: 2018-07-02 00:00:24 - 2018-12-31 23:59:05
     
 
@@ -2852,11 +2843,9 @@ train_trn['card_n'] = (train_trn['card1'].astype(str) + '_' + train_trn['card2']
 print('unique cards:', train_trn['card_n'].nunique())
 ```
 
-> 590540
-
-> 13553 500 114 119
-
-> unique cards: 14845
+> 590540<br/>
+> 13553 500 114 119<br/>
+> unique cards: 14845<br/>
     
 
 ```python
@@ -6192,9 +6181,8 @@ del train_id,train_trn,test_id,test_trn
 all_data = X_train.append(X_test, sort=False).reset_index(drop=True)
 ```
 
-> Memory usage of dataframe is 1959.88 MB --> 650.48 MB (Decreased by 66.8%)
-
-> Memory usage of dataframe is 1677.73 MB --> 565.37 MB (Decreased by 66.3%)
+> Memory usage of dataframe is 1959.88 MB --> 650.48 MB (Decreased by 66.8%)<br/>
+> Memory usage of dataframe is 1677.73 MB --> 565.37 MB (Decreased by 66.3%)<br/>
     
 
 ```python
@@ -6429,8 +6417,7 @@ oof_preds = clf.predict_proba(X_train, num_iteration=clf.best_iteration_)[:,1]
 sub_preds = clf.predict_proba(X_test, num_iteration=clf.best_iteration_)[:,1]
 ```
 
-> CPU times: user 1h 19min 25s, sys: 44.8 s, total: 1h 20min 10s
-
+> CPU times: user 1h 19min 25s, sys: 44.8 s, total: 1h 20min 10s<br/>
 > Wall time: 41min 29s
 
 
@@ -6476,10 +6463,7 @@ prediction.to_csv('prediction.csv', index=False)
 
 ## Download prediction.csv
 
-> ![Google Drive](/images/gd-logo.png)(https://drive.google.com/file/d/16u6y8S1uN7HI-uWHnKtTAzv6jeG9B-eT/view?usp=sharing)
-
-> ![OneDrive](/images/odrive-logo.jpg https://1drv.ms/u/s!AjWO46TOTFj4p1ZgMNzSHudoDLEl?e=LS6Lqy)
-
-> ![Mediafire](/images/mf-logo.png http://www.mediafire.com/file/6p2pqb5dgv6klfp/ieee-cis-fraud-detection-prediction.zip/file)
-
+> ![Google Drive](/images/gd-logo.png)(https://drive.google.com/file/d/16u6y8S1uN7HI-uWHnKtTAzv6jeG9B-eT/view?usp=sharing)<br/>
+> ![OneDrive](/images/odrive-logo.jpg https://1drv.ms/u/s!AjWO46TOTFj4p1ZgMNzSHudoDLEl?e=LS6Lqy)<br/>
+> ![Mediafire](/images/mf-logo.png http://www.mediafire.com/file/6p2pqb5dgv6klfp/ieee-cis-fraud-detection-prediction.zip/file)<br/>
 > [Mega Upload](https://mega.nz/#!buxzVQoI!tpE8DjDmJ2QbmUsE3PsMUbkknbq_z5rDooAK1Qnql74)
