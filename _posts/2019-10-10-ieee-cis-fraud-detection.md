@@ -9,7 +9,7 @@ header:
 mathjax: "true"
 ---
 
-# Overview
+## Overview
 
 Imagine standing at the check-out counter at the grocery store with a long line behind you and the cashier not-so-quietly announces that your card has been declined. In this moment, you probably aren’t thinking about the data science that determined your fate.
 
@@ -23,7 +23,7 @@ In this competition, you’ll benchmark machine learning models on a challenging
 
 If successful, you’ll improve the efficacy of fraudulent transaction alerts for millions of people around the world, helping hundreds of thousands of businesses reduce their fraud loss and increase their revenue. And of course, you will save party people just like you the hassle of false positives.
 
-# Data
+## Data
 
 In this, you are predicting the probability that an online transaction is fraudulent, as denoted by the binary target 'isFraud'.
 
@@ -48,12 +48,12 @@ The TransactionDT feature is a timedelta from a given reference datetime (not an
 
 You can find the dataset [here](https://www.kaggle.com/c/ieee-fraud-detection/data).
 
-# Files
+## Files
 
 1. train_{transaction, identity}.csv - the training set
 2. test_{transaction, identity}.csv - the test set (you must predict the isFraud value for these observations)
 
-# So lets begin with complete EDA...
+## So lets begin with complete EDA...
 
 ```python
 import numpy as np
@@ -135,6 +135,8 @@ def reduce_mem_usage(df):
 
 ## Load Data
 
+### Reducing memory usage
+
 ```python
 %%time
 train_id = pd.read_csv('../input/ieee-fraud-detection/train_identity.csv')
@@ -152,7 +154,6 @@ train_trn = reduce_mem_usage(train_trn)
 test_id = reduce_mem_usage(test_id)
 test_trn = reduce_mem_usage(test_trn)
 ```
-### Reducing memory usage
 
 Memory usage of dataframe is 45.12 MB --> 25.86 MB (Decreased by 42.7%)
 
@@ -6136,7 +6137,7 @@ print(pd.DataFrame([[val for val in dir()], [sys.getsizeof(eval(val)) for val in
     8            vc     1951187
     9           _65     1951187    
     
-# Feature engineering
+## Feature Engineering
 
 
 ```python
@@ -6165,7 +6166,6 @@ Memory usage of dataframe is 1959.88 MB --> 650.48 MB (Decreased by 66.8%)
 Memory usage of dataframe is 1677.73 MB --> 565.37 MB (Decreased by 66.3%)
     
 
-
 ```python
 vcols = [f'V{i}' for i in range(1,340)]
 
@@ -6180,7 +6180,6 @@ all_data['_vcol_nulls'] = all_data[vcols].isnull().sum(axis=1)
 
 all_data.drop(vcols, axis=1, inplace=True)
 ```
-
 
 ```python
 import datetime
@@ -6374,7 +6373,7 @@ Y_train = X_train.pop('isFraud')
 del all_data
 ```
 
-# Predict
+## Prediction
 
 ```python
 %%time
@@ -6446,4 +6445,8 @@ prediction['isFraud'] = sub_preds
 prediction.to_csv('prediction.csv', index=False)
 ```
 
-## Download [prediction.csv](https://drive.google.com/file/d/1-NltqHuSTrxwWQO7HboGnLN1VPiHKUBX/view?usp=sharing)
+## Download prediction.csv
+
+[Google Drive](https://drive.google.com/file/d/16u6y8S1uN7HI-uWHnKtTAzv6jeG9B-eT/view?usp=sharing)
+[OneDrive](https://1drv.ms/u/s!AjWO46TOTFj4p1ZgMNzSHudoDLEl?e=LS6Lqy)
+[Mediafire](http://www.mediafire.com/file/6p2pqb5dgv6klfp/ieee-cis-fraud-detection-prediction.zip/file)
