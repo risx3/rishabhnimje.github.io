@@ -6144,19 +6144,6 @@ print(pd.DataFrame([[val for val in dir()], [sys.getsizeof(eval(val)) for val in
     8            vc     1951187
     9           _65     1951187   
 
-
- | name | size
------------- | ------------- | ------------
-0 | train_trn | 1243551195
-1 | test_trn | 820917583
-2 | train_id_trn | 157073961
-3 | train_id | 155487526
-4 | test_id | 146112147
-5 | vsum0 | 6838548
-6 | train_date | 4724472
-7 | test_date | 4053680
-8 | vc | 1951187
-9 | _65 | 1951187 
     
 ## Feature Engineering
 
