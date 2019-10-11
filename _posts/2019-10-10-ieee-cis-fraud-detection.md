@@ -84,6 +84,7 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 
 # Any results you write to the current directory are saved as output.
 ```
+
 ### We have the locations for our files
 
 > /kaggle/input/ieee-fraud-detection/sample_submission.csv<br/>
@@ -163,7 +164,7 @@ print(train_trn.shape, test_trn.shape)
 
 > (144233, 41) (141907, 41)<br/>
 > (590540, 394) (506691, 393)
-    
+
 ## Data Analysis
 
 ### isFraud count
@@ -207,9 +208,7 @@ fc.T
 </table>
 </div>
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_8_1.png)
-
 
 ### Fraud Transaction rate per day and per week
 
@@ -223,7 +222,6 @@ train_trn.groupby('_seq_week')['isFraud'].mean().to_frame().plot.line(ax=ax[1])
 ```
 
 ![png](/images/ieee-cis-fraud-detection/analysis_10_1.png)
-
 
 ### Fraud transaction rate by weekday, hour, month-day, and year-month
 
@@ -330,7 +328,6 @@ df.sort_values(by='mean',ascending=False)[:10].T
 </table>
 </div>
 
-
 ```python
 df.sort_values(by='count',ascending=False)[:10].T
 ```
@@ -409,7 +406,6 @@ df.sort_values(by='count',ascending=False)[:10].T
 </table>
 </div>
 
-
 ```python
 # transaction-count X fraud-rate
 plt.scatter(df['count'], df['mean'], s=10)
@@ -417,14 +413,12 @@ plt.scatter(df['count'], df['mean'], s=10)
 
 ![png](/images/ieee-cis-fraud-detection/analysis_16_1.png)
 
-
 ```python
 # transaction-count X fraud-count
 plt.scatter(df['count'], df['sum'], s=10)
 ```
 
 ![png](/images/ieee-cis-fraud-detection/analysis_17_1.png)
-
 
 ### Fraud transaction rate by weekday-hour
 
@@ -434,7 +428,6 @@ train_trn.groupby('_weekday_hour')['isFraud'].mean().to_frame().plot.line(figsiz
 ```
 
 ![png](/images/ieee-cis-fraud-detection/analysis_19_1.png)
-
 
 ### Fraud rate by weekday
 
@@ -500,7 +493,6 @@ df.sort_values(by='isFraud', ascending=False)
   </tbody>
 </table>
 </div>
-
 
 ### Fraud rate by hour
 
@@ -579,7 +571,6 @@ df.sort_values(by='isFraud', ascending=False).head(10)
 </table>
 </div>
 
-
 ### Fraud rate by weekday-hour
 
 ```python
@@ -656,7 +647,6 @@ df.sort_values(by='isFraud', ascending=False).head(10)
   </tbody>
 </table>
 </div>
-
 
 ### Fraud rate by amount bin
 
@@ -736,7 +726,6 @@ df.sort_values(by='isFraud', ascending=False)
 </table>
 </div>
 
-
 ### TransactionId
 
 ```python
@@ -751,7 +740,6 @@ print(f'fraud data count:{len(fraud_id)}, and in trn:{len(fraud_id_in_trn)}')
 ```
 
 > fraud data count:20663, and in trn:11318
-    
 
 ## Identity Data
 
@@ -773,7 +761,7 @@ def plotHistByFraud(col, bins=20, figsize=(8,3)):
     with np.errstate(invalid='ignore'):
         plt.figure(figsize=figsize)
         plt.hist([train_id_f0[col], train_id_f1[col]], bins=bins, density=True, color=['royalblue', 'orange'])
-        
+
 def plotCategoryRateBar(col, topN=np.nan, figsize=(8,3)):
     a, b = train_id_f0, train_id_f1
     if topN == topN: # isNotNan
@@ -786,7 +774,6 @@ def plotCategoryRateBar(col, topN=np.nan, figsize=(8,3)):
 ```
 
 > (132915, 43) (11318, 43)
-    
 
 ### id_01 - id_11
 
@@ -804,49 +791,27 @@ plotHistByFraud('id_10')
 plotHistByFraud('id_11')
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_33_0.png)
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_33_1.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_33_2.png)
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_33_3.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_33_4.png)
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_33_5.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_33_6.png)
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_33_7.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_33_8.png)
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_33_9.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_33_10.png)
-
 
 ```python
 numid_cols = [f'id_{str(i).zfill(2)}' for i in range(1,12)]
@@ -903,15 +868,12 @@ train_id_trn[numid_cols].isna().sum().to_frame().T / len(train_id)
 </table>
 </div>
 
-
 ```python
 plt.figure(figsize=(10, 5))
 sns.heatmap(train_id_trn[['isFraud','TransactionAmt']+numid_cols].corr(), annot=True, fmt='.2f')
 ```
 
 ![png](/images/ieee-cis-fraud-detection/analysis_35_1.png)
-
-
 
 ```python
 train_id_f1[['isFraud'] + numid_cols].head(10)
@@ -1103,7 +1065,6 @@ train_id_f1[['isFraud'] + numid_cols].head(10)
   </tbody>
 </table>
 </div>
-
 
 ```python
 train_id_f0[['isFraud'] + numid_cols].head(10)
@@ -1312,38 +1273,21 @@ plotCategoryRateBar('id_20',10)
 
 ![png](/images/ieee-cis-fraud-detection/analysis_39_0.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_39_1.png)
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_39_2.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_39_3.png)
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_39_4.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_39_5.png)
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_39_6.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_39_7.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_39_8.png)
-
 
 ```python
 plotCategoryRateBar('id_21',20)
@@ -1358,45 +1302,25 @@ plotCategoryRateBar('id_29')
 plotCategoryRateBar('id_30',10)
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_40_0.png)
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_40_1.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_40_2.png)
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_40_3.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_40_4.png)
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_40_5.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_40_6.png)
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_40_7.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_40_8.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_40_9.png)
-
 
 ```python
 plotCategoryRateBar('id_31', 20)
@@ -1408,11 +1332,7 @@ plotCategoryRateBar('_id_31_ua', 10)
 
 ![png](/images/ieee-cis-fraud-detection/analysis_41_0.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_41_1.png)
-
-
 
 ```python
 plotCategoryRateBar('id_32')
@@ -1424,33 +1344,19 @@ plotCategoryRateBar('id_37')
 plotCategoryRateBar('id_38')
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_42_0.png)
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_42_1.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_42_2.png)
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_42_3.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_42_4.png)
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_42_5.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_42_6.png)
-
 
 ### DeviceType, DeviceInfo
 
@@ -1459,13 +1365,9 @@ plotCategoryRateBar('DeviceType')
 plotCategoryRateBar('DeviceInfo',10)
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_44_0.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_44_1.png)
-
 
 ## Transaction Data
 
@@ -1488,7 +1390,6 @@ mcols = [f'M{i}' for i in range(1,10)]
 vcols = [f'V{i}' for i in range(1,340)]
 ```
 
-
 ```python
 train_trn_f0 = train_trn[train_trn['isFraud'] == 0]
 train_trn_f1 = train_trn[train_trn['isFraud'] == 1]
@@ -1503,7 +1404,7 @@ def plotTrnLogHistByFraud(col, bins=20, figsize=(8,3)):
     with np.errstate(invalid='ignore'):
         plt.figure(figsize=figsize)
         plt.hist([np.log1p(train_trn_f0[col]), np.log1p(train_trn_f1[col])], bins=bins, density=True, color=['royalblue', 'orange'])
-        
+
 def plotTrnCategoryRateBar(col, topN=np.nan, figsize=(8,3)):
     a, b = train_trn_f0, train_trn_f1
     if topN == topN: # isNotNan
@@ -1516,7 +1417,6 @@ def plotTrnCategoryRateBar(col, topN=np.nan, figsize=(8,3)):
 ```
 
 > (569877, 404) (20663, 404)
-    
 
 ### TransactionDT
 
@@ -1534,7 +1434,6 @@ print('test  date:', test_date.min(), '-', test_date.max())
 
 > train date: 2017-12-02 00:00:00 - 2018-06-01 23:58:51<br/>
 > test  date: 2018-07-02 00:00:24 - 2018-12-31 23:59:05
-    
 
 
 ```python
@@ -1543,10 +1442,7 @@ train_trn['TransactionDT'].hist(bins=20)
 test_trn['TransactionDT'].hist(bins=20)
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_50_1.png)
-
-
 
 ```python
 def appendLagDT(df):
@@ -1558,12 +1454,10 @@ train_trn_f0 = train_trn[train_trn['isFraud'] == 0]
 train_trn_f1 = train_trn[train_trn['isFraud'] == 1]
 ```
 
-
 ```python
 pd.concat([train_trn_f0['_date_lag'].describe(), 
            train_trn_f1['_date_lag'].describe()], axis=1)
 ```
-
 
 <div>
 <style scoped>
@@ -1632,39 +1526,28 @@ pd.concat([train_trn_f0['_date_lag'].describe(),
 </table>
 </div>
 
-
-
-
 ```python
 plotTrnLogHistByFraud('_date_lag')
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_53_0.png)
 
-
 ### TransactionAmt
-
 
 ```python
 plotTrnHistByFraud('TransactionAmt')
 plotTrnLogHistByFraud('TransactionAmt')
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_55_0.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_55_1.png)
-
 
 ```python
 amt_desc = pd.concat([train_trn_f0['TransactionAmt'].describe(), train_trn_f1['TransactionAmt'].describe()], axis=1)
 amt_desc.columns = ['normal','fraud']
 amt_desc
 ```
-
 
 <div>
 <style scoped>
@@ -1733,7 +1616,6 @@ amt_desc
 </table>
 </div>
 
-
 ```python
 def appendLagAmt(df):
     df = df.assign(_amt_lag = df['TransactionAmt'] - df.groupby(['card1','card2'])['TransactionAmt'].shift(1))
@@ -1745,36 +1627,27 @@ train_trn_f0 = train_trn[train_trn['isFraud'] == 0]
 train_trn_f1 = train_trn[train_trn['isFraud'] == 1]
 ```
 
-
 ```python
 plotTrnHistByFraud('_amt_lag')
 plotTrnCategoryRateBar('_amt_lag_sig')
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_58_0.png)
-
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_58_1.png)
 
-
 ### ProductCD
-
 
 ```python
 plotTrnCategoryRateBar('ProductCD')
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_60_0.png)
-
 
 ```python
 cols = ['ProductCD','addr1','addr2','dist1','dist2']
 train_trn[cols].head(20)
 ```
-
 
 <div>
 <style scoped>
@@ -1966,19 +1839,15 @@ train_trn[cols].head(20)
 </table>
 </div>
 
-
-
 ```python
 cols = ['addr1','addr2','dist1','dist2']
 for f in cols:
     train_trn[f + '_isna'] = train_trn[f].isna()
 ```
 
-
 ```python
 pd.crosstab(train_trn['ProductCD'], train_trn['addr1_isna'])
 ```
-
 
 <div>
 <style scoped>
@@ -2037,11 +1906,9 @@ pd.crosstab(train_trn['ProductCD'], train_trn['addr1_isna'])
 </table>
 </div>
 
-
 ```python
 pd.crosstab(train_trn['ProductCD'], train_trn['dist1_isna'])
 ```
-
 
 <div>
 <style scoped>
@@ -2100,11 +1967,9 @@ pd.crosstab(train_trn['ProductCD'], train_trn['dist1_isna'])
 </table>
 </div>
 
-
 ```python
 pd.crosstab(train_trn['ProductCD'], train_trn['dist2_isna'])
 ```
-
 
 <div>
 <style scoped>
@@ -2163,11 +2028,9 @@ pd.crosstab(train_trn['ProductCD'], train_trn['dist2_isna'])
 </table>
 </div>
 
-
 ```python
 train_trn[(train_trn['dist1_isna'] == False) & (train_trn['dist2_isna'] == False)][cols]
 ```
-
 
 <div>
 <style scoped>
@@ -2198,12 +2061,10 @@ train_trn[(train_trn['dist1_isna'] == False) & (train_trn['dist2_isna'] == False
 </table>
 </div>
 
-
 ```python
 train_trn = pd.concat([train_trn, pd.get_dummies(train_trn[['ProductCD']])], axis=1)
 train_trn.head(5)
 ```
-
 
 <div>
 <style scoped>
@@ -2372,13 +2233,10 @@ train_trn.head(5)
 <p>5 rows × 416 columns</p>
 </div>
 
-
 ```python
 cols = ['ProductCD_W','ProductCD_C','ProductCD_H','ProductCD_R','ProductCD_S','dist1_isna','dist2_isna','addr1_isna','addr2_isna']
 train_trn[cols].corr()
 ```
-
-
 
 <div>
 <style scoped>
@@ -2522,12 +2380,10 @@ train_trn[cols].corr()
 </table>
 </div>
 
-
 ```python
 train_trn['_amount_max_ProductCD'] = train_trn.groupby(['ProductCD'])['TransactionAmt'].transform('max')
 train_trn[['ProductCD','_amount_max_ProductCD']].drop_duplicates().sort_values(by='_amount_max_ProductCD', ascending=False)
 ```
-
 
 <div>
 <style scoped>
@@ -2581,10 +2437,7 @@ train_trn[['ProductCD','_amount_max_ProductCD']].drop_duplicates().sort_values(b
 </table>
 </div>
 
-
-
 ### card1 - card6
-
 
 ```python
 cols = [f'card{n}' for n in range(1,7)]
@@ -2599,7 +2452,6 @@ train_trn[cols].isnull().sum()
     card6    1571
     dtype: int64
 
-
 ```python
 train_trn[cols].nunique()
 ```
@@ -2611,7 +2463,6 @@ train_trn[cols].nunique()
     card5      119
     card6        4
     dtype: int64
-
 
 ```python
 train_trn[cols].head(10)
@@ -2738,54 +2589,37 @@ train_trn[cols].head(10)
 </table>
 </div>
 
-
 ```python
 train_trn[train_trn['card4']=='visa']['card1'].hist(bins=50)
 train_trn[train_trn['card4']=='mastercard']['card1'].hist(bins=50)
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_74_1.png)
-
-
 
 ```python
 train_trn[train_trn['card4']=='visa']['card2'].hist(bins=50)
 train_trn[train_trn['card4']=='mastercard']['card2'].hist(bins=50)
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_75_1.png)
-
-
 
 ```python
 plotTrnCategoryRateBar('card1', 15)
 plotTrnHistByFraud('card1', bins=30)
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_76_0.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_76_1.png)
-
-
 
 ```python
 plotTrnCategoryRateBar('card2', 15)
 plotTrnHistByFraud('card2', bins=30)
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_77_0.png)
 
-
-
 ![png](/images/ieee-cis-fraud-detection/analysis_77_1.png)
-
-
 
 ```python
 train_trn_f0['_card1_card2'] = train_trn_f0['card1'].astype(str) + '_' + train_trn_f0['card2'].astype(str)
@@ -2794,45 +2628,31 @@ train_trn_f1['_card1_card2'] = train_trn_f1['card1'].astype(str) + '_' + train_t
 plotTrnCategoryRateBar('_card1_card2', 50, figsize=(15,3))
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_78_0.png)
-
-
 
 ```python
 plotTrnCategoryRateBar('card3', 10)
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_79_0.png)
-
-
 
 ```python
 plotTrnCategoryRateBar('card4')
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_80_0.png)
-
-
 
 ```python
 plotTrnCategoryRateBar('card5', 10)
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_81_0.png)
-
-
 
 ```python
 plotTrnCategoryRateBar('card6')
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_82_0.png)
-
 
 ```python
 print(len(train_trn))
@@ -2846,17 +2666,13 @@ print('unique cards:', train_trn['card_n'].nunique())
 > 590540<br/>
 > 13553 500 114 119<br/>
 > unique cards: 14845<br/>
-    
 
 ```python
 vc = train_trn['card_n'].value_counts()
 vc[vc > 3000].plot.bar()
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_84_1.png)
-
-
 
 ```python
 train_trn.groupby(['card_n'])['isFraud'].mean().sort_values(ascending=False)
@@ -2883,7 +2699,6 @@ train_trn['addr1'].nunique(), train_trn['addr2'].nunique()
 ```
 
 > (332, 74)
-
 
 ```python
 plotTrnCategoryRateBar('addr1', 20)
@@ -2970,7 +2785,7 @@ print('addr2 nunique:', train_trn['addr2'].nunique())
 ```
 
 > addr2 nunique: 74
-    
+
 ![png](/images/ieee-cis-fraud-detection/analysis_90_1.png)
 
 ```python
@@ -3043,7 +2858,6 @@ train_trn['addr2'].value_counts(dropna=False).to_frame().iloc[:10]
 </table>
 </div>
 
-
 ### dist1, dist2
 
 ```python
@@ -3052,13 +2866,11 @@ plotTrnCategoryRateBar('dist1', 20)
 
 ![png](/images/ieee-cis-fraud-detection/analysis_93_0.png)
 
-
 ```python
 plotTrnCategoryRateBar('dist2', 20)
 ```
 
 ![png](/images/ieee-cis-fraud-detection/analysis_94_0.png)
-
 
 ```python
 train_trn_f0['dist3'] = np.where(train_trn_f0['dist1'].isna(), train_trn_f0['dist2'], train_trn_f0['dist1'])
@@ -3069,7 +2881,6 @@ plotTrnLogHistByFraud('dist3')
 ```
 
 ![png](/images/ieee-cis-fraud-detection/analysis_95_0.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_95_1.png)
 
@@ -3082,9 +2893,7 @@ plotTrnCategoryRateBar('R_emaildomain',10)
 
 ![png](/images/ieee-cis-fraud-detection/analysis_97_0.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_97_1.png)
-
 
 ```python
 train_trn['P_emaildomain'].fillna('unknown',inplace=True)
@@ -3197,7 +3006,6 @@ inf.sort_values(by='isFraud', ascending=False).head(10)
   </tbody>
 </table>
 </div>
-
 
 ```python
 train_trn_f1['P_emaildomain_prefix'] = train_trn_f1['P_emaildomain'].fillna('unknown').apply(lambda x: x.split('.')[0])
@@ -3395,7 +3203,6 @@ pd.crosstab(train_trn_f1['P_emaildomain_prefix'], train_trn_f1['ProductCD']).T
 <p>5 rows × 36 columns</p>
 </div>
 
-
 ```python
 train_trn['P_emaildomain_prefix'] = train_trn['P_emaildomain'].apply(lambda x: x.split('.')[0])
 ct = pd.crosstab(train_trn['P_emaildomain_prefix'], train_trn['ProductCD'])
@@ -3414,45 +3221,31 @@ for i in range(1,15):
 
 ![png](/images/ieee-cis-fraud-detection/analysis_102_0.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_102_1.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_102_2.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_102_3.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_102_4.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_102_5.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_102_6.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_102_7.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_102_8.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_102_9.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_102_10.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_102_11.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_102_12.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_102_13.png)
-
 
 ```python
 train_trn[ccols].describe().loc[['count','mean','std','min','max']]
@@ -3581,7 +3374,6 @@ train_trn[ccols].describe().loc[['count','mean','std','min','max']]
   </tbody>
 </table>
 </div>
-
 
 ```python
 plt.figure(figsize=(10,5))
@@ -4041,7 +3833,6 @@ train_trn[train_trn['card1'] == 9500][cols].head(20)
 </table>
 </div>
 
-
 ```python
 cols = ['TransactionDT','TransactionAmt','isFraud'] + ccols
 train_trn[train_trn['card1'] == 4774][cols].head(20)
@@ -4209,7 +4000,6 @@ train_trn[train_trn['card1'] == 4774][cols].head(20)
 </table>
 </div>
 
-
 ```python
 train_trn[train_trn['card1'] == 14770][cols].head(20)
 ```
@@ -4296,9 +4086,7 @@ train_trn[train_trn['card1'] == 14770][cols].head(20)
 </table>
 </div>
 
-
 ### D1-D15
-
 
 ```python
 for i in range(1,16):
@@ -4307,48 +4095,33 @@ for i in range(1,16):
 
 ![png](/images/ieee-cis-fraud-detection/analysis_110_0.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_110_1.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_110_2.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_110_3.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_110_4.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_110_5.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_110_6.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_110_7.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_110_8.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_110_9.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_110_10.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_110_11.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_110_12.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_110_13.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_110_14.png)
-
 
 ```python
 train_trn[dcols].describe().loc[['count','mean','std','min','max']]
@@ -4484,7 +4257,6 @@ train_trn[dcols].describe().loc[['count','mean','std','min','max']]
 </table>
 </div>
 
-
 ```python
 plt.figure(figsize=(12,4))
 
@@ -4494,7 +4266,6 @@ plt.scatter(test_trn['TransactionDT'], test_trn['D1'], s=2, c='g')
 ```
 
 ![png](/images/ieee-cis-fraud-detection/analysis_112_1.png)
-
 
 ```python
 plt.figure(figsize=(12,4))
@@ -4507,7 +4278,6 @@ plt.scatter(test_trn['TransactionDT'], test_trn['D15'], s=2, c='g')
 
 ![png](/images/ieee-cis-fraud-detection/analysis_113_1.png)
 
-
 ```python
 plt.figure(figsize=(10,5))
 
@@ -4516,7 +4286,6 @@ sns.heatmap(corr, annot=True, fmt='.2f')
 ```
 
 ![png](/images/ieee-cis-fraud-detection/analysis_114_1.png)
-
 
 ```python
 fig, ax = plt.subplots(1, 2, figsize=(15, 3))
@@ -4527,7 +4296,6 @@ train_trn.loc[train_trn['isFraud']==1, dcols].isnull().sum(axis=1).to_frame().hi
 ![png](/images/ieee-cis-fraud-detection/analysis_115_1.png)
 
 ### Dx & card
-
 
 ```python
 cols = ['TransactionDT','TransactionAmt','isFraud'] + dcols
@@ -4997,7 +4765,6 @@ train_trn[train_trn['card1'] == 9500][cols].head(20)
 </table>
 </div>
 
-
 ```python
 cols = ['TransactionDT','TransactionAmt','isFraud'] + dcols
 train_trn[train_trn['card1'] == 4774][cols].head(20)
@@ -5172,7 +4939,6 @@ train_trn[train_trn['card1'] == 4774][cols].head(20)
 </table>
 </div>
 
-
 ```python
 train_trn[train_trn['card1'] == 14770][cols].head(20)
 ```
@@ -5262,8 +5028,6 @@ train_trn[train_trn['card1'] == 14770][cols].head(20)
 </table>
 </div>
 
-
-
 ### M1 - M9
 
 
@@ -5279,63 +5043,44 @@ plotTrnCategoryRateBar('M8')
 plotTrnCategoryRateBar('M9')
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_121_0.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_121_1.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_121_2.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_121_3.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_121_4.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_121_5.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_121_6.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_121_7.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_121_8.png)
 
-
 ### Vxxx
-
 
 ```python
 for f in ['V1','V14','V41','V65','V88','V107','V305']:
     plotTrnCategoryRateBar(f)
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_123_0.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_123_1.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_123_2.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_123_3.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_123_4.png)
-
 
 ![png](/images/ieee-cis-fraud-detection/analysis_123_5.png)
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_123_6.png)
-
 
 ```python
 vsum0 = train_trn_f0[vcols].sum(axis=1)
@@ -5345,7 +5090,6 @@ plt.scatter(train_trn_f1['_ymd'], vsum1, s=5, c='r')
 ```
 
 ![png](/images/ieee-cis-fraud-detection/analysis_124_1.png)
-
 
 ```python
 m = train_trn_f1[vcols].describe().T['max']
@@ -5374,15 +5118,12 @@ m[m >= 10000]
     V318    18,123.957
     Name: max, dtype: float64
 
-
 ```python
 plt.scatter(train_trn_f0['_ymd'], train_trn_f0['V160'], s=5)
 plt.scatter(train_trn_f1['_ymd'], train_trn_f1['V160'], s=5, c='r')
 ```
 
 ![png](/images/ieee-cis-fraud-detection/analysis_126_1.png)
-
-
 
 ```python
 vcols_1 = [f'V{i}' for i in range(1,160)]+[f'V{i}' for i in range(161,340)]
@@ -5392,9 +5133,7 @@ plt.scatter(train_trn_f0['_ymd'], vsum0, s=5)
 plt.scatter(train_trn_f1['_ymd'], vsum1, s=5, c='r')
 ```
 
-
 ![png](/images/ieee-cis-fraud-detection/analysis_127_1.png)
-
 
 ```python
 train_trn[vcols].isnull().sum() / len(train_trn)
@@ -5412,7 +5151,6 @@ train_trn[vcols].isnull().sum() / len(train_trn)
     V338   0.861
     V339   0.861
     Length: 339, dtype: float64
-
 
 ```python
 train_trn.loc[train_trn['V1'].isnull(), vcols].head(10)
@@ -5705,7 +5443,6 @@ train_trn.loc[train_trn['V1'].isnull(), vcols].head(10)
 <p>10 rows × 339 columns</p>
 </div>
 
-
 ```python
 train_trn.loc[train_trn['V1'].isnull() == False, vcols].head(10)
 ```
@@ -5997,7 +5734,6 @@ train_trn.loc[train_trn['V1'].isnull() == False, vcols].head(10)
 <p>10 rows × 339 columns</p>
 </div>
 
-
 ```python
 fig, ax = plt.subplots(1, 2, figsize=(15, 3))
 train_trn.loc[train_trn['isFraud']==0, vcols].isnull().sum(axis=1).to_frame().hist(ax=ax[0], bins=20)
@@ -6005,7 +5741,6 @@ train_trn.loc[train_trn['isFraud']==1, vcols].isnull().sum(axis=1).to_frame().hi
 ```
 
 ![png](/images/ieee-cis-fraud-detection/analysis_131_1.png)
-
 
 ```python
 train_trn[vcols].describe().T[['min','max']].T
@@ -6106,7 +5841,6 @@ train_trn[vcols].describe().T[['min','max']].T
 <p>2 rows × 339 columns</p>
 </div>
 
-
 ```python
 vcols = [f'V{i}' for i in range(1,340)]
 
@@ -6144,7 +5878,6 @@ print(pd.DataFrame([[val for val in dir()], [sys.getsizeof(eval(val)) for val in
     8            vc     1951187
     9           _65     1951187   
 
-    
 ## Feature Engineering
 
 ```python
@@ -6170,7 +5903,6 @@ all_data = X_train.append(X_test, sort=False).reset_index(drop=True)
 
 > Memory usage of dataframe is 1959.88 MB --> 650.48 MB (Decreased by 66.8%)<br/>
 > Memory usage of dataframe is 1677.73 MB --> 565.37 MB (Decreased by 66.3%)<br/>
-    
 
 ```python
 vcols = [f'V{i}' for i in range(1,340)]
@@ -6344,7 +6076,7 @@ print('features:', all_data.shape[1])
 ```
 
 > features: 137
-    
+
 ```python
 _='''
 cat_cols = ['ProductCD','card1','card2','card3','card4','card5','card6','addr1','addr2','P_emaildomain','R_emaildomain',
@@ -6368,7 +6100,6 @@ print(enc_cols)
 ```
 
 > ['ProductCD', 'card4', 'card6', 'P_emaildomain', 'R_emaildomain', 'M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'id_12', 'id_13', 'id_14', 'id_15', 'id_16', 'id_17', 'id_18', 'id_19', 'id_20', 'id_21', 'id_22', 'id_23', 'id_24', 'id_25', 'id_26', 'id_27', 'id_28', 'id_29', 'id_30', 'id_31', 'id_32', 'id_33', 'id_34', 'id_35', 'id_36', 'id_37', 'id_38', 'DeviceType', 'DeviceInfo', '_weekday', '_hour', '_weekday__hour', '_P_emaildomain__addr1', '_card1__card2', '_card1__addr1', '_card2__addr1', '_card12__addr1', '_card_all__addr1']
-
 
 ```python
 X_train = all_data[all_data['isFraud'].notnull()]
@@ -6407,7 +6138,6 @@ sub_preds = clf.predict_proba(X_test, num_iteration=clf.best_iteration_)[:,1]
 > CPU times: user 1h 19min 25s, sys: 44.8 s, total: 1h 20min 10s<br/>
 > Wall time: 41min 29s
 
-
 ```python
 fpr, tpr, thresholds = metrics.roc_curve(Y_train, oof_preds)
 auc = metrics.auc(fpr, tpr)
@@ -6421,7 +6151,6 @@ plt.grid(True)
 ```
 
 ![png](/images/ieee-cis-fraud-detection/prediction_14_0.png)
-
 
 ```python
 # Plot feature importance
