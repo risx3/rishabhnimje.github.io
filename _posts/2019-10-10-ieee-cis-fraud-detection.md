@@ -87,9 +87,13 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 ### We have the locations for our files
 
 > /kaggle/input/ieee-fraud-detection/sample_submission.csv
+
 > /kaggle/input/ieee-fraud-detection/test_identity.csv
+
 > /kaggle/input/ieee-fraud-detection/train_transaction.csv
+
 > /kaggle/input/ieee-fraud-detection/test_transaction.csv
+
 > /kaggle/input/ieee-fraud-detection/train_identity.csv
 
 ```python
@@ -141,6 +145,7 @@ test_id = pd.read_csv('../input/ieee-fraud-detection/test_identity.csv')
 test_trn = pd.read_csv('../input/ieee-fraud-detection/test_transaction.csv')
 ```
 > CPU times: user 40.3 s, sys: 4.38 s, total: 44.7 s
+
 > Wall time: 44.8 s
 
 ```python
@@ -151,8 +156,11 @@ test_trn = reduce_mem_usage(test_trn)
 ```
 
 > Memory usage of dataframe is 45.12 MB --> 25.86 MB (Decreased by 42.7%)
+
 > Memory usage of dataframe is 1775.15 MB --> 542.35 MB (Decreased by 69.4%)
+
 > Memory usage of dataframe is 44.39 MB --> 25.44 MB (Decreased by 42.7%)
+
 > Memory usage of dataframe is 1519.24 MB --> 472.59 MB (Decreased by 68.9%)
 
 ```python
@@ -161,6 +169,7 @@ print(train_trn.shape, test_trn.shape)
 ```
 
 > (144233, 41) (141907, 41)
+
 > (590540, 394) (506691, 393)
     
 ## Data Analysis
@@ -749,7 +758,7 @@ fraud_id_in_trn = [i for i in fraud_id if i in train_id['TransactionID'].values]
 print(f'fraud data count:{len(fraud_id)}, and in trn:{len(fraud_id_in_trn)}')
 ```
 
-fraud data count:20663, and in trn:11318
+> fraud data count:20663, and in trn:11318
     
 
 ## Identity Data
@@ -784,7 +793,7 @@ def plotCategoryRateBar(col, topN=np.nan, figsize=(8,3)):
     df.sort_values('fraud', ascending=False).plot.bar(figsize=figsize)
 ```
 
-(132915, 43) (11318, 43)
+> (132915, 43) (11318, 43)
     
 
 ### id_01 - id_11
@@ -1468,17 +1477,17 @@ plotCategoryRateBar('DeviceInfo',10)
 
 ## Transaction Data
 
-*TransactionDT: timedelta from a given reference datetime (not an actual timestamp)
-*TransactionAMT: transaction payment amount in USD
-*ProductCD: product code, the product for each transaction
-*card1 - card6: payment card information, such as card type, card category, issue bank, country, etc.
-*addr: address
-*dist: distance
-*P_ and (R__) emaildomain: purchaser and recipient email domain
-*C1-C14: counting, such as how many addresses are found to be associated with the payment card, etc. The actual meaning is masked.
-*D1-D15: timedelta, such as days between previous transaction, etc.
-*M1-M9: match, such as names on card and address, etc.
-*Vxxx: Vesta engineered rich features, including ranking, counting, and other entity relations.
+* TransactionDT: timedelta from a given reference datetime (not an actual timestamp)
+* TransactionAMT: transaction payment amount in USD
+* ProductCD: product code, the product for each transaction
+* card1 - card6: payment card information, such as card type, card category, issue bank, country, etc.
+* addr: address
+* dist: distance
+* P_ and (R__) emaildomain: purchaser and recipient email domain
+* C1-C14: counting, such as how many addresses are found to be associated with the payment card, etc. The actual meaning is masked.
+* D1-D15: timedelta, such as days between previous transaction, etc.
+* M1-M9: match, such as names on card and address, etc.
+* Vxxx: Vesta engineered rich features, including ranking, counting, and other entity relations.
 
 ```python
 ccols = [f'C{i}' for i in range(1,15)]
@@ -1514,7 +1523,7 @@ def plotTrnCategoryRateBar(col, topN=np.nan, figsize=(8,3)):
     df.sort_values('fraud', ascending=False).plot.bar(figsize=figsize)
 ```
 
-(569877, 404) (20663, 404)
+> (569877, 404) (20663, 404)
     
 
 ### TransactionDT
@@ -1531,9 +1540,9 @@ print('train date:', train_date.min(), '-', train_date.max())
 print('test  date:', test_date.min(), '-', test_date.max())
 ```
 
-train date: 2017-12-02 00:00:00 - 2018-06-01 23:58:51
+> train date: 2017-12-02 00:00:00 - 2018-06-01 23:58:51
 
-test  date: 2018-07-02 00:00:24 - 2018-12-31 23:59:05
+> test  date: 2018-07-02 00:00:24 - 2018-12-31 23:59:05
     
 
 
@@ -2843,11 +2852,11 @@ train_trn['card_n'] = (train_trn['card1'].astype(str) + '_' + train_trn['card2']
 print('unique cards:', train_trn['card_n'].nunique())
 ```
 
-590540
+> 590540
 
-13553 500 114 119
+> 13553 500 114 119
 
-unique cards: 14845
+> unique cards: 14845
     
 
 ```python
@@ -2884,7 +2893,7 @@ train_trn.groupby(['card_n'])['isFraud'].mean().sort_values(ascending=False)
 train_trn['addr1'].nunique(), train_trn['addr2'].nunique()
 ```
 
-(332, 74)
+> (332, 74)
 
 
 ```python
@@ -2971,7 +2980,7 @@ plotTrnCategoryRateBar('addr2', 10)
 print('addr2 nunique:', train_trn['addr2'].nunique())
 ```
 
-addr2 nunique: 74
+> addr2 nunique: 74
     
 ![png](/images/ieee-cis-fraud-detection/analysis_90_1.png)
 
@@ -6125,8 +6134,7 @@ print(vcol_pca.ndim)
 
 ![png](/images/ieee-cis-fraud-detection/analysis_133_0.png)
 
-2
-    
+> 2
 
 ```python
 del train_trn_f0,train_trn_f1,train_id_f0,train_id_f1
@@ -6145,10 +6153,23 @@ print(pd.DataFrame([[val for val in dir()], [sys.getsizeof(eval(val)) for val in
     6    train_date     4724472
     7     test_date     4053680
     8            vc     1951187
-    9           _65     1951187    
+    9           _65     1951187   
+
+
+ | name | size
+------------ | ------------- | ------------
+0 | train_trn | 1243551195
+1 | test_trn | 820917583
+2 | train_id_trn | 157073961
+3 | train_id | 155487526
+4 | test_id | 146112147
+5 | vsum0 | 6838548
+6 | train_date | 4724472
+7 | test_date | 4053680
+8 | vc | 1951187
+9 | _65 | 1951187 
     
 ## Feature Engineering
-
 
 ```python
 train_id = pd.read_csv('../input/ieee-fraud-detection/train_identity.csv')
@@ -6171,9 +6192,9 @@ del train_id,train_trn,test_id,test_trn
 all_data = X_train.append(X_test, sort=False).reset_index(drop=True)
 ```
 
-Memory usage of dataframe is 1959.88 MB --> 650.48 MB (Decreased by 66.8%)
+> Memory usage of dataframe is 1959.88 MB --> 650.48 MB (Decreased by 66.8%)
 
-Memory usage of dataframe is 1677.73 MB --> 565.37 MB (Decreased by 66.3%)
+> Memory usage of dataframe is 1677.73 MB --> 565.37 MB (Decreased by 66.3%)
     
 
 ```python
@@ -6212,7 +6233,6 @@ all_data['_count_rate'] = all_data['_day'].map(cnt_day.to_dict())
 all_data.drop(['TransactionDT','Date','_day'], axis=1, inplace=True)
 ```
 
-
 ```python
 all_data['_P_emaildomain__addr1'] = all_data['P_emaildomain'] + '__' + all_data['addr1'].astype(str)
 all_data['_card1__card2'] = all_data['card1'].astype(str) + '__' + all_data['card2'].astype(str)
@@ -6221,7 +6241,6 @@ all_data['_card2__addr1'] = all_data['card2'].astype(str) + '__' + all_data['add
 all_data['_card12__addr1'] = all_data['_card1__card2'] + '__' + all_data['addr1'].astype(str)
 all_data['_card_all__addr1'] = all_data['_card1__card2'] + '__' + all_data['addr1'].astype(str)
 ```
-
 
 ```python
 all_data['_amount_decimal'] = ((all_data['TransactionAmt'] - all_data['TransactionAmt'].astype(int)) * 1000).astype(int)
@@ -6349,7 +6368,7 @@ for f in cols:
 print('features:', all_data.shape[1])
 ```
 
-features: 137
+> features: 137
     
 ```python
 _='''
@@ -6373,7 +6392,7 @@ for i, t in all_data.loc[:, all_data.columns != 'isFraud'].dtypes.iteritems():
 print(enc_cols)
 ```
 
-['ProductCD', 'card4', 'card6', 'P_emaildomain', 'R_emaildomain', 'M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'id_12', 'id_13', 'id_14', 'id_15', 'id_16', 'id_17', 'id_18', 'id_19', 'id_20', 'id_21', 'id_22', 'id_23', 'id_24', 'id_25', 'id_26', 'id_27', 'id_28', 'id_29', 'id_30', 'id_31', 'id_32', 'id_33', 'id_34', 'id_35', 'id_36', 'id_37', 'id_38', 'DeviceType', 'DeviceInfo', '_weekday', '_hour', '_weekday__hour', '_P_emaildomain__addr1', '_card1__card2', '_card1__addr1', '_card2__addr1', '_card12__addr1', '_card_all__addr1']
+> ['ProductCD', 'card4', 'card6', 'P_emaildomain', 'R_emaildomain', 'M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'id_12', 'id_13', 'id_14', 'id_15', 'id_16', 'id_17', 'id_18', 'id_19', 'id_20', 'id_21', 'id_22', 'id_23', 'id_24', 'id_25', 'id_26', 'id_27', 'id_28', 'id_29', 'id_30', 'id_31', 'id_32', 'id_33', 'id_34', 'id_35', 'id_36', 'id_37', 'id_38', 'DeviceType', 'DeviceInfo', '_weekday', '_hour', '_weekday__hour', '_P_emaildomain__addr1', '_card1__card2', '_card1__addr1', '_card2__addr1', '_card12__addr1', '_card_all__addr1']
 
 
 ```python
@@ -6410,9 +6429,9 @@ oof_preds = clf.predict_proba(X_train, num_iteration=clf.best_iteration_)[:,1]
 sub_preds = clf.predict_proba(X_test, num_iteration=clf.best_iteration_)[:,1]
 ```
 
-CPU times: user 1h 19min 25s, sys: 44.8 s, total: 1h 20min 10s
+> CPU times: user 1h 19min 25s, sys: 44.8 s, total: 1h 20min 10s
 
-Wall time: 41min 29s
+> Wall time: 41min 29s
 
 
 ```python
@@ -6455,14 +6474,12 @@ prediction['isFraud'] = sub_preds
 prediction.to_csv('prediction.csv', index=False)
 ```
 
-## Downloads
+## Download prediction.csv
 
-prediction.csv
+> [Google Drive](https://drive.google.com/file/d/16u6y8S1uN7HI-uWHnKtTAzv6jeG9B-eT/view?usp=sharing)
 
-[Google Drive](https://drive.google.com/file/d/16u6y8S1uN7HI-uWHnKtTAzv6jeG9B-eT/view?usp=sharing)
+> [OneDrive](https://1drv.ms/u/s!AjWO46TOTFj4p1ZgMNzSHudoDLEl?e=LS6Lqy)
 
-[OneDrive](https://1drv.ms/u/s!AjWO46TOTFj4p1ZgMNzSHudoDLEl?e=LS6Lqy)
+> [Mediafire](http://www.mediafire.com/file/6p2pqb5dgv6klfp/ieee-cis-fraud-detection-prediction.zip/file)
 
-[Mediafire](http://www.mediafire.com/file/6p2pqb5dgv6klfp/ieee-cis-fraud-detection-prediction.zip/file)
-
-[Mega Upload](https://mega.nz/#!buxzVQoI!tpE8DjDmJ2QbmUsE3PsMUbkknbq_z5rDooAK1Qnql74)
+> [Mega Upload](https://mega.nz/#!buxzVQoI!tpE8DjDmJ2QbmUsE3PsMUbkknbq_z5rDooAK1Qnql74)
