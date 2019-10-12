@@ -191,13 +191,12 @@ print("Y_test shape: " + str(Y_test.shape))
 
 ### So, let's see what we have here...
 
-    number of training examples = 12000
-    number of test examples = 1199
-    X_train shape: (12000, 2500)
-    Y_train shape: (1, 12000)
-    X_test shape: (1199, 2500)
-    Y_test shape: (1, 1199)
-    
+> number of training examples = 12000<br/>
+> number of test examples = 1199<br/>
+> X_train shape: (12000, 2500)<br/>
+> Y_train shape: (1, 12000)<br/>
+> X_test shape: (1199, 2500)<br/>
+> Y_test shape: (1, 1199)<br/>
 
 ### Back to code...
 
@@ -214,12 +213,13 @@ print("X_train shape: " + str(X_train.shape))
 print("X_test shape: " + str(X_test.shape))
 print("Y_train shape: " + str(train_y.shape))
 ```
+
 ### Output for this is...
 
-    X_train shape: (12000, 50, 50, 1)
-    X_test shape: (1199, 50, 50, 1)
-    Y_train shape: (12000, 12)
-    
+> X_train shape: (12000, 50, 50, 1)<br/>
+> X_test shape: (1199, 50, 50, 1)<br/>
+> Y_train shape: (12000, 12)<br/>
+
 ### Back to code...
 
 ```python
@@ -249,7 +249,7 @@ print("CNN Error: %.2f%%" % (100 - scores[1] * 100))
 print_summary(model)
 model.save('handEmo.h5')
 ```
-    
+
     CNN Error: 0.00%
     Model: "sequential_1"
     _________________________________________________________________
@@ -275,7 +275,7 @@ model.save('handEmo.h5')
     Trainable params: 1,113,996
     Non-trainable params: 0
     _________________________________________________________________
-    
+
 ### So this program will create handEmo.h5 file.
 
 ### Now we have our model file, lets implement it to classify realtime emojis...
@@ -393,6 +393,7 @@ while (cap.isOpened()):
     if k == 27:
         break
 ```
+
 ## We are done here...
 
 ## On executing application.py file, this will open system's webcam and start capturing the hand gestures

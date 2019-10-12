@@ -90,12 +90,12 @@ print("Y_test shape: " + str(Y_test.shape))
 
 ### Lets see what we have
 
-    number of training examples = 70000
-    number of test examples = 2000
-    X_train shape: (70000, 1024)
-    Y_train shape: (1, 70000)
-    X_test shape: (2000, 1024)
-    Y_test shape: (1, 2000)
+> number of training examples = 70000<br/>
+> number of test examples = 2000<br/>
+> X_train shape: (70000, 1024)<br/>
+> Y_train shape: (1, 70000)<br/>
+> X_test shape: (2000, 1024)<br/>
+> Y_test shape: (1, 2000)<br/>
 
 ### Back to code...
 
@@ -120,8 +120,8 @@ print("Y_train shape: " + str(train_y.shape))
 
 ### What we got here
 
-    X_train shape: (70000, 32, 32, 1)
-    Y_train shape: (70000, 37)
+> X_train shape: (70000, 32, 32, 1)<br/>
+> Y_train shape: (70000, 37)<br/>
 
 ### Back to code...
 
