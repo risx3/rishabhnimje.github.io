@@ -6180,6 +6180,6 @@ prediction.to_csv('prediction.csv', index=False)
 ## Download prediction.csv
 
 > [Google Drive](https://drive.google.com/file/d/16u6y8S1uN7HI-uWHnKtTAzv6jeG9B-eT/view?usp=sharing)<br/>
-> ![OneDrive](https://1drv.ms/u/s!AjWO46TOTFj4p1ZgMNzSHudoDLEl?e=LS6Lqy)<br/>
-> ![Mediafire](http://www.mediafire.com/file/6p2pqb5dgv6klfp/ieee-cis-fraud-detection-prediction.zip/file)<br/>
+> [OneDrive](https://1drv.ms/u/s!AjWO46TOTFj4p1ZgMNzSHudoDLEl?e=LS6Lqy)<br/>
+> [Mediafire](http://www.mediafire.com/file/6p2pqb5dgv6klfp/ieee-cis-fraud-detection-prediction.zip/file)<br/>
 > [Mega Upload](https://mega.nz/#!buxzVQoI!tpE8DjDmJ2QbmUsE3PsMUbkknbq_z5rDooAK1Qnql74)<br/>
