@@ -4,8 +4,8 @@ date: 2019-10-10
 tags: [Kaggle, Fraud Detection, IEEE-CIS, machine learning, PCA]
 excerpt: "Can you detect fraud from customer transactions?"
 header:
-  overlay_image: #"/images/emojinator/emojinator.jpg"
-  caption: #"Emojinator"
+  overlay_image: "/images/ieee-cis-fraud-detection/home-page.jpg"
+  caption: "Photo by Arget on Unsplash"
 mathjax: "true"
 ---
 
