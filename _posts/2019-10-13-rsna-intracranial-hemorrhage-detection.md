@@ -73,17 +73,17 @@ train_data = pd.read_csv('/kaggle/input/rsna-intracranial-hemorrhage-detection/s
 print(train_data.head(10))
 ```
 
-_                             ID  Label<br/>
-0          ID_63eb1e259_epidural      0<br/>
-1  ID_63eb1e259_intraparenchymal      0<br/>
-2  ID_63eb1e259_intraventricular      0<br/>
-3      ID_63eb1e259_subarachnoid      0<br/>
-4          ID_63eb1e259_subdural      0<br/>
-5               ID_63eb1e259_any      0<br/>
-6          ID_2669954a7_epidural      0<br/>
-7  ID_2669954a7_intraparenchymal      0<br/>
-8  ID_2669954a7_intraventricular      0<br/>
-9      ID_2669954a7_subarachnoid      0<br/>
+  _                             ID  Label
+  0          ID_63eb1e259_epidural      0
+  1  ID_63eb1e259_intraparenchymal      0
+  2  ID_63eb1e259_intraventricular      0
+  3      ID_63eb1e259_subarachnoid      0
+  4          ID_63eb1e259_subdural      0
+  5               ID_63eb1e259_any      0
+  6          ID_2669954a7_epidural      0
+  7  ID_2669954a7_intraparenchymal      0
+  8  ID_2669954a7_intraventricular      0
+  9      ID_2669954a7_subarachnoid      0
 
 ### Splitting Data
 
@@ -96,17 +96,17 @@ del splitData
 print(train_data.head(10))
 ```
 
-_   Label             class      fileName<br/>
-0      0          epidural  ID_63eb1e259<br/>
-1      0  intraparenchymal  ID_63eb1e259<br/>
-2      0  intraventricular  ID_63eb1e259<br/>
-3      0      subarachnoid  ID_63eb1e259<br/>
-4      0          subdural  ID_63eb1e259<br/>
-5      0               any  ID_63eb1e259<br/>
-6      0          epidural  ID_2669954a7<br/>
-7      0  intraparenchymal  ID_2669954a7<br/>
-8      0  intraventricular  ID_2669954a7<br/>
-9      0      subarachnoid  ID_2669954a7<br/>
+  _   Label             class      fileName
+  0      0          epidural  ID_63eb1e259
+  1      0  intraparenchymal  ID_63eb1e259
+  2      0  intraventricular  ID_63eb1e259
+  3      0      subarachnoid  ID_63eb1e259
+  4      0          subdural  ID_63eb1e259
+  5      0               any  ID_63eb1e259
+  6      0          epidural  ID_2669954a7
+  7      0  intraparenchymal  ID_2669954a7
+  8      0  intraventricular  ID_2669954a7
+  9      0      subarachnoid  ID_2669954a7
 
 
 ```python
@@ -115,29 +115,29 @@ pivot_train_data = pd.DataFrame(pivot_train_data.to_records())
 print(pivot_train_data.head(10))
 ```
 
-_       fileName  any  epidural  intraparenchymal  intraventricular  \<br/>
-0  ID_000039fa0    0         0                 0                 0<br/>
-1  ID_00005679d    0         0                 0                 0<br/>
-2  ID_00008ce3c    0         0                 0                 0<br/>
-3  ID_0000950d7    0         0                 0                 0<br/>
-4  ID_0000aee4b    0         0                 0                 0<br/>
-5  ID_0000f1657    0         0                 0                 0<br/>
-6  ID_000178e76    0         0                 0                 0<br/>
-7  ID_00019828f    0         0                 0                 0<br/>
-8  ID_0001dcc25    0         0                 0                 0<br/>
-9  ID_0001de0e8    0         0                 0                 0<br/><br/>
+  _       fileName  any  epidural  intraparenchymal  intraventricular  \
+  0  ID_000039fa0    0         0                 0                 0
+  1  ID_00005679d    0         0                 0                 0
+  2  ID_00008ce3c    0         0                 0                 0
+  3  ID_0000950d7    0         0                 0                 0
+  4  ID_0000aee4b    0         0                 0                 0
+  5  ID_0000f1657    0         0                 0                 0
+  6  ID_000178e76    0         0                 0                 0
+  7  ID_00019828f    0         0                 0                 0
+  8  ID_0001dcc25    0         0                 0                 0
+  9  ID_0001de0e8    0         0                 0                 0
 
-_   subarachnoid  subdural<br/>
-0             0         0<br/>
-1             0         0<br/>
-2             0         0<br/>
-3             0         0<br/>
-4             0         0<br/>
-5             0         0<br/>
-6             0         0<br/>
-7             0         0<br/>
-8             0         0<br/>
-9             0         0<br/>
+  _   subarachnoid  subdural
+  0             0         0
+  1             0         0
+  2             0         0
+  3             0         0
+  4             0         0
+  5             0         0
+  6             0         0
+  7             0         0
+  8             0         0
+  9             0         0
 
 ## Data Analysis
 
@@ -549,24 +549,25 @@ testDataGenerator = generateTestImageData(test_files)
 temp_pred = model_conv.predict_generator(testDataGenerator,steps = pivot_test_data.shape[0]/batch_size,verbose = True)
 ```
 
-> 100%|██████████| 64/64 [00:00<00:00, 121.64it/s]<br/>
-> 100%|██████████| 64/64 [00:00<00:00, 106.34it/s]<br/>
-> 100%|██████████| 64/64 [00:00<00:00, 108.99it/s]<br/>
-> 100%|██████████| 64/64 [00:00<00:00, 105.13it/s]<br/>
-> 55% |█████▍    | 35/64 [00:00<00:00, 110.47it/s]<br/><br/>
-> 1/1227   [..............................] - ETA: 56:19<br/>
-> 70% |███████   | 45/64 [00:00<00:00, 105.82it/s]<br/>
-> 3/1227   [..............................] - ETA: 19:08<br/>
->100% |██████████| 64/64 [00:00<00:00, 106.76it/s]<br/>
-> 0%  |          | 0/64 [00:00<?, ?it/s]<br/>
-> ...<br/>
-> ...<br/>
-> ...<br/>
-> ...<br/>
->1227/1227 [============================>.] - ETA: 0s<br/>
->100% |██████████| 17/17 [00:00<00:00, 126.79it/s]<br/>
-> 31% |███▏      | 20/64 [00:00<00:00, 192.64it/s]<br/>
->1228/1227 [==============================] - 606s 493ms/step<br/>
+  100%|██████████| 64/64 [00:00<00:00, 121.64it/s]
+  100%|██████████| 64/64 [00:00<00:00, 106.34it/s]
+  100%|██████████| 64/64 [00:00<00:00, 108.99it/s]
+  100%|██████████| 64/64 [00:00<00:00, 105.13it/s]
+  55% |█████▍    | 35/64 [00:00<00:00, 110.47it/s]
+
+  1/1227   [..............................] - ETA: 56:19
+  70% |███████   | 45/64 [00:00<00:00, 105.82it/s]
+  3/1227   [..............................] - ETA: 19:08
+  100%|██████████| 64/64 [00:00<00:00, 106.76it/s]
+  0%  |          | 0/64 [00:00<?, ?it/s]
+  ...
+  ...
+  ...
+  ...
+  1227/1227 [============================>.] - ETA: 0s
+  100%|██████████| 17/17 [00:00<00:00, 126.79it/s]
+  31% |███▏      | 20/64 [00:00<00:00, 192.64it/s]
+  1228/1227 [==============================] - 606s 493ms/step
 
 ```python
 temp_pred.shape
@@ -593,54 +594,54 @@ submission_df['Label'] = submission_df['value']
 print(submission_df.head(20))
 ```
 
-> _       fileName variable     value                ID     Label<br/>
-> 0   ID_000012eaf      any  0.077172  ID_000012eaf_any  0.077172<br/>
-> 1   ID_0000ca2f6      any  0.132851  ID_0000ca2f6_any  0.132851<br/>
-> 2   ID_000259ccf      any  0.001006  ID_000259ccf_any  0.001006<br/>
-> 3   ID_0002d438a      any  0.176040  ID_0002d438a_any  0.176040<br/>
-> 4   ID_00032d440      any  0.041040  ID_00032d440_any  0.041040<br/>
-> 5   ID_00044a417      any  0.069968  ID_00044a417_any  0.069968<br/>
-> 6   ID_0004cd66f      any  0.059623  ID_0004cd66f_any  0.059623<br/>
-> 7   ID_0005b2d86      any  0.063642  ID_0005b2d86_any  0.063642<br/>
-> 8   ID_0005db660      any  0.023117  ID_0005db660_any  0.023117<br/>
-> 9   ID_000624786      any  0.037962  ID_000624786_any  0.037962<br/>
-> 10  ID_0006441d0      any  0.048462  ID_0006441d0_any  0.048462<br/>
-> 11  ID_00067e05e      any  0.002257  ID_00067e05e_any  0.002257<br/>
-> 12  ID_000716c43      any  0.066924  ID_000716c43_any  0.066924<br/>
-> 13  ID_0007c5cb8      any  0.172517  ID_0007c5cb8_any  0.172517<br/>
-> 14  ID_00086a66f      any  0.045856  ID_00086a66f_any  0.045856<br/>
-> 15  ID_0008f134d      any  0.227791  ID_0008f134d_any  0.227791<br/>
-> 16  ID_000920cd1      any  0.057263  ID_000920cd1_any  0.057263<br/>
-> 17  ID_0009c4591      any  0.103415  ID_0009c4591_any  0.103415<br/>
-> 18  ID_000b8242c      any  0.137407  ID_000b8242c_any  0.137407<br/>
-> 19  ID_000dcad55      any  0.250025  ID_000dcad55_any  0.250025<br/>
+            fileName variable     value                ID     Label
+    0   ID_000012eaf      any  0.077172  ID_000012eaf_any  0.077172
+    1   ID_0000ca2f6      any  0.132851  ID_0000ca2f6_any  0.132851
+    2   ID_000259ccf      any  0.001006  ID_000259ccf_any  0.001006
+    3   ID_0002d438a      any  0.176040  ID_0002d438a_any  0.176040
+    4   ID_00032d440      any  0.041040  ID_00032d440_any  0.041040
+    5   ID_00044a417      any  0.069968  ID_00044a417_any  0.069968
+    6   ID_0004cd66f      any  0.059623  ID_0004cd66f_any  0.059623
+    7   ID_0005b2d86      any  0.063642  ID_0005b2d86_any  0.063642
+    8   ID_0005db660      any  0.023117  ID_0005db660_any  0.023117
+    9   ID_000624786      any  0.037962  ID_000624786_any  0.037962
+    10  ID_0006441d0      any  0.048462  ID_0006441d0_any  0.048462
+    11  ID_00067e05e      any  0.002257  ID_00067e05e_any  0.002257
+    12  ID_000716c43      any  0.066924  ID_000716c43_any  0.066924
+    13  ID_0007c5cb8      any  0.172517  ID_0007c5cb8_any  0.172517
+    14  ID_00086a66f      any  0.045856  ID_00086a66f_any  0.045856
+    15  ID_0008f134d      any  0.227791  ID_0008f134d_any  0.227791
+    16  ID_000920cd1      any  0.057263  ID_000920cd1_any  0.057263
+    17  ID_0009c4591      any  0.103415  ID_0009c4591_any  0.103415
+    18  ID_000b8242c      any  0.137407  ID_000b8242c_any  0.137407
+    19  ID_000dcad55      any  0.250025  ID_000dcad55_any  0.250025
 
 ```python
 submission_df = submission_df.drop(['fileName','variable','value'],axis = 1)
 print(submission_df.head(20))
 ```
 
-> _                 ID     Label<br/>
-> 0   ID_000012eaf_any  0.077172<br/>
-> 1   ID_0000ca2f6_any  0.132851<br/>
-> 2   ID_000259ccf_any  0.001006<br/>
-> 3   ID_0002d438a_any  0.176040<br/>
-> 4   ID_00032d440_any  0.041040<br/>
-> 5   ID_00044a417_any  0.069968<br/>
-> 6   ID_0004cd66f_any  0.059623<br/>
-> 7   ID_0005b2d86_any  0.063642<br/>
-> 8   ID_0005db660_any  0.023117<br/>
-> 9   ID_000624786_any  0.037962<br/>
-> 10  ID_0006441d0_any  0.048462<br/>
-> 11  ID_00067e05e_any  0.002257<br/>
-> 12  ID_000716c43_any  0.066924<br/>
-> 13  ID_0007c5cb8_any  0.172517<br/>
-> 14  ID_00086a66f_any  0.045856<br/>
-> 15  ID_0008f134d_any  0.227791<br/>
-> 16  ID_000920cd1_any  0.057263<br/>
-> 17  ID_0009c4591_any  0.103415<br/>
-> 18  ID_000b8242c_any  0.137407<br/>
-> 19  ID_000dcad55_any  0.250025<br/>
+                      ID     Label
+    0   ID_000012eaf_any  0.077172
+    1   ID_0000ca2f6_any  0.132851
+    2   ID_000259ccf_any  0.001006
+    3   ID_0002d438a_any  0.176040
+    4   ID_00032d440_any  0.041040
+    5   ID_00044a417_any  0.069968
+    6   ID_0004cd66f_any  0.059623
+    7   ID_0005b2d86_any  0.063642
+    8   ID_0005db660_any  0.023117
+    9   ID_000624786_any  0.037962
+    10  ID_0006441d0_any  0.048462
+    11  ID_00067e05e_any  0.002257
+    12  ID_000716c43_any  0.066924
+    13  ID_0007c5cb8_any  0.172517
+    14  ID_00086a66f_any  0.045856
+    15  ID_0008f134d_any  0.227791
+    16  ID_000920cd1_any  0.057263
+    17  ID_0009c4591_any  0.103415
+    18  ID_000b8242c_any  0.137407
+    19  ID_000dcad55_any  0.250025
 
 
 ```python
