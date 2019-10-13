@@ -73,17 +73,17 @@ train_data = pd.read_csv('/kaggle/input/rsna-intracranial-hemorrhage-detection/s
 print(train_data.head(10))
 ```
 
-> _                             ID  Label<br/>
-> 0          ID_63eb1e259_epidural      0<br/>
-> 1  ID_63eb1e259_intraparenchymal      0<br/>
-> 2  ID_63eb1e259_intraventricular      0<br/>
-> 3      ID_63eb1e259_subarachnoid      0<br/>
-> 4          ID_63eb1e259_subdural      0<br/>
-> 5               ID_63eb1e259_any      0<br/>
-> 6          ID_2669954a7_epidural      0<br/>
-> 7  ID_2669954a7_intraparenchymal      0<br/>
-> 8  ID_2669954a7_intraventricular      0<br/>
-> 9      ID_2669954a7_subarachnoid      0<br/>
+_                             ID  Label<br/>
+0          ID_63eb1e259_epidural      0<br/>
+1  ID_63eb1e259_intraparenchymal      0<br/>
+2  ID_63eb1e259_intraventricular      0<br/>
+3      ID_63eb1e259_subarachnoid      0<br/>
+4          ID_63eb1e259_subdural      0<br/>
+5               ID_63eb1e259_any      0<br/>
+6          ID_2669954a7_epidural      0<br/>
+7  ID_2669954a7_intraparenchymal      0<br/>
+8  ID_2669954a7_intraventricular      0<br/>
+9      ID_2669954a7_subarachnoid      0<br/>
 
 ### Splitting Data
 
@@ -96,17 +96,17 @@ del splitData
 print(train_data.head(10))
 ```
 
-> _   Label             class      fileName<br/>
-> 0      0          epidural  ID_63eb1e259<br/>
-> 1      0  intraparenchymal  ID_63eb1e259<br/>
-> 2      0  intraventricular  ID_63eb1e259<br/>
-> 3      0      subarachnoid  ID_63eb1e259<br/>
-> 4      0          subdural  ID_63eb1e259<br/>
-> 5      0               any  ID_63eb1e259<br/>
-> 6      0          epidural  ID_2669954a7<br/>
-> 7      0  intraparenchymal  ID_2669954a7<br/>
-> 8      0  intraventricular  ID_2669954a7<br/>
-> 9      0      subarachnoid  ID_2669954a7<br/>
+_   Label             class      fileName<br/>
+0      0          epidural  ID_63eb1e259<br/>
+1      0  intraparenchymal  ID_63eb1e259<br/>
+2      0  intraventricular  ID_63eb1e259<br/>
+3      0      subarachnoid  ID_63eb1e259<br/>
+4      0          subdural  ID_63eb1e259<br/>
+5      0               any  ID_63eb1e259<br/>
+6      0          epidural  ID_2669954a7<br/>
+7      0  intraparenchymal  ID_2669954a7<br/>
+8      0  intraventricular  ID_2669954a7<br/>
+9      0      subarachnoid  ID_2669954a7<br/>
 
 
 ```python
@@ -115,29 +115,29 @@ pivot_train_data = pd.DataFrame(pivot_train_data.to_records())
 print(pivot_train_data.head(10))
 ```
 
-> _       fileName  any  epidural  intraparenchymal  intraventricular  \<br/>
-> 0  ID_000039fa0    0         0                 0                 0<br/>
-> 1  ID_00005679d    0         0                 0                 0<br/>
-> 2  ID_00008ce3c    0         0                 0                 0<br/>
-> 3  ID_0000950d7    0         0                 0                 0<br/>
-> 4  ID_0000aee4b    0         0                 0                 0<br/>
-> 5  ID_0000f1657    0         0                 0                 0<br/>
-> 6  ID_000178e76    0         0                 0                 0<br/>
-> 7  ID_00019828f    0         0                 0                 0<br/>
-> 8  ID_0001dcc25    0         0                 0                 0<br/>
-> 9  ID_0001de0e8    0         0                 0                 0<br/><br/>
+_       fileName  any  epidural  intraparenchymal  intraventricular  \<br/>
+0  ID_000039fa0    0         0                 0                 0<br/>
+1  ID_00005679d    0         0                 0                 0<br/>
+2  ID_00008ce3c    0         0                 0                 0<br/>
+3  ID_0000950d7    0         0                 0                 0<br/>
+4  ID_0000aee4b    0         0                 0                 0<br/>
+5  ID_0000f1657    0         0                 0                 0<br/>
+6  ID_000178e76    0         0                 0                 0<br/>
+7  ID_00019828f    0         0                 0                 0<br/>
+8  ID_0001dcc25    0         0                 0                 0<br/>
+9  ID_0001de0e8    0         0                 0                 0<br/><br/>
 
-> _   subarachnoid  subdural<br/>
-> 0             0         0<br/>
-> 1             0         0<br/>
-> 2             0         0<br/>
-> 3             0         0<br/>
-> 4             0         0<br/>
-> 5             0         0<br/>
-> 6             0         0<br/>
-> 7             0         0<br/>
-> 8             0         0<br/>
-> 9             0         0<br/>
+_   subarachnoid  subdural<br/>
+0             0         0<br/>
+1             0         0<br/>
+2             0         0<br/>
+3             0         0<br/>
+4             0         0<br/>
+5             0         0<br/>
+6             0         0<br/>
+7             0         0<br/>
+8             0         0<br/>
+9             0         0<br/>
 
 ## Data Analysis
 
