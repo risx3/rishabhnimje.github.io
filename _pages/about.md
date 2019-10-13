@@ -6,3 +6,4 @@ header:
 ---
 
 Resume - still not designed!!!
+[Resume](/_pages/resume.html)
