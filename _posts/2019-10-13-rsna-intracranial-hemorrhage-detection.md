@@ -33,13 +33,13 @@ The training data is provided as a set of image Ids and multiple labels, one for
 There is also a target column, Label, indicating the probability of whether that type of hemorrhage exists in the indicated image.<br/>
 There will be 6 rows per image Id. The label indicated by a particular row will look like [Image Id]_[Sub-type Name], as follows:<br/>
 
-Id,Label<br/>
-1_epidural_hemorrhage,0<br/>
-1_intraparenchymal_hemorrhage,0<br/>
-1_intraventricular_hemorrhage,0<br/>
-1_subarachnoid_hemorrhage,0.6<br/>
-1_subdural_hemorrhage,0<br/>
-1_any,0.9<br/>
+> Id,Label<br/>
+> 1_epidural_hemorrhage,0<br/>
+> 1_intraparenchymal_hemorrhage,0<br/>
+> 1_intraventricular_hemorrhage,0<br/>
+> 1_subarachnoid_hemorrhage,0.6<br/>
+> 1_subdural_hemorrhage,0<br/>
+> 1_any,0.9<br/>
 
 ### DICOM Images
 
@@ -73,17 +73,17 @@ train_data = pd.read_csv('/kaggle/input/rsna-intracranial-hemorrhage-detection/s
 print(train_data.head(10))
 ```
 
-                                  ID  Label
-    0          ID_63eb1e259_epidural      0
-    1  ID_63eb1e259_intraparenchymal      0
-    2  ID_63eb1e259_intraventricular      0
-    3      ID_63eb1e259_subarachnoid      0
-    4          ID_63eb1e259_subdural      0
-    5               ID_63eb1e259_any      0
-    6          ID_2669954a7_epidural      0
-    7  ID_2669954a7_intraparenchymal      0
-    8  ID_2669954a7_intraventricular      0
-    9      ID_2669954a7_subarachnoid      0
+> _                             ID  Label<br/>
+> 0          ID_63eb1e259_epidural      0<br/>
+> 1  ID_63eb1e259_intraparenchymal      0<br/>
+> 2  ID_63eb1e259_intraventricular      0<br/>
+> 3      ID_63eb1e259_subarachnoid      0<br/>
+> 4          ID_63eb1e259_subdural      0<br/>
+> 5               ID_63eb1e259_any      0<br/>
+> 6          ID_2669954a7_epidural      0<br/>
+> 7  ID_2669954a7_intraparenchymal      0<br/>
+> 8  ID_2669954a7_intraventricular      0<br/>
+> 9      ID_2669954a7_subarachnoid      0<br/>
 
 ### Splitting Data
 
@@ -96,17 +96,17 @@ del splitData
 print(train_data.head(10))
 ```
 
-       Label             class      fileName
-    0      0          epidural  ID_63eb1e259
-    1      0  intraparenchymal  ID_63eb1e259
-    2      0  intraventricular  ID_63eb1e259
-    3      0      subarachnoid  ID_63eb1e259
-    4      0          subdural  ID_63eb1e259
-    5      0               any  ID_63eb1e259
-    6      0          epidural  ID_2669954a7
-    7      0  intraparenchymal  ID_2669954a7
-    8      0  intraventricular  ID_2669954a7
-    9      0      subarachnoid  ID_2669954a7
+> _   Label             class      fileName<br/>
+> 0      0          epidural  ID_63eb1e259<br/>
+> 1      0  intraparenchymal  ID_63eb1e259<br/>
+> 2      0  intraventricular  ID_63eb1e259<br/>
+> 3      0      subarachnoid  ID_63eb1e259<br/>
+> 4      0          subdural  ID_63eb1e259<br/>
+> 5      0               any  ID_63eb1e259<br/>
+> 6      0          epidural  ID_2669954a7<br/>
+> 7      0  intraparenchymal  ID_2669954a7<br/>
+> 8      0  intraventricular  ID_2669954a7<br/>
+> 9      0      subarachnoid  ID_2669954a7<br/>
 
 
 ```python
@@ -115,29 +115,29 @@ pivot_train_data = pd.DataFrame(pivot_train_data.to_records())
 print(pivot_train_data.head(10))
 ```
 
-           fileName  any  epidural  intraparenchymal  intraventricular  \
-    0  ID_000039fa0    0         0                 0                 0   
-    1  ID_00005679d    0         0                 0                 0   
-    2  ID_00008ce3c    0         0                 0                 0   
-    3  ID_0000950d7    0         0                 0                 0   
-    4  ID_0000aee4b    0         0                 0                 0   
-    5  ID_0000f1657    0         0                 0                 0   
-    6  ID_000178e76    0         0                 0                 0   
-    7  ID_00019828f    0         0                 0                 0   
-    8  ID_0001dcc25    0         0                 0                 0   
-    9  ID_0001de0e8    0         0                 0                 0   
-    
-       subarachnoid  subdural  
-    0             0         0  
-    1             0         0  
-    2             0         0  
-    3             0         0  
-    4             0         0  
-    5             0         0  
-    6             0         0  
-    7             0         0  
-    8             0         0  
-    9             0         0  
+> _       fileName  any  epidural  intraparenchymal  intraventricular  \<br/>
+> 0  ID_000039fa0    0         0                 0                 0<br/>
+> 1  ID_00005679d    0         0                 0                 0<br/>
+> 2  ID_00008ce3c    0         0                 0                 0<br/>
+> 3  ID_0000950d7    0         0                 0                 0<br/>
+> 4  ID_0000aee4b    0         0                 0                 0<br/>
+> 5  ID_0000f1657    0         0                 0                 0<br/>
+> 6  ID_000178e76    0         0                 0                 0<br/>
+> 7  ID_00019828f    0         0                 0                 0<br/>
+> 8  ID_0001dcc25    0         0                 0                 0<br/>
+> 9  ID_0001de0e8    0         0                 0                 0<br/><br/>
+
+> _   subarachnoid  subdural<br/>
+> 0             0         0<br/>
+> 1             0         0<br/>
+> 2             0         0<br/>
+> 3             0         0<br/>
+> 4             0         0<br/>
+> 5             0         0<br/>
+> 6             0         0<br/>
+> 7             0         0<br/>
+> 8             0         0<br/>
+> 9             0         0<br/>
 
 ## Data Analysis
 
@@ -593,7 +593,7 @@ submission_df['Label'] = submission_df['value']
 print(submission_df.head(20))
 ```
 
-> .       fileName variable     value                ID     Label<br/>
+> _       fileName variable     value                ID     Label<br/>
 > 0   ID_000012eaf      any  0.077172  ID_000012eaf_any  0.077172<br/>
 > 1   ID_0000ca2f6      any  0.132851  ID_0000ca2f6_any  0.132851<br/>
 > 2   ID_000259ccf      any  0.001006  ID_000259ccf_any  0.001006<br/>
@@ -620,7 +620,7 @@ submission_df = submission_df.drop(['fileName','variable','value'],axis = 1)
 print(submission_df.head(20))
 ```
 
-> .                 ID     Label<br/>
+> _                 ID     Label<br/>
 > 0   ID_000012eaf_any  0.077172<br/>
 > 1   ID_0000ca2f6_any  0.132851<br/>
 > 2   ID_000259ccf_any  0.001006<br/>
