@@ -5904,6 +5904,8 @@ all_data = X_train.append(X_test, sort=False).reset_index(drop=True)
 > Memory usage of dataframe is 1959.88 MB --> 650.48 MB (Decreased by 66.8%)<br/>
 > Memory usage of dataframe is 1677.73 MB --> 565.37 MB (Decreased by 66.3%)<br/>
 
+## Principal Component Analysis
+
 ```python
 vcols = [f'V{i}' for i in range(1,340)]
 
@@ -6182,4 +6184,4 @@ prediction.to_csv('prediction.csv', index=False)
 > [Google Drive](https://drive.google.com/file/d/16u6y8S1uN7HI-uWHnKtTAzv6jeG9B-eT/view?usp=sharing)<br/>
 > [OneDrive](https://1drv.ms/u/s!AjWO46TOTFj4p1ZgMNzSHudoDLEl?e=LS6Lqy)<br/>
 > [Mediafire](http://www.mediafire.com/file/6p2pqb5dgv6klfp/ieee-cis-fraud-detection-prediction.zip/file)<br/>
-> [Mega Upload](https://mega.nz/#!buxzVQoI!tpE8DjDmJ2QbmUsE3PsMUbkknbq_z5rDooAK1Qnql74)<br/>
+> [Mega](https://mega.nz/#!buxzVQoI!tpE8DjDmJ2QbmUsE3PsMUbkknbq_z5rDooAK1Qnql74)<br/>

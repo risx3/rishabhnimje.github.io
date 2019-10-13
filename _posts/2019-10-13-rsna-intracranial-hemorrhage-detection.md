@@ -21,21 +21,25 @@ Hemorrhage in the head (intracranial hemorrhage) is a relatively common conditio
 While all acute (i.e. new) hemorrhages appear dense (i.e. white) on computed tomography (CT), the primary imaging features that help Radiologists determine the subtype of hemorrhage are the location, shape and proximity to other structures (see table).<br/>
 Intraparenchymal hemorrhage is blood that is located completely within the brain itself; intraventricular or subarachnoid hemorrhage is blood that has leaked into the spaces of the brain that normally contain cerebrospinal fluid (the ventricles or subarachnoid cisterns). Extra-axial hemorrhages are blood that collects in the tissue coverings that surround the brain (e.g. subdural or epidural subtypes). ee figure.) Patients may exhibit more than one type of cerebral hemorrhage, which c may appear on the same image. While small hemorrhages are less morbid than large hemorrhages typically, even a small hemorrhage can lead to death because it is an indicator of another type of serious abnormality (e.g. cerebral aneurysm).<br/>
 
+<img src="{{ site.url }}{{ site.baseurl }}/images/rsna-intracranial-hemorrhage-detection/h-type1.png" alt="Hemorrage Type">
+<br/>
+<img src="{{ site.url }}{{ site.baseurl }}/images/rsna-intracranial-hemorrhage-detection/h-type2.png" alt="Hemorrage Labelled">
+
+> Image credit: By SVG by Mysid, original by SEER Development Team [1], Jmarchn - Vectorized in Inkscape by Mysid, based on work by SEER Development Team, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=10485059
+
 ## Data Description
 
-The training data is provided as a set of image Ids and multiple labels, one for each of five sub-types of hemorrhage, plus an additional label for any, which should always be true if any of the sub-type labels is true.
+The training data is provided as a set of image Ids and multiple labels, one for each of five sub-types of hemorrhage, plus an additional label for any, which should always be true if any of the sub-type labels is true.<br/>
+There is also a target column, Label, indicating the probability of whether that type of hemorrhage exists in the indicated image.<br/>
+There will be 6 rows per image Id. The label indicated by a particular row will look like [Image Id]_[Sub-type Name], as follows:<br/>
 
-There is also a target column, Label, indicating the probability of whether that type of hemorrhage exists in the indicated image.
-
-There will be 6 rows per image Id. The label indicated by a particular row will look like [Image Id]_[Sub-type Name], as follows:
-
-Id,Label
-1_epidural_hemorrhage,0
-1_intraparenchymal_hemorrhage,0
-1_intraventricular_hemorrhage,0
-1_subarachnoid_hemorrhage,0.6
-1_subdural_hemorrhage,0
-1_any,0.9
+Id,Label<br/>
+1_epidural_hemorrhage,0<br/>
+1_intraparenchymal_hemorrhage,0<br/>
+1_intraventricular_hemorrhage,0<br/>
+1_subarachnoid_hemorrhage,0.6<br/>
+1_subdural_hemorrhage,0<br/>
+1_any,0.9<br/>
 
 ### DICOM Images
 
@@ -46,6 +50,8 @@ All provided images are in DICOM format. DICOM images contain associated metadat
 ## Files
 
 * stage_1_train.csv - the training set. Contains Ids and target information.
+* stage_1_train_images
+* stage_1_test_images
 
 You can find the dataset [here](https://www.kaggle.com/c/rsna-intracranial-hemorrhage-detection/data).
 
@@ -59,6 +65,7 @@ import matplotlib.pyplot as plt
 import scipy as sp
 import os
 ```
+
 ## Load Data
 
 ```python
@@ -202,6 +209,7 @@ for i_col in colsToPlot:
 pivot_train_data = pivot_train_data.drop(list(pivot_train_data['fileName']).index('ID_6431af929'))
 ```
 
+## Training Dataset
 
 ```python
 import keras
@@ -263,6 +271,7 @@ x_val = np.array([readDCMFile('/kaggle/input/rsna-intracranial-hemorrhage-detect
 y_val = val_df[colsToPlot]
 ```
 
+## Loss Function Definition
 
 ```python
 # loss function definition courtesy https://www.kaggle.com/akensert/resnet50-keras-baseline-model
@@ -311,6 +320,7 @@ def weighted_loss(y_true, y_pred):
     return K.mean(loss_samples)
 ```
 
+## Defining Convolutional and Identity Block
 
 ```python
 def convolutionBlock(X,f,filters,stage,block,s):
@@ -368,6 +378,7 @@ def identityBlock(X,f,filters,stage,block):
     return X
 ```
 
+## Convolutional Neural Network
 
 ```python
 input_img = Input((64,64,1))
@@ -406,23 +417,24 @@ X = convolutionBlock(X, f=3, filters=[512, 512, 2048], stage=5, block='a', s=2)
 X = identityBlock(X, 3, [512, 512, 2048], stage=5, block='b')
 X = identityBlock(X, 3, [512, 512, 2048], stage=5, block='c')
 
-
 # AVGPOOL (≈1 line). Use "X = AveragePooling2D(...)(X)"
 X = AveragePooling2D(pool_size=(2, 2), padding='same')(X)
-# output layer
+
+# Output layer
 X = Flatten()(X)
 out = Dense(6,name='fc' + str(6),activation='sigmoid')(X)
 ```
 
+### Reshape
 
 ```python
 x_val = np.reshape(x_val,(x_val.shape[0],x_val.shape[1],x_val.shape[2],1))
 ```
 
+## Model
 
 ```python
 model_conv = Model(inputs = input_img, outputs = out)
-#model_conv.compile(optimizer='Adam',loss = 'categorical_crossentropy',metrics=['accuracy'])
 model_conv.compile(optimizer='Adam',loss = logloss,metrics=[weighted_loss])
 model_conv.summary()
 history_conv = model_conv.fit_generator(dataGenerator,steps_per_epoch=500, epochs=20,validation_data = (x_val,y_val),verbose = False)
@@ -491,28 +503,6 @@ history_conv = model_conv.fit_generator(dataGenerator,steps_per_epoch=500, epoch
     __________________________________________________________________________________________________
     bn2b_branch2c (BatchNormalizati (None, 15, 15, 256)  1024        res2b_branch2c[0][0]             
     __________________________________________________________________________________________________
-    add_2 (Add)                     (None, 15, 15, 256)  0           bn2b_branch2c[0][0]              
-                                                                     activation_4[0][0]               
-    __________________________________________________________________________________________________
-    activation_7 (Activation)       (None, 15, 15, 256)  0           add_2[0][0]                      
-    __________________________________________________________________________________________________
-    res2c_branch2a (Conv2D)         (None, 15, 15, 64)   16448       activation_7[0][0]               
-    __________________________________________________________________________________________________
-    bn2c_branch2a (BatchNormalizati (None, 15, 15, 64)   256         res2c_branch2a[0][0]             
-    __________________________________________________________________________________________________
-    activation_8 (Activation)       (None, 15, 15, 64)   0           bn2c_branch2a[0][0]              
-    __________________________________________________________________________________________________
-    res2c_branch2b (Conv2D)         (None, 15, 15, 64)   36928       activation_8[0][0]               
-    __________________________________________________________________________________________________
-    bn2c_branch2b (BatchNormalizati (None, 15, 15, 64)   256         res2c_branch2b[0][0]             
-    __________________________________________________________________________________________________
-    activation_9 (Activation)       (None, 15, 15, 64)   0           bn2c_branch2b[0][0]              
-    __________________________________________________________________________________________________
-    res2c_branch2c (Conv2D)         (None, 15, 15, 256)  16640       activation_9[0][0]               
-    __________________________________________________________________________________________________
-    bn2c_branch2c (BatchNormalizati (None, 15, 15, 256)  1024        res2c_branch2c[0][0]             
-    __________________________________________________________________________________________________
-    ...
     ...
     ...            
     __________________________________________________________________________________________________
@@ -542,6 +532,7 @@ history_conv = model_conv.fit_generator(dataGenerator,steps_per_epoch=500, epoch
     100%|██████████| 64/64 [00:00<00:00, 132.97it/s]
       0%|          | 0/64 [00:00<?, ?it/s]
 
+## Organizing data for Test Data
 
 ```python
 test_data = pd.read_csv('/kaggle/input/rsna-intracranial-hemorrhage-detection/stage_1_sample_submission.csv')
@@ -553,6 +544,7 @@ del splitData
 pivot_test_data = test_data[['fileName','class','Label']].drop_duplicates().pivot_table(index = 'fileName',columns=['class'], values='Label')
 pivot_test_data = pd.DataFrame(pivot_test_data.to_records())
 test_files = list(pivot_test_data['fileName'])
+
 testDataGenerator = generateTestImageData(test_files)
 temp_pred = model_conv.predict_generator(testDataGenerator,steps = pivot_test_data.shape[0]/batch_size,verbose = True)
 ```
@@ -574,30 +566,8 @@ temp_pred = model_conv.predict_generator(testDataGenerator,steps = pivot_test_da
 
     ...
     ...
-     100/1227 [=>............................] - ETA: 9:13
-
-    100%|██████████| 64/64 [00:00<00:00, 127.74it/s]
-      0%|          | 0/64 [00:00<?, ?it/s]
-
     ...
     ...
-
-     500/1227 [===========>..................] - ETA: 6:06
-
-    100%|██████████| 64/64 [00:00<00:00, 130.64it/s]
-      0%|          | 0/64 [00:00<?, ?it/s]
-
-    ...
-    ...
-
-    1000/1227 [=======================>......] - ETA: 1:52
-
-    100%|██████████| 64/64 [00:00<00:00, 133.36it/s]
-      0%|          | 0/64 [00:00<?, ?it/s]
-
-    ...
-    ...
-
     1227/1227 [============================>.] - ETA: 0s
 
     100%|██████████| 17/17 [00:00<00:00, 126.79it/s]
@@ -605,12 +575,13 @@ temp_pred = model_conv.predict_generator(testDataGenerator,steps = pivot_test_da
 
     1228/1227 [==============================] - 606s 493ms/step
 
-
 ```python
 temp_pred.shape
 ```
 
 > (78545, 6)
+
+## Prediction
 
 ```python
 submission_df = pivot_test_data
@@ -682,3 +653,10 @@ print(submission_df.head(20))
 ```python
 submission_df.to_csv('submission.csv', index=False)
 ```
+
+## Download prediction.csv
+
+> [Google Drive](https://drive.google.com/file/d/19BYik_stYwcsqbLUBCfHXAMmihgGabRR/view?usp=sharing)<br/>
+> [OneDrive](https://1drv.ms/u/s!AjWO46TOTFj4p1jK3pJsEgRXqIFZ?e=DITAGb)<br/>
+> [Mediafire](http://www.mediafire.com/file/6s9b4c7scvdw3q3/rsna-intracranial-hemorrhage-detection-prediction.zip/file)<br/>
+> [Mega](https://mega.nz/#!CuR1FYDJ!CeWXGdC5PIRYDZCwVKAwemCqEPpUsjG08tjAUgjgCTk)<br/>
