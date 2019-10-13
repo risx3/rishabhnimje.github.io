@@ -4,5 +4,3 @@ main:
     url: /about/
   - title: "Projects"
     url: /machine-learning/
-  - title: "Resume"
-    url: /resume/
