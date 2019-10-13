@@ -73,17 +73,17 @@ train_data = pd.read_csv('/kaggle/input/rsna-intracranial-hemorrhage-detection/s
 print(train_data.head(10))
 ```
 
-  _                             ID  Label
-  0          ID_63eb1e259_epidural      0
-  1  ID_63eb1e259_intraparenchymal      0
-  2  ID_63eb1e259_intraventricular      0
-  3      ID_63eb1e259_subarachnoid      0
-  4          ID_63eb1e259_subdural      0
-  5               ID_63eb1e259_any      0
-  6          ID_2669954a7_epidural      0
-  7  ID_2669954a7_intraparenchymal      0
-  8  ID_2669954a7_intraventricular      0
-  9      ID_2669954a7_subarachnoid      0
+    _                             ID  Label
+    0          ID_63eb1e259_epidural      0
+    1  ID_63eb1e259_intraparenchymal      0
+    2  ID_63eb1e259_intraventricular      0
+    3      ID_63eb1e259_subarachnoid      0
+    4          ID_63eb1e259_subdural      0
+    5               ID_63eb1e259_any      0
+    6          ID_2669954a7_epidural      0
+    7  ID_2669954a7_intraparenchymal      0
+    8  ID_2669954a7_intraventricular      0
+    9      ID_2669954a7_subarachnoid      0
 
 ### Splitting Data
 
@@ -96,17 +96,17 @@ del splitData
 print(train_data.head(10))
 ```
 
-  _   Label             class      fileName
-  0      0          epidural  ID_63eb1e259
-  1      0  intraparenchymal  ID_63eb1e259
-  2      0  intraventricular  ID_63eb1e259
-  3      0      subarachnoid  ID_63eb1e259
-  4      0          subdural  ID_63eb1e259
-  5      0               any  ID_63eb1e259
-  6      0          epidural  ID_2669954a7
-  7      0  intraparenchymal  ID_2669954a7
-  8      0  intraventricular  ID_2669954a7
-  9      0      subarachnoid  ID_2669954a7
+    _   Label             class      fileName
+    0      0          epidural  ID_63eb1e259
+    1      0  intraparenchymal  ID_63eb1e259
+    2      0  intraventricular  ID_63eb1e259
+    3      0      subarachnoid  ID_63eb1e259
+    4      0          subdural  ID_63eb1e259
+    5      0               any  ID_63eb1e259
+    6      0          epidural  ID_2669954a7
+    7      0  intraparenchymal  ID_2669954a7
+    8      0  intraventricular  ID_2669954a7
+    9      0      subarachnoid  ID_2669954a7
 
 
 ```python
@@ -115,29 +115,29 @@ pivot_train_data = pd.DataFrame(pivot_train_data.to_records())
 print(pivot_train_data.head(10))
 ```
 
-  _       fileName  any  epidural  intraparenchymal  intraventricular  \
-  0  ID_000039fa0    0         0                 0                 0
-  1  ID_00005679d    0         0                 0                 0
-  2  ID_00008ce3c    0         0                 0                 0
-  3  ID_0000950d7    0         0                 0                 0
-  4  ID_0000aee4b    0         0                 0                 0
-  5  ID_0000f1657    0         0                 0                 0
-  6  ID_000178e76    0         0                 0                 0
-  7  ID_00019828f    0         0                 0                 0
-  8  ID_0001dcc25    0         0                 0                 0
-  9  ID_0001de0e8    0         0                 0                 0
+    _       fileName  any  epidural  intraparenchymal  intraventricular  \
+    0  ID_000039fa0    0         0                 0                 0
+    1  ID_00005679d    0         0                 0                 0
+    2  ID_00008ce3c    0         0                 0                 0
+    3  ID_0000950d7    0         0                 0                 0
+    4  ID_0000aee4b    0         0                 0                 0
+    5  ID_0000f1657    0         0                 0                 0
+    6  ID_000178e76    0         0                 0                 0
+    7  ID_00019828f    0         0                 0                 0
+    8  ID_0001dcc25    0         0                 0                 0
+    9  ID_0001de0e8    0         0                 0                 0
 
-  _   subarachnoid  subdural
-  0             0         0
-  1             0         0
-  2             0         0
-  3             0         0
-  4             0         0
-  5             0         0
-  6             0         0
-  7             0         0
-  8             0         0
-  9             0         0
+    _   subarachnoid  subdural
+    0             0         0
+    1             0         0
+    2             0         0
+    3             0         0
+    4             0         0
+    5             0         0
+    6             0         0
+    7             0         0
+    8             0         0
+    9             0         0
 
 ## Data Analysis
 
@@ -549,25 +549,25 @@ testDataGenerator = generateTestImageData(test_files)
 temp_pred = model_conv.predict_generator(testDataGenerator,steps = pivot_test_data.shape[0]/batch_size,verbose = True)
 ```
 
-  100%|██████████| 64/64 [00:00<00:00, 121.64it/s]
-  100%|██████████| 64/64 [00:00<00:00, 106.34it/s]
-  100%|██████████| 64/64 [00:00<00:00, 108.99it/s]
-  100%|██████████| 64/64 [00:00<00:00, 105.13it/s]
-  55% |█████▍    | 35/64 [00:00<00:00, 110.47it/s]
+    100%|██████████| 64/64 [00:00<00:00, 121.64it/s]
+    100%|██████████| 64/64 [00:00<00:00, 106.34it/s]
+    100%|██████████| 64/64 [00:00<00:00, 108.99it/s]
+    100%|██████████| 64/64 [00:00<00:00, 105.13it/s]
+    55% |█████▍    | 35/64 [00:00<00:00, 110.47it/s]
 
-  1/1227   [..............................] - ETA: 56:19
-  70% |███████   | 45/64 [00:00<00:00, 105.82it/s]
-  3/1227   [..............................] - ETA: 19:08
-  100%|██████████| 64/64 [00:00<00:00, 106.76it/s]
-  0%  |          | 0/64 [00:00<?, ?it/s]
-  ...
-  ...
-  ...
-  ...
-  1227/1227 [============================>.] - ETA: 0s
-  100%|██████████| 17/17 [00:00<00:00, 126.79it/s]
-  31% |███▏      | 20/64 [00:00<00:00, 192.64it/s]
-  1228/1227 [==============================] - 606s 493ms/step
+    1/1227   [..............................] - ETA: 56:19
+    70% |███████   | 45/64 [00:00<00:00, 105.82it/s]
+    3/1227   [..............................] - ETA: 19:08
+    100%|██████████| 64/64 [00:00<00:00, 106.76it/s]
+    0%  |          | 0/64 [00:00<?, ?it/s]
+    ...
+    ...
+    ...
+    ...
+    1227/1227 [============================>.] - ETA: 0s
+    100%|██████████| 17/17 [00:00<00:00, 126.79it/s]
+    31% |███▏      | 20/64 [00:00<00:00, 192.64it/s]
+    1228/1227 [==============================] - 606s 493ms/step
 
 ```python
 temp_pred.shape
