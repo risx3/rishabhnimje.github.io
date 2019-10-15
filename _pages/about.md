@@ -5,5 +5,5 @@ header:
   image: #"/images/zakim.jpg"
 ---
 
-Resume - still not designed!!!
-[Resume](/_pages/resume-index.html)
+Resume - still not designed!!!<br>
+[Resume](/_pages/resume.html)
