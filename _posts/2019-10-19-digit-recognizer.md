@@ -258,7 +258,7 @@ train.head()
 <p>5 rows × 785 columns</p>
 </div>
 
-## Count 
+## Count for each digit
 
 ```python
 z_train = Counter(train['label'])
@@ -283,6 +283,7 @@ sns.countplot(train['label'])
 
 ![png](/images/digit-recognizer/digit-recognizer_4_1.png)
 
+## Reshaping Data
 
 ```python
 print(test.shape)
@@ -480,11 +481,6 @@ plt.show()
 
 ## Normalising The Data
 
-> [Google Drive](https://drive.google.com/file/d/19BYik_stYwcsqbLUBCfHXAMmihgGabRR/view?usp=sharing)<br/>
-> [OneDrive](https://1drv.ms/u/s!AjWO46TOTFj4p1jK3pJsEgRXqIFZ?e=DITAGb)<br/>
-> [Mediafire](http://www.mediafire.com/file/6s9b4c7scvdw3q3/rsna-intracranial-hemorrhage-detection-prediction.zip/file)<br/>
-> [Mega](https://mega.nz/#!CuR1FYDJ!CeWXGdC5PIRYDZCwVKAwemCqEPpUsjG08tjAUgjgCTk)<br/>
-
 ```python
 x_train = x_train/255.0
 x_test = x_test/255.0
@@ -496,7 +492,7 @@ y_train
 
 > array([1, 0, 1, ..., 7, 6, 9], dtype=int32)
 
-## Printing the shape of the Datasets
+## Shape of the Datasets
 
 ```python
 print('x_train shape:', x_train.shape)
@@ -507,7 +503,7 @@ print(x_test.shape[0], 'test samples')
 > x_train shape: (42000, 784)<br>
 > 42000 train samples<br>
 > 28000 test samples<br>
-    
+
 > ## Reshape our data
 
 ```python
@@ -531,8 +527,10 @@ epochs = 20
 input_shape = (28, 28, 1)
 ```
 
+### convert class vectors to binary class matrices One Hot Encoding
+
 ```python
-# convert class vectors to binary class matrices One Hot Encoding
+
 y_train = keras.utils.to_categorical(y_train, num_classes)
 X_train, X_val, Y_train, Y_val = train_test_split(X_train, y_train, test_size = 0.1, random_state=42)
 ```
