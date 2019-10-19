@@ -4,7 +4,7 @@ date: 2019-10-19
 tags: [Kaggle, Digit Recognition, Keras, Machine Learning, ]
 excerpt: "Learn computer vision fundamentals with the famous MNIST data"
 header:
-  overlay_image: "/images/digit-recognizer/home-page.jpg"
+  overlay_image: "/images/digit-recognizer/home-page.png"
   caption: #
 mathjax: "true"
 ---
@@ -28,12 +28,13 @@ For example, pixel31 indicates the pixel that is in the fourth column from the l
 
 Visually, if we omit the "pixel" prefix, the pixels make up the image like this:
 
-> 000 001 002 003 ... 026 027<br>
-> 028 029 030 031 ... 054 055<br>
-> 056 057 058 059 ... 082 083<br>
->  |   |   |   |  ...  |   |<br>
-> 728 729 730 731 ... 754 755<br>
-> 756 757 758 759 ... 782 783 <br>
+  000 001 002 003 ... 026 027
+  028 029 030 031 ... 054 055
+  056 057 058 059 ... 082 083
+   |   |   |   |  ...  |   |
+  728 729 730 731 ... 754 755
+  756 757 758 759 ... 782 783
+
 The test data set, (test.csv), is the same as the training set, except that it does not contain the "label" column.
 
 Your submission file should be in the following format: For each of the 28000 images in the test set, output a single line containing the ImageId and the digit you predict. For example, if you predict that the first image is of a 3, the second image is of a 7, and the third image is of a 8, then your submission file would look like:
@@ -41,8 +42,9 @@ Your submission file should be in the following format: For each of the 28000 im
 > ImageId,Label<br>
 > 1,3<br>
 > 2,7<br>
-> 3,8<br> 
+> 3,8<br>
 (27997 more lines)<br>
+
 The evaluation metric for this contest is the categorization accuracy, or the proportion of test images that are correctly classified. For example, a categorization accuracy of 0.97 indicates that you have correctly classified all but 3% of the images.
 
 ## Files
@@ -255,6 +257,8 @@ train.head()
 </table>
 <p>5 rows × 785 columns</p>
 </div>
+
+## Count 
 
 ```python
 z_train = Counter(train['label'])
@@ -474,6 +478,13 @@ plt.show()
 
 ![png](/images/digit-recognizer/digit-recognizer_7_0.png)
 
+## Normalising The Data
+
+> [Google Drive](https://drive.google.com/file/d/19BYik_stYwcsqbLUBCfHXAMmihgGabRR/view?usp=sharing)<br/>
+> [OneDrive](https://1drv.ms/u/s!AjWO46TOTFj4p1jK3pJsEgRXqIFZ?e=DITAGb)<br/>
+> [Mediafire](http://www.mediafire.com/file/6s9b4c7scvdw3q3/rsna-intracranial-hemorrhage-detection-prediction.zip/file)<br/>
+> [Mega](https://mega.nz/#!CuR1FYDJ!CeWXGdC5PIRYDZCwVKAwemCqEPpUsjG08tjAUgjgCTk)<br/>
+
 ```python
 x_train = x_train/255.0
 x_test = x_test/255.0
@@ -497,7 +508,7 @@ print(x_test.shape[0], 'test samples')
 > 42000 train samples<br>
 > 28000 test samples<br>
     
-> ## Reshape
+> ## Reshape our data
 
 ```python
 X_train = x_train.reshape(x_train.shape[0], 28, 28,1)
@@ -525,6 +536,8 @@ input_shape = (28, 28, 1)
 y_train = keras.utils.to_categorical(y_train, num_classes)
 X_train, X_val, Y_train, Y_val = train_test_split(X_train, y_train, test_size = 0.1, random_state=42)
 ```
+
+## Creating Linear Model
 
 ```python
 model = Sequential()
@@ -811,25 +824,9 @@ plt.matshow(first_layer_activation[0, :, :, 4], cmap='viridis')
 ![png](/images/digit-recognizer/digit-recognizer_27_2.png)
 
 ```python
-model.layers[:-1]# Droping The Last Dense Layer
+# Droping The Last Dense Layer
+model.layers[:-1]
 ```
-
-
-    [<keras.layers.convolutional.Conv2D at 0x7fcbbf95c550>,
-     <keras.layers.convolutional.Conv2D at 0x7fcbe4f702e8>,
-     <keras.layers.pooling.MaxPooling2D at 0x7fcbbeeef9e8>,
-     <keras.layers.core.Dropout at 0x7fcbbf95ca20>,
-     <keras.layers.convolutional.Conv2D at 0x7fcbbeeefbe0>,
-     <keras.layers.convolutional.Conv2D at 0x7fcbbf95c940>,
-     <keras.layers.pooling.MaxPooling2D at 0x7fcbe6281f98>,
-     <keras.layers.core.Dropout at 0x7fcbbee711d0>,
-     <keras.layers.convolutional.Conv2D at 0x7fcbbee137b8>,
-     <keras.layers.core.Dropout at 0x7fcbbee13518>,
-     <keras.layers.core.Flatten at 0x7fcbbee4b240>,
-     <keras.layers.core.Dense at 0x7fcbbee4bf98>,
-     <keras.layers.normalization.BatchNormalization at 0x7fcbbee4bfd0>,
-     <keras.layers.core.Dropout at 0x7fcbbed60d68>]
-
 
 ```python
 layer_names = []
@@ -934,12 +931,12 @@ for layer_name, layer_activation in zip(layer_names, activations):
 
 ![png](/images/digit-recognizer/digit-recognizer_31_2.png)
 
-## Classifcation Report
+## Prediction
 
 ```python
 # Predict the values from the validation dataset
 Y_pred = model.predict(X_val)
-# Convert predictions classes to one hot vectors 
+# Convert predictions classes to one hot vectors
 Y_pred_classes = np.argmax(Y_pred, axis = 1)
 Y_true_classes = np.argmax(Y_val, axis = 1)
 ```
@@ -984,10 +981,6 @@ submissions.to_csv("prediction.csv", index=False, header=True)
 ```python
 model.save('my_model_1.h5')
 json_string = model.to_json()
-```
-
-```python
-
 ```
 
 ## Download prediction.csv
