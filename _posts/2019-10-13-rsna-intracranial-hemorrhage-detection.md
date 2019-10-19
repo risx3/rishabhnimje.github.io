@@ -5,7 +5,7 @@ tags: [Kaggle, Hemorrhage Detection, RSNA, Machine Learning, Keras, Tensorflow, 
 excerpt: "Identify acute intracranial hemorrhage and its subtypes"
 header:
   overlay_image: "/images/rsna-intracranial-hemorrhage-detection/home-page.png"
-  caption: #"Photo by Arget on Unsplash"
+  caption: #
 mathjax: "true"
 ---
 

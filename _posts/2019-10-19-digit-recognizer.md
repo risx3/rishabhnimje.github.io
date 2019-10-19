@@ -2,12 +2,57 @@
 title: "Digit Recognizer"
 date: 2019-10-19
 tags: [Kaggle, Digit Recognition, Keras, Machine Learning, ]
-excerpt: "Can you detect fraud from customer transactions?"
+excerpt: "Learn computer vision fundamentals with the famous MNIST data"
 header:
-  overlay_image: "/images/ieee-cis-fraud-detection/home-page.jpg"
-  caption: "Photo by Arget on Unsplash"
+  overlay_image: "/images/digit-recognizer/home-page.jpg"
+  caption: #
 mathjax: "true"
 ---
+
+## Overview
+
+MNIST ("Modified National Institute of Standards and Technology") is the de facto “hello world” dataset of computer vision. Since its release in 1999, this classic dataset of handwritten images has served as the basis for benchmarking classification algorithms. As new machine learning techniques emerge, MNIST remains a reliable resource for researchers and learners alike.<br>
+In this project, our goal is to correctly identify digits from a dataset of tens of thousands of handwritten images.
+
+## Data Description
+
+The data files train.csv and test.csv contain gray-scale images of hand-drawn digits, from zero through nine.
+
+Each image is 28 pixels in height and 28 pixels in width, for a total of 784 pixels in total. Each pixel has a single pixel-value associated with it, indicating the lightness or darkness of that pixel, with higher numbers meaning darker. This pixel-value is an integer between 0 and 255, inclusive.
+
+The training data set, (train.csv), has 785 columns. The first column, called "label", is the digit that was drawn by the user. The rest of the columns contain the pixel-values of the associated image.
+
+Each pixel column in the training set has a name like pixelx, where x is an integer between 0 and 783, inclusive. To locate this pixel on the image, suppose that we have decomposed x as x = i * 28 + j, where i and j are integers between 0 and 27, inclusive. Then pixelx is located on row i and column j of a 28 x 28 matrix, (indexing by zero).
+
+For example, pixel31 indicates the pixel that is in the fourth column from the left, and the second row from the top, as in the ascii-diagram below.
+
+Visually, if we omit the "pixel" prefix, the pixels make up the image like this:
+
+> 000 001 002 003 ... 026 027<br>
+> 028 029 030 031 ... 054 055<br>
+> 056 057 058 059 ... 082 083<br>
+>  |   |   |   |  ...  |   |<br>
+> 728 729 730 731 ... 754 755<br>
+> 756 757 758 759 ... 782 783 <br>
+The test data set, (test.csv), is the same as the training set, except that it does not contain the "label" column.
+
+Your submission file should be in the following format: For each of the 28000 images in the test set, output a single line containing the ImageId and the digit you predict. For example, if you predict that the first image is of a 3, the second image is of a 7, and the third image is of a 8, then your submission file would look like:
+
+> ImageId,Label<br>
+> 1,3<br>
+> 2,7<br>
+> 3,8<br> 
+(27997 more lines)<br>
+The evaluation metric for this contest is the categorization accuracy, or the proportion of test images that are correctly classified. For example, a categorization accuracy of 0.97 indicates that you have correctly classified all but 3% of the images.
+
+## Files
+
+* test.csv
+* train.csv
+
+You can find the dataset [here](https://www.kaggle.com/c/digit-recognizer/data).
+
+## So let's begin here...
 
 ```python
 import numpy as np
@@ -32,7 +77,6 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 > /kaggle/input/digit-recognizer/train.csv<br>
 > /kaggle/input/digit-recognizer/sample_submission.csv<br>
 > /kaggle/input/digit-recognizer/test.csv<br>
-    
 
 ## Load Data
 
@@ -44,7 +88,6 @@ train.head()
 ```
 
 > (42000, 785)
-
 
 <div>
 <style scoped>
@@ -213,16 +256,10 @@ train.head()
 <p>5 rows × 785 columns</p>
 </div>
 
-
-
-
 ```python
 z_train = Counter(train['label'])
 z_train
 ```
-
-
-
 
     Counter({1: 4684,
              0: 4132,
@@ -236,22 +273,11 @@ z_train
              6: 4137})
 
 
-
-
 ```python
 sns.countplot(train['label'])
 ```
 
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fcbe5108a58>
-
-
-
-
-![png](digit-recognizer_files/digit-recognizer_4_1.png)
-
+![png](/images/digit-recognizer/digit-recognizer_4_1.png)
 
 
 ```python
@@ -259,10 +285,7 @@ print(test.shape)
 test.head()
 ```
 
-    (28000, 784)
-    
-
-
+> (28000, 784)
 
 
 <div>
@@ -432,15 +455,11 @@ test.head()
 <p>5 rows × 784 columns</p>
 </div>
 
-
-
-
 ```python
 x_train = (train.iloc[:,1:].values).astype('float32') # all pixel values
 y_train = train.iloc[:,0].values.astype('int32') # only labels
 x_test = test.values.astype('float32')
 ```
-
 
 ```python
 %matplotlib inline
@@ -453,30 +472,20 @@ for i in range(40):
 plt.show()
 ```
 
-
-![png](digit-recognizer_files/digit-recognizer_7_0.png)
-
-
+![png](/images/digit-recognizer/digit-recognizer_7_0.png)
 
 ```python
 x_train = x_train/255.0
 x_test = x_test/255.0
 ```
 
-
 ```python
 y_train
 ```
 
-
-
-
-    array([1, 0, 1, ..., 7, 6, 9], dtype=int32)
-
-
+> array([1, 0, 1, ..., 7, 6, 9], dtype=int32)
 
 ## Printing the shape of the Datasets
-
 
 ```python
 print('x_train shape:', x_train.shape)
@@ -484,13 +493,11 @@ print(x_train.shape[0], 'train samples')
 print(x_test.shape[0], 'test samples')
 ```
 
-    x_train shape: (42000, 784)
-    42000 train samples
-    28000 test samples
+> x_train shape: (42000, 784)<br>
+> 42000 train samples<br>
+> 28000 test samples<br>
     
-
 > ## Reshape
-
 
 ```python
 X_train = x_train.reshape(x_train.shape[0], 28, 28,1)
@@ -498,7 +505,6 @@ X_test = x_test.reshape(x_test.shape[0], 28, 28,1)
 ```
 
 ## Implementing Keras
-
 
 ```python
 import keras
@@ -514,16 +520,11 @@ epochs = 20
 input_shape = (28, 28, 1)
 ```
 
-    Using TensorFlow backend.
-    
-
-
 ```python
 # convert class vectors to binary class matrices One Hot Encoding
 y_train = keras.utils.to_categorical(y_train, num_classes)
 X_train, X_val, Y_train, Y_val = train_test_split(X_train, y_train, test_size = 0.1, random_state=42)
 ```
-
 
 ```python
 model = Sequential()
@@ -567,7 +568,6 @@ datagen = ImageDataGenerator(
         vertical_flip=False)  # randomly flip images
 ```
 
-
 ```python
 model.summary()
 ```
@@ -610,7 +610,6 @@ model.summary()
     Trainable params: 730,346
     Non-trainable params: 256
     _________________________________________________________________
-    
 
 
 ```python
@@ -624,12 +623,6 @@ h = model.fit_generator(datagen.flow(X_train,Y_train, batch_size=batch_size),
     Epoch 1/20
     590/590 [==============================] - 15s 26ms/step - loss: 0.3556 - accuracy: 0.8882 - val_loss: 0.0583 - val_accuracy: 0.9817
     Epoch 2/20
-     10/590 [..............................] - ETA: 11s - loss: 0.1427 - accuracy: 0.9563
-
-    /opt/conda/lib/python3.6/site-packages/keras/callbacks/callbacks.py:1042: RuntimeWarning: Reduce LR on plateau conditioned on metric `val_acc` which is not available. Available metrics are: val_loss,val_accuracy,loss,accuracy,lr
-      (self.monitor, ','.join(list(logs.keys()))), RuntimeWarning
-    
-
     590/590 [==============================] - 11s 19ms/step - loss: 0.1105 - accuracy: 0.9662 - val_loss: 0.0560 - val_accuracy: 0.9838
     Epoch 3/20
     590/590 [==============================] - 12s 20ms/step - loss: 0.0859 - accuracy: 0.9731 - val_loss: 0.0278 - val_accuracy: 0.9917
@@ -667,20 +660,17 @@ h = model.fit_generator(datagen.flow(X_train,Y_train, batch_size=batch_size),
     590/590 [==============================] - 12s 20ms/step - loss: 0.0341 - accuracy: 0.9898 - val_loss: 0.0172 - val_accuracy: 0.9950
     Epoch 20/20
     590/590 [==============================] - 16s 27ms/step - loss: 0.0334 - accuracy: 0.9905 - val_loss: 0.0169 - val_accuracy: 0.9955
-    
+
 
 ## Basic Simple Plot And Evaluation
-
 
 ```python
 final_loss, final_acc = model.evaluate(X_val, Y_val, verbose=0)
 print("Final loss: {0:.6f}, final accuracy: {1:.6f}".format(final_loss, final_acc))
 ```
 
-    Final loss: 0.016873, final accuracy: 0.995476
+> Final loss: 0.016873, final accuracy: 0.995476
     
-
-
 ```python
 # Look at confusion matrix 
 #Note, this code is taken straight from the SKLEARN website, an nice way of viewing confusion matrix.
@@ -724,17 +714,13 @@ confusion_mtx = confusion_matrix(Y_true, Y_pred_classes)
 plot_confusion_matrix(confusion_mtx, classes = range(10))
 ```
 
-
-![png](digit-recognizer_files/digit-recognizer_22_0.png)
-
-
+![png](/images/digit-recognizer/digit-recognizer_22_0.png)
 
 ```python
 print(h.history.keys())
 ```
 
-    dict_keys(['val_loss', 'val_accuracy', 'loss', 'accuracy', 'lr'])
-    
+> dict_keys(['val_loss', 'val_accuracy', 'loss', 'accuracy', 'lr'])
 
 
 ```python
@@ -756,14 +742,9 @@ plt.legend()
 plt.show()
 ```
 
+![png](/images/digit-recognizer/digit-recognizer_24_0.png)
 
-![png](digit-recognizer_files/digit-recognizer_24_0.png)
-
-
-
-![png](digit-recognizer_files/digit-recognizer_24_1.png)
-
-
+![png](/images/digit-recognizer/digit-recognizer_24_1.png)
 
 ```python
 # Errors are difference between predicted labels and true labels
@@ -806,9 +787,7 @@ most_important_errors = sorted_dela_errors[-6:]
 display_errors(most_important_errors, X_val_errors, Y_pred_classes_errors, Y_true_errors)
 ```
 
-
-![png](digit-recognizer_files/digit-recognizer_25_0.png)
-
+![png](/images/digit-recognizer/digit-recognizer_25_0.png)
 
 
 ```python
@@ -816,16 +795,7 @@ test_im = X_train[154]
 plt.imshow(test_im.reshape(28,28), cmap='viridis', interpolation='none')
 ```
 
-
-
-
-    <matplotlib.image.AxesImage at 0x7fcb51ebc748>
-
-
-
-
-![png](digit-recognizer_files/digit-recognizer_26_1.png)
-
+![png](/images/digit-recognizer/digit-recognizer_26_1.png)
 
 
 ```python
@@ -838,27 +808,11 @@ first_layer_activation = activations[0]
 plt.matshow(first_layer_activation[0, :, :, 4], cmap='viridis')
 ```
 
-    /opt/conda/lib/python3.6/site-packages/ipykernel_launcher.py:3: UserWarning: Update your `Model` call to the Keras 2 API: `Model(inputs=Tensor("co..., outputs=[<tf.Tenso...)`
-      This is separate from the ipykernel package so we can avoid doing imports until
-    
-
-
-
-
-    <matplotlib.image.AxesImage at 0x7fcb51e95da0>
-
-
-
-
-![png](digit-recognizer_files/digit-recognizer_27_2.png)
-
-
+![png](/images/digit-recognizer/digit-recognizer_27_2.png)
 
 ```python
 model.layers[:-1]# Droping The Last Dense Layer
 ```
-
-
 
 
     [<keras.layers.convolutional.Conv2D at 0x7fcbbf95c550>,
@@ -875,8 +829,6 @@ model.layers[:-1]# Droping The Last Dense Layer
      <keras.layers.core.Dense at 0x7fcbbee4bf98>,
      <keras.layers.normalization.BatchNormalization at 0x7fcbbee4bfd0>,
      <keras.layers.core.Dropout at 0x7fcbbed60d68>]
-
-
 
 
 ```python
@@ -908,26 +860,13 @@ for layer_name, layer_activation in zip(layer_names, activations):
         plt.imshow(display_grid, aspect='auto', cmap='viridis')
 ```
 
-    /opt/conda/lib/python3.6/site-packages/ipykernel_launcher.py:15: RuntimeWarning: invalid value encountered in true_divide
-      from ipykernel import kernelapp as app
-    
+![png](/images/digit-recognizer/digit-recognizer_29_1.png)
 
+![png](/images/digit-recognizer/digit-recognizer_29_2.png)
 
-![png](digit-recognizer_files/digit-recognizer_29_1.png)
+![png](/images/digit-recognizer/digit-recognizer_29_3.png)
 
-
-
-![png](digit-recognizer_files/digit-recognizer_29_2.png)
-
-
-
-![png](digit-recognizer_files/digit-recognizer_29_3.png)
-
-
-
-![png](digit-recognizer_files/digit-recognizer_29_4.png)
-
-
+![png](/images/digit-recognizer/digit-recognizer_29_4.png)
 
 ```python
 layer_names = []
@@ -958,18 +897,9 @@ for layer_name, layer_activation in zip(layer_names, activations):
         plt.imshow(display_grid, aspect='auto', cmap='viridis')
 ```
 
-    /opt/conda/lib/python3.6/site-packages/ipykernel_launcher.py:15: RuntimeWarning: invalid value encountered in true_divide
-      from ipykernel import kernelapp as app
-    
+![png](/images/digit-recognizer/digit-recognizer_30_1.png)
 
-
-![png](digit-recognizer_files/digit-recognizer_30_1.png)
-
-
-
-![png](digit-recognizer_files/digit-recognizer_30_2.png)
-
-
+![png](/images/digit-recognizer/digit-recognizer_30_2.png)
 
 ```python
 layer_names = []
@@ -1000,20 +930,11 @@ for layer_name, layer_activation in zip(layer_names, activations):
         plt.imshow(display_grid, aspect='auto', cmap='viridis')
 ```
 
-    /opt/conda/lib/python3.6/site-packages/ipykernel_launcher.py:15: RuntimeWarning: invalid value encountered in true_divide
-      from ipykernel import kernelapp as app
-    
+![png](/images/digit-recognizer/digit-recognizer_31_1.png)
 
-
-![png](digit-recognizer_files/digit-recognizer_31_1.png)
-
-
-
-![png](digit-recognizer_files/digit-recognizer_31_2.png)
-
+![png](/images/digit-recognizer/digit-recognizer_31_2.png)
 
 ## Classifcation Report
-
 
 ```python
 # Predict the values from the validation dataset
@@ -1023,18 +944,11 @@ Y_pred_classes = np.argmax(Y_pred, axis = 1)
 Y_true_classes = np.argmax(Y_val, axis = 1)
 ```
 
-
 ```python
 Y_pred_classes[:5], Y_true_classes[:5]
 ```
 
-
-
-
-    (array([8, 1, 9, 9, 8]), array([8, 1, 9, 9, 8]))
-
-
-
+> (array([8, 1, 9, 9, 8]), array([8, 1, 9, 9, 8]))
 
 ```python
 from sklearn.metrics import classification_report
@@ -1059,8 +973,6 @@ print(classification_report(Y_true_classes, Y_pred_classes, target_names=target_
        macro avg       1.00      1.00      1.00      4200
     weighted avg       1.00      1.00      1.00      4200
     
-    
-
 
 ```python
 predicted_classes = model.predict_classes(X_test)
@@ -1069,13 +981,18 @@ submissions=pd.DataFrame({"ImageId": list(range(1,len(predicted_classes)+1)),
 submissions.to_csv("prediction.csv", index=False, header=True)
 ```
 
-
 ```python
 model.save('my_model_1.h5')
 json_string = model.to_json()
 ```
 
-
 ```python
 
 ```
+
+## Download prediction.csv
+
+> [Google Drive](https://drive.google.com/file/d/19BYik_stYwcsqbLUBCfHXAMmihgGabRR/view?usp=sharing)<br/>
+> [OneDrive](https://1drv.ms/u/s!AjWO46TOTFj4p1jK3pJsEgRXqIFZ?e=DITAGb)<br/>
+> [Mediafire](http://www.mediafire.com/file/6s9b4c7scvdw3q3/rsna-intracranial-hemorrhage-detection-prediction.zip/file)<br/>
+> [Mega](https://mega.nz/#!CuR1FYDJ!CeWXGdC5PIRYDZCwVKAwemCqEPpUsjG08tjAUgjgCTk)<br/>
