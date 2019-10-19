@@ -28,21 +28,21 @@ For example, pixel31 indicates the pixel that is in the fourth column from the l
 
 Visually, if we omit the "pixel" prefix, the pixels make up the image like this:
 
-  000 001 002 003 ... 026 027
-  028 029 030 031 ... 054 055
-  056 057 058 059 ... 082 083
-   |   |   |   |  ...  |   |
-  728 729 730 731 ... 754 755
-  756 757 758 759 ... 782 783
+  000 001 002 003 ... 026 027<br>
+  028 029 030 031 ... 054 055<br>
+  056 057 058 059 ... 082 083<br>
+   |   |   |   |  ...  |   |<br>
+  728 729 730 731 ... 754 755<br>
+  756 757 758 759 ... 782 783<br>
 
 The test data set, (test.csv), is the same as the training set, except that it does not contain the "label" column.
 
 Your submission file should be in the following format: For each of the 28000 images in the test set, output a single line containing the ImageId and the digit you predict. For example, if you predict that the first image is of a 3, the second image is of a 7, and the third image is of a 8, then your submission file would look like:
 
-> ImageId,Label<br>
-> 1,3<br>
-> 2,7<br>
-> 3,8<br>
+ImageId,Label<br>
+1,3<br>
+2,7<br>
+3,8<br>
 (27997 more lines)<br>
 
 The evaluation metric for this contest is the categorization accuracy, or the proportion of test images that are correctly classified. For example, a categorization accuracy of 0.97 indicates that you have correctly classified all but 3% of the images.
@@ -479,7 +479,7 @@ plt.show()
 
 ![png](/images/digit-recognizer/digit-recognizer_7_0.png)
 
-## Normalising The Data
+## Normalizing The Data
 
 ```python
 x_train = x_train/255.0
@@ -527,10 +527,9 @@ epochs = 20
 input_shape = (28, 28, 1)
 ```
 
-### convert class vectors to binary class matrices One Hot Encoding
+### convert class vectors to binary class matrices
 
 ```python
-
 y_train = keras.utils.to_categorical(y_train, num_classes)
 X_train, X_val, Y_train, Y_val = train_test_split(X_train, y_train, test_size = 0.1, random_state=42)
 ```
@@ -673,7 +672,7 @@ h = model.fit_generator(datagen.flow(X_train,Y_train, batch_size=batch_size),
     590/590 [==============================] - 16s 27ms/step - loss: 0.0334 - accuracy: 0.9905 - val_loss: 0.0169 - val_accuracy: 0.9955
 
 
-## Basic Simple Plot And Evaluation
+## Basic Plot And Evaluation
 
 ```python
 final_loss, final_acc = model.evaluate(X_val, Y_val, verbose=0)
@@ -683,8 +682,8 @@ print("Final loss: {0:.6f}, final accuracy: {1:.6f}".format(final_loss, final_ac
 > Final loss: 0.016873, final accuracy: 0.995476
     
 ```python
-# Look at confusion matrix 
-#Note, this code is taken straight from the SKLEARN website, an nice way of viewing confusion matrix.
+# Look at confusion matrix
+# Note, this code is taken straight from the SKLEARN website, an nice way of viewing confusion matrix.
 def plot_confusion_matrix(cm, classes,
                           normalize=False,
                           title='Confusion matrix',
@@ -732,7 +731,6 @@ print(h.history.keys())
 ```
 
 > dict_keys(['val_loss', 'val_accuracy', 'loss', 'accuracy', 'lr'])
-
 
 ```python
 accuracy = h.history['accuracy']
