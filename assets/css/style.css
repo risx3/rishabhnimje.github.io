@@ -325,7 +325,7 @@ ul.list-check li::before {
 
 
 #home {
-	background: url(../images/home2.jpg) no-repeat center center;
+	background: url(/images/resume/home2.jpg) no-repeat center center;
 	-webkit-background-attachment: fixed;
     background-attachment: fixed;
 	background-color: #222;
@@ -1272,7 +1272,7 @@ Resume Timeline
 
 /* === Facts Section === */
 .facts-section {
-    background: url(../../assets/images/counter-bg.jpg) no-repeat center center;
+    background: url(/images/resume/counter-bg.jpg) no-repeat center center;
     background-attachment: fixed;
     background-size: cover;
     color: #fff;  
@@ -1625,7 +1625,7 @@ Icon for all respective meta
 
 #pre-status,
 .preload-placeholder {
-	background-image: url(../images/preloader.gif);
+	background-image: url(/images/resume/preloader.gif);
 	background-position: center;
 	background-repeat: no-repeat;
 	height: 200px;
@@ -1651,7 +1651,7 @@ Icon for all respective meta
 /* === Home Page Two === */
 
 #homeTwo {
-    background: url(../images/home-2.jpg) no-repeat center center;
+    background: url(/images/resume/home2.jpg) no-repeat center center;
     background-color: #222;
     background-size: cover;
     padding: 0;
