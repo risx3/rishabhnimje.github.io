@@ -131,14 +131,13 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
     /kaggle/input/house-prices-advanced-regression-techniques/sample_submission.csv
     /kaggle/input/house-prices-advanced-regression-techniques/test.csv
 
-```python
-
 **Settings and switches**
 
 **Here one can choose settings for optimal performance and runtime.**  
 **For example, nr_cv sets the number of cross validations used in GridsearchCV, and**  
-**min_val_corr is the minimum value for the correlation coefficient to the target (only features with larger correlation will be used).** 
+**min_val_corr is the minimum value for the correlation coefficient to the target (only features with larger correlation will be used).**
 
+```python
 # setting the number of cross validations used in the Model part
 nr_cv = 5
 
@@ -155,6 +154,7 @@ min_val_corr = 0.4
 # switch for dropping columns that are similar to others already used and show a high correlation to these
 drop_similar = 1
 ```
+
 **Some useful functions**
 
 ```python
@@ -206,7 +206,7 @@ print(df_train.shape)
 print(df_test.shape)
 ```
 
-> (1460, 81)
+> (1460, 81)<br>
 > (1459, 80)
 
 ```python
@@ -301,11 +301,11 @@ print(df_train.info())
     memory usage: 924.0+ KB
     None
 
-df train has 81 columns (79 features + id and target SalePrice) and 1460 entries (number of rows or house sales)<br> 
-df test has 80 columns (79 features + id) and 1459 entries<br>
-There is lots of info that is probably related to the SalePrice like the area, the neighborhood, the condition and quality.<br>
-Maybe other features are not so important for predicting the target, also there might be a strong correlation for some of the features (like GarageCars and GarageArea).<br>
-For some columns many values are missing: only 7 values for Pool QC in df train and 3 in df test.<br>
+> df train has 81 columns (79 features + id and target SalePrice) and 1460 entries (number of rows or house sales)<br> 
+> df test has 80 columns (79 features + id) and 1459 entries<br>
+> There is lots of info that is probably related to the SalePrice like the area, the neighborhood, the condition and quality.<br>
+> Maybe other features are not so important for predicting the target, also there might be a strong correlation for some of the features (like GarageCars and GarageArea).<br>
+> For some columns many values are missing: only 7 values for Pool QC in df train and 3 in df test.<br>
 
 ```python
 df_train.head()
@@ -731,7 +731,7 @@ print("Skewness: %f" % df_train['SalePrice'].skew())
 print("Kurtosis: %f" % df_train['SalePrice'].kurt())
 ```
 
-> Skewness: 1.882876
+> Skewness: 1.882876<br>
 > Kurtosis: 6.536282
 
 ![png](/images/house-prices/notebook_12_1.png)
@@ -739,7 +739,7 @@ print("Kurtosis: %f" % df_train['SalePrice'].kurt())
 As we see, the target variable SalePrice is not normally distributed.<br>
 This can reduce the performance of the ML regression models because some assume normal distribution,<br>
 see [sklearn info on preprocessing](http://scikit-learn.org/stable/modules/preprocessing.html)<br>
-Therfore we make a log transformation, the resulting distribution looks much better.<br>
+Therefore we make a log transformation, the resulting distribution looks much better.<br>
 
 ```python
 df_train['SalePrice_Log'] = np.log(df_train['SalePrice'])
@@ -751,7 +751,8 @@ print("Kurtosis: %f" % df_train['SalePrice_Log'].kurt())
 # dropping old column
 df_train.drop('SalePrice', axis= 1, inplace=True)
 ```
-> Skewness: 0.121335
+
+> Skewness: 0.121335<br>
 > Kurtosis: 0.809532
 
 ![png](/images/house-prices/notebook_13_1.png)
@@ -766,7 +767,7 @@ categorical_feats = df_train.dtypes[df_train.dtypes == "object"].index
 print("Number of Categorical features: ", len(categorical_feats))
 ```
 
-> Number of Numerical features:  38
+> Number of Numerical features:  38<br>
 > Number of Categorical features:  43
 
 ```python
@@ -1273,6 +1274,7 @@ missing_data.head(20)
 </div>
 
 ### Filling Missing values
+
 For a few columns there is lots of NaN entries.  
 However, reading the data description we find this is not missing data:  
 For PoolQC, NaN is not missing data but means no pool, likewise for Fence, FireplaceQu etc.
@@ -1356,7 +1358,7 @@ missing_data.head(5)
 </table>
 </div>
 
-**Checking missing values in train data ?**
+**Checking missing values in train data**
 
 ```python
 df_train.isnull().sum().sum()
@@ -1364,7 +1366,7 @@ df_train.isnull().sum().sum()
 
 > 0
 
-**Checking missing values in test data ?**
+**Checking missing values in test data**
 
 ```python
 df_test.isnull().sum().sum()
@@ -1432,7 +1434,7 @@ print("Skewness: %f" % df_train['GrLivArea'].skew())
 print("Kurtosis: %f" % df_train['GrLivArea'].kurt())
 ```
 
-> Skewness: 1.366560
+> Skewness: 1.366560<br>
 > Kurtosis: 4.895121
 
 ![png](/images/house-prices/notebook_29_1.png)
@@ -1444,7 +1446,7 @@ print("Skewness: %f" % df_train['LotArea'].skew())
 print("Kurtosis: %f" % df_train['LotArea'].kurt())
 ```
 
-> Skewness: 12.207688
+> Skewness: 12.207688<br>
 > Kurtosis: 203.243271
 
 ![png](/images/house-prices/notebook_30_1.png)
@@ -1466,7 +1468,7 @@ print("Skewness: %f" % df_train['GrLivArea_Log'].skew())
 print("Kurtosis: %f" % df_train['GrLivArea_Log'].kurt())
 ```
 
-> Skewness: -0.006995
+> Skewness: -0.006995<br>
 > Kurtosis: 0.282603
 
 ![png](/images/house-prices/notebook_32_1.png)
@@ -1478,7 +1480,7 @@ print("Skewness: %f" % df_train['LotArea_Log'].skew())
 print("Kurtosis: %f" % df_train['LotArea_Log'].kurt())
 ```
 
-> Skewness: -0.137994
+> Skewness: -0.137994<br>
 > Kurtosis: 4.713358
 
 ![png](/images/house-prices/notebook_33_1.png)
@@ -1996,7 +1998,6 @@ So the other columns are dropped when creating the ML dataframes in Part 2 :
 'Exterior1st', 'Exterior2nd', 'ExterCond', 'Foundation', 'BsmtCond', 'BsmtExposure', 'BsmtFinType1', 'BsmtFinType2', 'Heating', 'HeatingQC', 
 'Functional', 'FireplaceQu', 'GarageType', 'GarageFinish', 'GarageQual', 'GarageCond', 'PavedDrive', 'PoolQC', 'Fence', 'MiscFeature', 'SaleCondition' 
 
-
 ```python
 catg_strong_corr = [ 'MSZoning', 'Neighborhood', 'Condition2', 'MasVnrType', 'ExterQual', 
                      'BsmtQual','CentralAir', 'Electrical', 'KitchenQual', 'SaleType']
@@ -2013,21 +2014,17 @@ catg_weak_corr = ['Street', 'Alley', 'LotShape', 'LandContour', 'Utilities', 'Lo
 ### Correlation matrix 1
 
 **Features with largest correlation to SalePrice_Log**  
-all numerical features with correlation coefficient above threshold 
-
+All numerical features with correlation coefficient above threshold
 
 ```python
 nr_feats = len(cols_abv_corr_limit)
 ```
 
-
 ```python
 plot_corr_matrix(df_train, nr_feats, target)
 ```
 
-
 ![png](/images/house-prices/notebook_51_0.png)
-
 
 **Of those features with the largest correlation to SalePrice, some also are correlated strongly to each other.**
 **To avoid failures of the ML regression models due to multicollinearity, these are dropped in part 2.**
@@ -2035,13 +2032,13 @@ plot_corr_matrix(df_train, nr_feats, target)
 
 ## Data Wrangling
 
-**Drop all columns with only small correlation to SalePrice**
-**Transform Categorical to numerical**
-**Handling columns with missing data**
-**Log values**
-**Drop all columns with strong correlation to similar features**
+**Drop all columns with only small correlation to SalePrice**<br>
+**Transform Categorical to numerical**<br>
+**Handling columns with missing data**<br>
+**Log values**<br>
+**Drop all columns with strong correlation to similar features**<br>
 
-Numerical columns : drop similar and low correlation
+Numerical columns : drop similar and low correlation<br>
 Categorical columns : Transform  to numerical
 
 ### Dropping all columns with weak correlation to SalePrice
@@ -2173,7 +2170,6 @@ for catg in catg_list :
     WD       11.991061
     Name: SalePrice_Log, dtype: float64
 
-
 ```python
 # 'MSZoning'
 msz_catg2 = ['RM', 'RH']
@@ -2213,33 +2209,32 @@ for df in [df_train, df_test]:
 
     df['ExtQ_num'] = 1
     df.loc[(df['ExterQual'] == 'TA' ), 'ExtQ_num'] = 2
-    df.loc[(df['ExterQual'] == 'Gd' ), 'ExtQ_num'] = 3     
-    df.loc[(df['ExterQual'] == 'Ex' ), 'ExtQ_num'] = 4     
-   
-    df['BsQ_num'] = 1          
-    df.loc[(df['BsmtQual'] == 'Gd' ), 'BsQ_num'] = 2     
-    df.loc[(df['BsmtQual'] == 'Ex' ), 'BsQ_num'] = 3     
- 
-    df['CA_num'] = 0          
-    df.loc[(df['CentralAir'] == 'Y' ), 'CA_num'] = 1    
+    df.loc[(df['ExterQual'] == 'Gd' ), 'ExtQ_num'] = 3
+    df.loc[(df['ExterQual'] == 'Ex' ), 'ExtQ_num'] = 4
 
-    df['Elc_num'] = 1       
-    df.loc[(df['Electrical'] == 'SBrkr' ), 'Elc_num'] = 2 
+    df['BsQ_num'] = 1
+    df.loc[(df['BsmtQual'] == 'Gd' ), 'BsQ_num'] = 2
+    df.loc[(df['BsmtQual'] == 'Ex' ), 'BsQ_num'] = 3
+
+    df['CA_num'] = 0
+    df.loc[(df['CentralAir'] == 'Y' ), 'CA_num'] = 1
+
+    df['Elc_num'] = 1
+    df.loc[(df['Electrical'] == 'SBrkr' ), 'Elc_num'] = 2
 
 
-    df['KiQ_num'] = 1       
-    df.loc[(df['KitchenQual'] == 'TA' ), 'KiQ_num'] = 2     
-    df.loc[(df['KitchenQual'] == 'Gd' ), 'KiQ_num'] = 3     
-    df.loc[(df['KitchenQual'] == 'Ex' ), 'KiQ_num'] = 4      
-    
-    df['SlTy_num'] = 2       
+    df['KiQ_num'] = 1
+    df.loc[(df['KitchenQual'] == 'TA' ), 'KiQ_num'] = 2
+    df.loc[(df['KitchenQual'] == 'Gd' ), 'KiQ_num'] = 3
+    df.loc[(df['KitchenQual'] == 'Ex' ), 'KiQ_num'] = 4
+
+    df['SlTy_num'] = 2
     df.loc[(df['SaleType'].isin(SlTy_catg1) ), 'SlTy_num'] = 1  
     df.loc[(df['SaleType'].isin(SlTy_catg3) ), 'SlTy_num'] = 3  
     df.loc[(df['SaleType'].isin(SlTy_catg4) ), 'SlTy_num'] = 4
 ```
 
 ### Checking correlation to SalePrice for the new numerical columns
-
 
 ```python
 new_col_num = ['MSZ_num', 'NbHd_num', 'Cond2_num', 'Mas_num', 'ExtQ_num', 'BsQ_num', 'CA_num', 'Elc_num', 'KiQ_num', 'SlTy_num']
@@ -2267,8 +2262,8 @@ plt.show()
 There are few columns with quite large correlation to SalePrice (NbHd_num, ExtQ_num, BsQ_num, KiQ_num).  
 These will probably be useful for optimal performance of the Regressors in part 3.
 
-**Dropping the converted categorical columns and the new numerical columns with weak correlation**
-**columns and correlation before dropping**
+**Dropping the converted categorical columns and the new numerical columns with weak correlation**<br>
+**Columns and Correlation before dropping**
 
 ```python
 catg_cols_to_drop = ['Neighborhood' , 'Condition2', 'MasVnrType', 'ExterQual', 'BsmtQual','CentralAir', 'Electrical', 'KitchenQual', 'SaleType']
@@ -2316,7 +2311,7 @@ for df in [df_train, df_test] :
     Name: SalePrice_Log, dtype: float64
 
 
-**columns and correlation after dropping**
+**Columns and Correlation after dropping**
 
 ```python
 corr2 = df_train.corr()
@@ -2351,7 +2346,7 @@ print(ser_corr_2)
     Name: SalePrice_Log, dtype: float64
     
 
-**new dataframes**
+**New Dataframes**
 
 ```python
 df_train.head()
@@ -2689,7 +2684,7 @@ df_test.head()
 </div>
 
 **List of all features with strong correlation to SalePrice_Log**  
-after dropping all coumns with weak correlation
+After dropping all columns with weak correlation
 
 ```python
 corr = df_train.corr()
@@ -2762,9 +2757,7 @@ print(cols)
 
     ['SalePrice_Log', 'OverallQual', 'GrLivArea_Log', 'NbHd_num', 'ExtQ_num', 'GarageCars', 'KiQ_num', 'BsQ_num', 'TotalBsmtSF', 'FullBath', 'YearBuilt', 'YearRemodAdd', 'Fireplaces', 'MasVnrArea', 'MSZ_num', 'LotArea_Log']
 
-
-**List of features used for the Regressors in Part 3**
-
+**List of features used for the Regressors later**
 
 ```python
 feats = cols.copy()
@@ -2774,7 +2767,6 @@ print(feats)
 ```
 
     ['OverallQual', 'GrLivArea_Log', 'NbHd_num', 'ExtQ_num', 'GarageCars', 'KiQ_num', 'BsQ_num', 'TotalBsmtSF', 'FullBath', 'YearBuilt', 'YearRemodAdd', 'Fireplaces', 'MasVnrArea', 'MSZ_num', 'LotArea_Log']
-
 
 ```python
 df_train_ml = df_train[feats].copy()
@@ -2927,7 +2919,6 @@ df_train_ml_sc.head()
   </tbody>
 </table>
 </div>
-
 
 **Creating Datasets for ML algorithms**
 
@@ -3253,16 +3244,16 @@ X_sc.head()
 </table>
 </div>
 
-# Scikit-learn basic regression models and comparison of results
+## Scikit-learn basic regression models and comparison of results
 
 **Test simple sklearn models and compare by metrics**
 
 **We test the following Regressors from scikit-learn:**  
-Linear Regression
-Stochastic Gradient Descent  
-DecisionTreeRegressor  
-RandomForestRegressor  
-SVR
+Linear Regression<br>
+Stochastic Gradient Descent<br>
+Decision Tree Regressor<br>
+Random Forest Regressor<br>
+KNN<br>
 
 **Model tuning and selection with GridSearchCV**
 
@@ -3272,7 +3263,6 @@ score_calc = 'neg_mean_squared_error'
 ```
 
 ### Linear Regression
-
 
 ```python
 from sklearn.linear_model import LinearRegression
@@ -3285,7 +3275,7 @@ grid_linear.fit(X, y)
 sc_linear = get_best_score(grid_linear)
 ```
 
-> Fitting 5 folds for each of 8 candidates, totalling 40 fits
+> Fitting 5 folds for each of 8 candidates, totalling 40 fits<br>
 > 0.1362343506167217
 
 ```python
@@ -3297,7 +3287,7 @@ grid_linear_sc.fit(X_sc, y)
 sc_linear_sc = get_best_score(grid_linear_sc)
 ```
 
-> Fitting 5 folds for each of 8 candidates, totalling 40 fits
+> Fitting 5 folds for each of 8 candidates, totalling 40 fits<br>
 > 0.13623435061672204
 
 ```python
@@ -3330,7 +3320,7 @@ sc_sgd = get_best_score(grid_sgd)
 pred_sgd = grid_sgd.predict(X_test_sc)
 ```
 
-> Fitting 5 folds for each of 1 candidates, totalling 5 fits
+> Fitting 5 folds for each of 1 candidates, totalling 5 fits<br>
 > 0.13740875157743374
 
 ### Decision Tree Regressor
@@ -3350,7 +3340,7 @@ sc_dtree = get_best_score(grid_dtree)
 pred_dtree = grid_dtree.predict(X_test)
 ```
 
-> Fitting 5 folds for each of 480 candidates, totalling 2400 fits
+> Fitting 5 folds for each of 480 candidates, totalling 2400 fits<br>
 > 0.18299182249476628
 
 ```python
@@ -3372,7 +3362,7 @@ grid_rf.fit(X, y)
 sc_rf = get_best_score(grid_rf)
 ```
 
-> Fitting 5 folds for each of 8 candidates, totalling 40 fits
+> Fitting 5 folds for each of 8 candidates, totalling 40 fits<br>
 > 0.1465978663015509
 
 ```python
@@ -3485,7 +3475,7 @@ grid_knn.fit(X_sc, y_sc)
 sc_knn = get_best_score(grid_knn)
 ```
 
-> Fitting 5 folds for each of 42 candidates, totalling 210 fits
+> Fitting 5 folds for each of 42 candidates, totalling 210 fits<br>
 > 0.15615217437688825
 
 ```python
