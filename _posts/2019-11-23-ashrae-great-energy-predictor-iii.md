@@ -11,12 +11,12 @@ mathjax: "true"
 
 ## Overview
 
-Q: How much does it cost to cool a skyscraper in the summer?
+Q: How much does it cost to cool a skyscraper in the summer?<br>
 A: A lot! And not just in dollars, but in environmental impact.
 
 Thankfully, significant investments are being made to improve building efficiencies to reduce costs and emissions. The question is, are the improvements working? That’s where you come in. Under pay-for-performance financing, the building owner makes payments based on the difference between their real energy consumption and what they would have used without any retrofits. The latter values have to come from a model. Current methods of estimation are fragmented and do not scale well. Some assume a specific meter type or don’t work with different building types.
 
-In this projrct, we will develop accurate models of metered building energy usage in the following areas: chilled water, electric, hot water, and steam meters. The data comes from over 1,000 buildings over a three-year timeframe. With better estimates of these energy-saving investments, large scale investors and financial institutions will be more inclined to invest in this area to enable progress in building efficiencies.
+In this project, we will develop accurate models of metered building energy usage in the following areas: chilled water, electric, hot water, and steam meters. The data comes from over 1,000 buildings over a three-year timeframe. With better estimates of these energy-saving investments, large scale investors and financial institutions will be more inclined to invest in this area to enable progress in building efficiencies.
 
 ### About the Host
 
@@ -87,7 +87,6 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
     /kaggle/input/ashrae-energy-prediction/weather_train.csv
     /kaggle/input/ashrae-energy-prediction/test.csv
 
-
 ## Load Data
 
 ```python
@@ -123,11 +122,9 @@ train = pd.read_csv("../input/ashrae-energy-prediction/train.csv")
 * number of meters
 * number of buildings at a siteid
 
-
 ```python
 building_df
 ```
-
 
 <div>
 <style scoped>
@@ -259,7 +256,6 @@ building_df
 </table>
 <p>1449 rows × 6 columns</p>
 </div>
-
 
 ```python
 weather_train
@@ -432,7 +428,6 @@ weather_train
 <p>139773 rows × 9 columns</p>
 </div>
 
-
 ```python
 train
 ```
@@ -544,7 +539,6 @@ train
 <p>20216100 rows × 4 columns</p>
 </div>
 
-
 ```python
 train = train.merge(building_df, left_on = "building_id", right_on = "building_id", how = "left")
 train = train.merge(weather_train, left_on = ["site_id", "timestamp"], right_on = ["site_id", "timestamp"], how = "left")
@@ -563,36 +557,17 @@ train["month"] = train["timestamp"].dt.month
 train[train["site_id"] == 0].plot("timestamp", "meter_reading")
 ```
 
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x7f78b0eb3748>
-
-
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_21_1.png)
-
-
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_21_1.png)
 
 ```python
 train[train["site_id"] == 2].plot("timestamp", "meter_reading")
 ```
 
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x7f789b60f470>
-
-
-
-
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_22_1.png)
-
-
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_22_1.png)
 
 ```python
 train[["hour", "day", "weekend", "month"]]
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -1279,403 +1254,403 @@ for value in top_buildings.index:
 ```
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_0.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_0.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_1.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_1.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_2.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_2.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_3.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_3.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_4.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_4.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_5.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_5.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_6.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_6.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_7.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_7.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_8.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_8.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_9.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_9.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_10.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_10.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_11.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_11.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_12.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_12.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_13.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_13.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_14.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_14.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_15.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_15.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_16.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_16.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_17.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_17.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_18.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_18.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_19.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_19.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_20.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_20.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_21.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_21.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_22.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_22.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_23.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_23.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_24.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_24.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_25.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_25.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_26.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_26.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_27.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_27.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_28.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_28.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_29.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_29.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_30.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_30.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_31.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_31.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_32.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_32.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_33.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_33.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_34.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_34.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_35.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_35.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_36.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_36.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_37.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_37.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_38.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_38.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_39.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_39.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_40.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_40.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_41.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_41.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_42.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_42.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_43.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_43.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_44.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_44.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_45.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_45.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_46.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_46.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_47.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_47.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_48.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_48.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_49.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_49.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_50.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_50.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_51.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_51.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_52.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_52.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_53.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_53.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_54.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_54.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_55.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_55.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_56.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_56.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_57.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_57.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_58.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_58.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_59.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_59.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_60.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_60.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_61.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_61.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_62.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_62.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_63.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_63.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_64.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_64.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_65.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_65.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_66.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_66.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_67.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_67.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_68.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_68.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_69.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_69.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_70.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_70.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_71.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_71.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_72.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_72.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_73.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_73.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_74.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_74.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_75.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_75.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_76.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_76.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_77.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_77.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_78.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_78.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_79.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_79.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_80.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_80.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_81.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_81.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_82.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_82.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_83.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_83.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_84.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_84.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_85.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_85.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_86.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_86.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_87.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_87.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_88.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_88.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_89.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_89.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_90.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_90.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_91.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_91.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_92.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_92.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_93.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_93.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_94.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_94.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_95.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_95.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_96.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_96.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_97.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_97.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_98.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_98.png)
 
 
 
-![png](images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_99.png)
+![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_33_99.png)
 
 
 
