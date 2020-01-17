@@ -122,6 +122,9 @@ train = pd.read_csv("../input/ashrae-energy-prediction/train.csv")
 * number of meters
 * number of buildings at a siteid
 
+
+## Data Analysis
+
 ```python
 building_df
 ```
@@ -539,6 +542,8 @@ train
 <p>20216100 rows × 4 columns</p>
 </div>
 
+### Merging train.csv, building_df.csv and weather_train.csv
+
 ```python
 train = train.merge(building_df, left_on = "building_id", right_on = "building_id", how = "left")
 train = train.merge(weather_train, left_on = ["site_id", "timestamp"], right_on = ["site_id", "timestamp"], how = "left")
@@ -552,12 +557,15 @@ train["weekend"] = train["timestamp"].dt.weekday
 train["month"] = train["timestamp"].dt.month
 ```
 
+### Plot between timestamp and meter_reading for site_id = 0
+
 ```python
-# looks like there may be some errors with some of the readings
 train[train["site_id"] == 0].plot("timestamp", "meter_reading")
 ```
 
 ![png](/images/ashrae-great-energy-predictor-iii/ashrae-great-energy-predictor-iii_21_1.png)
+
+### Plot between timestamp and meter_reading for site_id = 2
 
 ```python
 train[train["site_id"] == 2].plot("timestamp", "meter_reading")
@@ -1640,6 +1648,8 @@ train
 <p>20216100 rows × 12 columns</p>
 </div>
 
+### Memory Reducing
+
 ```python
 #Based on this great kernel https://www.kaggle.com/arjanso/reducing-dataframe-memory-size-by-65
 def reduce_mem_usage(df):
@@ -1708,10 +1718,10 @@ def reduce_mem_usage(df):
 train, NAlist = reduce_mem_usage(train)
 ```
 
-    Memory usage of properties dataframe is : 2005.0758361816406  MB
-    ******************************
-    Column:  building_id
-    dtype before:  int64
+> Memory usage of properties dataframe is : 2005.0758361816406  MB
+> ******************************
+> Column:  building_id
+> dtype before:  int64
     min for this col:  0
     max for this col:  1448
     dtype after:  uint16
