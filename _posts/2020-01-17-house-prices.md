@@ -138,7 +138,7 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 **min_val_corr is the minimum value for the correlation coefficient to the target (only features with larger correlation will be used).**
 
 ```python
-# setting the number of cross validations used in the Model part
+# setting the number of cross validations used in the Model
 nr_cv = 5
 
 # switch for using log values for SalePrice and features
@@ -148,7 +148,7 @@ use_logvals = 1
 target = 'SalePrice_Log'
 
 # only columns with correlation above this threshold value  
-# are used for the ML Regressors in Part 3
+# are used for the ML Regressors later
 min_val_corr = 0.4
 
 # switch for dropping columns that are similar to others already used and show a high correlation to these
@@ -1522,7 +1522,7 @@ For other features like 'MSSubClass' the correlation is very weak.
 For this kernel I decided to use only those features for prediction that have a correlation larger than a threshold value to SalePrice.  
 This threshold value can be choosen in the global settings : min_val_corr  
 
-With the default threshold for min_val_corr = 0.4, these features are dropped in Part 2, Data Wrangling:  
+With the default threshold for min_val_corr = 0.4, these features are dropped, Data Wrangling:  
 'Id', 'MSSubClass', 'LotArea', 'OverallCond', 'BsmtFinSF2', 'BsmtUnfSF',  'LowQualFinSF',  'BsmtFullBath', 'BsmtHalfBath', 'HalfBath',
 'BedroomAbvGr', 'KitchenAbvGr', 'EnclosedPorch', '3SsnPorch', 'ScreenPorch', 'PoolArea', 'MiscVal', 'MoSold', 'YrSold'
 
@@ -1537,7 +1537,7 @@ df_train = df_train.drop(df_train[(df_train['GrLivArea_Log']>8.3) & (df_train['S
 ```
 
 **Find columns with strong correlation to target**  
-Only those with r > min_val_corr are used in the ML Regressors in Part 3  
+Only those with r > min_val_corr are used in the ML Regressors later
 The value for min_val_corr can be chosen in global settings
 
 ```python
@@ -1993,7 +1993,7 @@ For many of the categorical there is no strong relation to the target.
 However, for some fetaures it is easy to find a strong relation.  
 From the figures above these are : 'MSZoning', 'Neighborhood', 'Condition2', 'MasVnrType', 'ExterQual', 'BsmtQual','CentralAir', 'Electrical', 'KitchenQual', 'SaleType'
 Also for the categorical features, I use only those that show a strong relation to SalePrice. 
-So the other columns are dropped when creating the ML dataframes in Part 2 :  
+So the other columns are dropped when creating the ML dataframes :  
  'Street', 'Alley', 'LotShape', 'LandContour', 'Utilities', 'LotConfig', 'LandSlope', 'Condition1',  'BldgType', 'HouseStyle', 'RoofStyle', 'RoofMatl',
 'Exterior1st', 'Exterior2nd', 'ExterCond', 'Foundation', 'BsmtCond', 'BsmtExposure', 'BsmtFinType1', 'BsmtFinType2', 'Heating', 'HeatingQC', 
 'Functional', 'FireplaceQu', 'GarageType', 'GarageFinish', 'GarageQual', 'GarageCond', 'PavedDrive', 'PoolQC', 'Fence', 'MiscFeature', 'SaleCondition' 
@@ -2027,7 +2027,7 @@ plot_corr_matrix(df_train, nr_feats, target)
 ![png](/images/house-prices/notebook_51_0.png)
 
 **Of those features with the largest correlation to SalePrice, some also are correlated strongly to each other.**
-**To avoid failures of the ML regression models due to multicollinearity, these are dropped in part 2.**
+**To avoid failures of the ML regression models due to multicollinearity, these are dropped**
 **This is optional and controlled by the switch drop_similar (global settings)**
 
 ## Data Wrangling
@@ -2260,7 +2260,7 @@ plt.show()
 ![png](/images/house-prices/notebook_65_0.png)
 
 There are few columns with quite large correlation to SalePrice (NbHd_num, ExtQ_num, BsQ_num, KiQ_num).  
-These will probably be useful for optimal performance of the Regressors in part 3.
+These will probably be useful for optimal performance of the Regressors later.
 
 **Dropping the converted categorical columns and the new numerical columns with weak correlation**<br>
 **Columns and Correlation before dropping**
