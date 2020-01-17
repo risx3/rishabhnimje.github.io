@@ -4,7 +4,7 @@ date: 2020-01-17
 tags: [Kaggle, Regression, AMES Iowa, Machine Learning]
 excerpt: "Predict sales prices and practice feature engineering, RFs, and gradient boosting"
 header:
-  overlay_image: "/images/house-prices/housebanner.png"
+  overlay_image: "/images/house-prices/housesbanner.png"
   caption: ""
 mathjax: "true"
 ---
@@ -27,94 +27,94 @@ The Ames Housing dataset was compiled by Dean De Cock for use in data science ed
 
 ## Data Fields
 
-Here's a brief version of what you'll find in the data description file.
-
-SalePrice - the property's sale price in dollars. This is the target variable that you're trying to predict.
-MSSubClass: The building class
-MSZoning: The general zoning classification
-LotFrontage: Linear feet of street connected to property
-LotArea: Lot size in square feet
-Street: Type of road access
-Alley: Type of alley access
-LotShape: General shape of property
-LandContour: Flatness of the property
-Utilities: Type of utilities available
-LotConfig: Lot configuration
-LandSlope: Slope of property
-Neighborhood: Physical locations within Ames city limits
-Condition1: Proximity to main road or railroad
-Condition2: Proximity to main road or railroad (if a second is present)
-BldgType: Type of dwelling
-HouseStyle: Style of dwelling
-OverallQual: Overall material and finish quality
-OverallCond: Overall condition rating
-YearBuilt: Original construction date
-YearRemodAdd: Remodel date
-RoofStyle: Type of roof
-RoofMatl: Roof material
-Exterior1st: Exterior covering on house
-Exterior2nd: Exterior covering on house (if more than one material)
-MasVnrType: Masonry veneer type
-MasVnrArea: Masonry veneer area in square feet
-ExterQual: Exterior material quality
-ExterCond: Present condition of the material on the exterior
-Foundation: Type of foundation
-BsmtQual: Height of the basement
-BsmtCond: General condition of the basement
-BsmtExposure: Walkout or garden level basement walls
-BsmtFinType1: Quality of basement finished area
-BsmtFinSF1: Type 1 finished square feet
-BsmtFinType2: Quality of second finished area (if present)
-BsmtFinSF2: Type 2 finished square feet
-BsmtUnfSF: Unfinished square feet of basement area
-TotalBsmtSF: Total square feet of basement area
-Heating: Type of heating
-HeatingQC: Heating quality and condition
-CentralAir: Central air conditioning
-Electrical: Electrical system
-1stFlrSF: First Floor square feet
-2ndFlrSF: Second floor square feet
-LowQualFinSF: Low quality finished square feet (all floors)
-GrLivArea: Above grade (ground) living area square feet
-BsmtFullBath: Basement full bathrooms
-BsmtHalfBath: Basement half bathrooms
-FullBath: Full bathrooms above grade
-HalfBath: Half baths above grade
-Bedroom: Number of bedrooms above basement level
-Kitchen: Number of kitchens
-KitchenQual: Kitchen quality
-TotRmsAbvGrd: Total rooms above grade (does not include bathrooms)
-Functional: Home functionality rating
-Fireplaces: Number of fireplaces
-FireplaceQu: Fireplace quality
-GarageType: Garage location
-GarageYrBlt: Year garage was built
-GarageFinish: Interior finish of the garage
-GarageCars: Size of garage in car capacity
-GarageArea: Size of garage in square feet
-GarageQual: Garage quality
-GarageCond: Garage condition
-PavedDrive: Paved driveway
-WoodDeckSF: Wood deck area in square feet
-OpenPorchSF: Open porch area in square feet
-EnclosedPorch: Enclosed porch area in square feet
-3SsnPorch: Three season porch area in square feet
-ScreenPorch: Screen porch area in square feet
-PoolArea: Pool area in square feet
-PoolQC: Pool quality
-Fence: Fence quality
-MiscFeature: Miscellaneous feature not covered in other categories
-MiscVal: $Value of miscellaneous feature
-MoSold: Month Sold
-YrSold: Year Sold
-SaleType: Type of sale
-SaleCondition: Condition of sale
+Here's a brief version of what you'll find in the data description file.<br>
+<br>
+SalePrice - the property's sale price in dollars. This is the target variable that you're trying to predict.<br>
+MSSubClass: The building class<br>
+MSZoning: The general zoning classification<br>
+LotFrontage: Linear feet of street connected to property<br>
+LotArea: Lot size in square feet<br>
+Street: Type of road access<br>
+Alley: Type of alley access<br>
+LotShape: General shape of property<br>
+LandContour: Flatness of the property<br>
+Utilities: Type of utilities available<br>
+LotConfig: Lot configuration<br>
+LandSlope: Slope of property<br>
+Neighborhood: Physical locations within Ames city limits<br>
+Condition1: Proximity to main road or railroad<br>
+Condition2: Proximity to main road or railroad (if a second is present)<br>
+BldgType: Type of dwelling<br>
+HouseStyle: Style of dwelling<br>
+OverallQual: Overall material and finish quality<br>
+OverallCond: Overall condition rating<br>
+YearBuilt: Original construction date<br>
+YearRemodAdd: Remodel date<br>
+RoofStyle: Type of roof<br>
+RoofMatl: Roof material<br>
+Exterior1st: Exterior covering on house<br>
+Exterior2nd: Exterior covering on house (if more than one material)<br>
+MasVnrType: Masonry veneer type<br>
+MasVnrArea: Masonry veneer area in square feet<br>
+ExterQual: Exterior material quality<br>
+ExterCond: Present condition of the material on the exterior<br>
+Foundation: Type of foundation<br>
+BsmtQual: Height of the basement<br>
+BsmtCond: General condition of the basement<br>
+BsmtExposure: Walkout or garden level basement walls<br>
+BsmtFinType1: Quality of basement finished area<br>
+BsmtFinSF1: Type 1 finished square feet<br>
+BsmtFinType2: Quality of second finished area (if present)<br>
+BsmtFinSF2: Type 2 finished square feet<br>
+BsmtUnfSF: Unfinished square feet of basement area<br>
+TotalBsmtSF: Total square feet of basement area<br>
+Heating: Type of heating<br>
+HeatingQC: Heating quality and condition<br>
+CentralAir: Central air conditioning<br>
+Electrical: Electrical system<br>
+1stFlrSF: First Floor square feet<br>
+2ndFlrSF: Second floor square feet<br>
+LowQualFinSF: Low quality finished square feet (all floors)<br>
+GrLivArea: Above grade (ground) living area square feet<br>
+BsmtFullBath: Basement full bathrooms<br>
+BsmtHalfBath: Basement half bathrooms<br>
+FullBath: Full bathrooms above grade<br>
+HalfBath: Half baths above grade<br>
+Bedroom: Number of bedrooms above basement level<br>
+Kitchen: Number of kitchens<br>
+KitchenQual: Kitchen quality<br>
+TotRmsAbvGrd: Total rooms above grade (does not include bathrooms)<br>
+Functional: Home functionality rating<br>
+Fireplaces: Number of fireplaces<br>
+FireplaceQu: Fireplace quality<br>
+GarageType: Garage location<br>
+GarageYrBlt: Year garage was built<br>
+GarageFinish: Interior finish of the garage<br>
+GarageCars: Size of garage in car capacity<br>
+GarageArea: Size of garage in square feet<br>
+GarageQual: Garage quality<br>
+GarageCond: Garage condition<br>
+PavedDrive: Paved driveway<br>
+WoodDeckSF: Wood deck area in square feet<br>
+OpenPorchSF: Open porch area in square feet<br>
+EnclosedPorch: Enclosed porch area in square feet<br>
+3SsnPorch: Three season porch area in square feet<br>
+ScreenPorch: Screen porch area in square feet<br>
+PoolArea: Pool area in square feet<br>
+PoolQC: Pool quality<br>
+Fence: Fence quality<br>
+MiscFeature: Miscellaneous feature not covered in other categories<br>
+MiscVal: $Value of miscellaneous feature<br>
+MoSold: Month Sold<br>
+YrSold: Year Sold<br>
+SaleType: Type of sale<br>
+SaleCondition: Condition of sale<br>
 
 ## So lets begin with complete EDA...
 
 ```python
-import numpy as np # linear algebra
-import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy import stats
@@ -132,7 +132,14 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
     /kaggle/input/house-prices-advanced-regression-techniques/test.csv
 
 ```python
-# setting the number of cross validations used in the Model part 
+
+**Settings and switches**
+
+**Here one can choose settings for optimal performance and runtime.**  
+**For example, nr_cv sets the number of cross validations used in GridsearchCV, and**  
+**min_val_corr is the minimum value for the correlation coefficient to the target (only features with larger correlation will be used).** 
+
+# setting the number of cross validations used in the Model part
 nr_cv = 5
 
 # switch for using log values for SalePrice and features
@@ -148,6 +155,7 @@ min_val_corr = 0.4
 # switch for dropping columns that are similar to others already used and show a high correlation to these
 drop_similar = 1
 ```
+**Some useful functions**
 
 ```python
 def get_best_score(grid):
@@ -191,20 +199,18 @@ df_train = pd.read_csv("/kaggle/input/house-prices-advanced-regression-technique
 df_test = pd.read_csv("/kaggle/input/house-prices-advanced-regression-techniques/test.csv")
 ```
 
+## Exploratory Data Analysis
 
 ```python
 print(df_train.shape)
 print(df_test.shape)
 ```
 
-    (1460, 81)
-    (1459, 80)
-    
-
+> (1460, 81)
+> (1459, 80)
 
 ```python
 print(df_train.info())
-
 ```
 
     <class 'pandas.core.frame.DataFrame'>
@@ -294,15 +300,16 @@ print(df_train.info())
     dtypes: float64(3), int64(35), object(43)
     memory usage: 924.0+ KB
     None
-    
 
+df train has 81 columns (79 features + id and target SalePrice) and 1460 entries (number of rows or house sales)<br> 
+df test has 80 columns (79 features + id) and 1459 entries<br>
+There is lots of info that is probably related to the SalePrice like the area, the neighborhood, the condition and quality.<br>
+Maybe other features are not so important for predicting the target, also there might be a strong correlation for some of the features (like GarageCars and GarageArea).<br>
+For some columns many values are missing: only 7 values for Pool QC in df train and 3 in df test.<br>
 
 ```python
 df_train.head()
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -471,15 +478,9 @@ df_train.head()
 <p>5 rows × 81 columns</p>
 </div>
 
-
-
-
 ```python
 df_train.describe()
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -720,8 +721,6 @@ df_train.describe()
 <p>8 rows × 38 columns</p>
 </div>
 
-
-
 ## Distribution of SalePrice
 
 
@@ -732,14 +731,15 @@ print("Skewness: %f" % df_train['SalePrice'].skew())
 print("Kurtosis: %f" % df_train['SalePrice'].kurt())
 ```
 
-    Skewness: 1.882876
-    Kurtosis: 6.536282
-    
+> Skewness: 1.882876
+> Kurtosis: 6.536282
 
+![png](/images/house-prices/notebook_12_1.png)
 
-![png](notebook_files/notebook_12_1.png)
-
-
+As we see, the target variable SalePrice is not normally distributed.<br>
+This can reduce the performance of the ML regression models because some assume normal distribution,<br>
+see [sklearn info on preprocessing](http://scikit-learn.org/stable/modules/preprocessing.html)<br>
+Therfore we make a log transformation, the resulting distribution looks much better.<br>
 
 ```python
 df_train['SalePrice_Log'] = np.log(df_train['SalePrice'])
@@ -751,17 +751,12 @@ print("Kurtosis: %f" % df_train['SalePrice_Log'].kurt())
 # dropping old column
 df_train.drop('SalePrice', axis= 1, inplace=True)
 ```
+> Skewness: 0.121335
+> Kurtosis: 0.809532
 
-    Skewness: 0.121335
-    Kurtosis: 0.809532
-    
-
-
-![png](notebook_files/notebook_13_1.png)
-
+![png](/images/house-prices/notebook_13_1.png)
 
 ### Numerical and Categorical Features
-
 
 ```python
 numerical_feats = df_train.dtypes[df_train.dtypes != "object"].index
@@ -771,10 +766,8 @@ categorical_feats = df_train.dtypes[df_train.dtypes == "object"].index
 print("Number of Categorical features: ", len(categorical_feats))
 ```
 
-    Number of Numerical features:  38
-    Number of Categorical features:  43
-    
-
+> Number of Numerical features:  38
+> Number of Categorical features:  43
 
 ```python
 print(df_train[numerical_feats].columns)
@@ -800,15 +793,10 @@ print(df_train[categorical_feats].columns)
            'GarageCond', 'PavedDrive', 'PoolQC', 'Fence', 'MiscFeature',
            'SaleType', 'SaleCondition'],
           dtype='object')
-    
-
 
 ```python
 df_train[numerical_feats].head()
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -977,15 +965,9 @@ df_train[numerical_feats].head()
 <p>5 rows × 38 columns</p>
 </div>
 
-
-
-
 ```python
 df_train[categorical_feats].head()
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -1154,10 +1136,7 @@ df_train[categorical_feats].head()
 <p>5 rows × 43 columns</p>
 </div>
 
-
-
 ### Features with missing values
-
 
 ```python
 total = df_train.isnull().sum().sort_values(ascending=False)
@@ -1165,9 +1144,6 @@ percent = (df_train.isnull().sum()/df_train.isnull().count()).sort_values(ascend
 missing_data = pd.concat([total, percent], axis=1, keys=['Total', 'Percent'])
 missing_data.head(20)
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -1296,10 +1272,10 @@ missing_data.head(20)
 </table>
 </div>
 
-
-
 ### Filling Missing values
-
+For a few columns there is lots of NaN entries.  
+However, reading the data description we find this is not missing data:  
+For PoolQC, NaN is not missing data but means no pool, likewise for Fence, FireplaceQu etc.
 
 ```python
 # columns where NaN values have meaning e.g. no pool etc.
@@ -1315,13 +1291,11 @@ for col in cols_fillna:
     df_test[col].fillna('None',inplace=True)
 ```
 
-
 ```python
 # fillna with mean for the remaining columns: LotFrontage, GarageYrBlt, MasVnrArea
 df_train.fillna(df_train.mean(), inplace=True)
 df_test.fillna(df_test.mean(), inplace=True)
 ```
-
 
 ```python
 total = df_train.isnull().sum().sort_values(ascending=False)
@@ -1329,9 +1303,6 @@ percent = (df_train.isnull().sum()/df_train.isnull().count()).sort_values(ascend
 missing_data = pd.concat([total, percent], axis=1, keys=['Total', 'Percent'])
 missing_data.head(5)
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -1385,35 +1356,25 @@ missing_data.head(5)
 </table>
 </div>
 
-
-
+**Checking missing values in train data ?**
 
 ```python
 df_train.isnull().sum().sum()
 ```
 
+> 0
 
-
-
-    0
-
-
-
+**Checking missing values in test data ?**
 
 ```python
 df_test.isnull().sum().sum()
 ```
 
+> 0
 
+### Log transform
 
-
-    0
-
-
-
-### log transform
 Like the target variable, also some of the feature values are not normally distributed and it is therefore better to use log values in df_train and df_test. Checking for skewness and kurtosis:
-
 
 ```python
 for col in numerical_feats:
@@ -1464,7 +1425,6 @@ for col in numerical_feats:
     SalePrice_Log   Skewness: 00.12     Kurtosis: 000.81
     
 
-
 ```python
 sns.distplot(df_train['GrLivArea']);
 #skewness and kurtosis
@@ -1472,14 +1432,10 @@ print("Skewness: %f" % df_train['GrLivArea'].skew())
 print("Kurtosis: %f" % df_train['GrLivArea'].kurt())
 ```
 
-    Skewness: 1.366560
-    Kurtosis: 4.895121
-    
+> Skewness: 1.366560
+> Kurtosis: 4.895121
 
-
-![png](notebook_files/notebook_29_1.png)
-
-
+![png](/images/house-prices/notebook_29_1.png)
 
 ```python
 sns.distplot(df_train['LotArea']);
@@ -1488,14 +1444,10 @@ print("Skewness: %f" % df_train['LotArea'].skew())
 print("Kurtosis: %f" % df_train['LotArea'].kurt())
 ```
 
-    Skewness: 12.207688
-    Kurtosis: 203.243271
-    
+> Skewness: 12.207688
+> Kurtosis: 203.243271
 
-
-![png](notebook_files/notebook_30_1.png)
-
-
+![png](/images/house-prices/notebook_30_1.png)
 
 ```python
 for df in [df_train, df_test]:
@@ -1507,7 +1459,6 @@ for df in [df_train, df_test]:
 numerical_feats = df_train.dtypes[df_train.dtypes != "object"].index
 ```
 
-
 ```python
 sns.distplot(df_train['GrLivArea_Log']);
 #skewness and kurtosis
@@ -1515,14 +1466,10 @@ print("Skewness: %f" % df_train['GrLivArea_Log'].skew())
 print("Kurtosis: %f" % df_train['GrLivArea_Log'].kurt())
 ```
 
-    Skewness: -0.006995
-    Kurtosis: 0.282603
-    
+> Skewness: -0.006995
+> Kurtosis: 0.282603
 
-
-![png](notebook_files/notebook_32_1.png)
-
-
+![png](/images/house-prices/notebook_32_1.png)
 
 ```python
 sns.distplot(df_train['LotArea_Log']);
@@ -1531,28 +1478,14 @@ print("Skewness: %f" % df_train['LotArea_Log'].skew())
 print("Kurtosis: %f" % df_train['LotArea_Log'].kurt())
 ```
 
-    Skewness: -0.137994
-    Kurtosis: 4.713358
-    
+> Skewness: -0.137994
+> Kurtosis: 4.713358
 
-
-![png](notebook_files/notebook_33_1.png)
-
-
-
-```python
-
-```
-
-
-```python
-
-```
+![png](/images/house-prices/notebook_33_1.png)
 
 ## Relation of features to target (SalePrice_log)
 
 ### Plots of relation to target for all numerical features
-
 
 ```python
 nr_rows = 12
@@ -1573,14 +1506,12 @@ for r in range(0,nr_rows):
             stp = stats.pearsonr(df_train[li_plot_num_feats[i]], df_train[target])
             str_title = "r = " + "{0:.2f}".format(stp[0]) + "      " "p = " + "{0:.2f}".format(stp[1])
             axs[r][c].set_title(str_title,fontsize=11)
-            
-plt.tight_layout()    
+
+plt.tight_layout()
 plt.show()
 ```
 
-
-![png](notebook_files/notebook_38_0.png)
-
+![png](/images/house-prices/notebook_38_0.png)
 
 **Conclusion from EDA on numerical columns:**
 
@@ -1590,18 +1521,22 @@ For this kernel I decided to use only those features for prediction that have a 
 This threshold value can be choosen in the global settings : min_val_corr  
 
 With the default threshold for min_val_corr = 0.4, these features are dropped in Part 2, Data Wrangling:  
-'Id', 'MSSubClass', 'LotArea', 'OverallCond', 'BsmtFinSF2', 'BsmtUnfSF',  'LowQualFinSF',  'BsmtFullBath', 'BsmtHalfBath', 'HalfBath',   
+'Id', 'MSSubClass', 'LotArea', 'OverallCond', 'BsmtFinSF2', 'BsmtUnfSF',  'LowQualFinSF',  'BsmtFullBath', 'BsmtHalfBath', 'HalfBath',
 'BedroomAbvGr', 'KitchenAbvGr', 'EnclosedPorch', '3SsnPorch', 'ScreenPorch', 'PoolArea', 'MiscVal', 'MoSold', 'YrSold'
 
 We also see that the entries for some of the numerical columns are in fact categorical values.  
 For example, the numbers for 'OverallQual' and 'MSSubClass' represent a certain group for that feature ( see data description txt)
 
+**Outliers**
 
 ```python
 df_train = df_train.drop(df_train[(df_train['OverallQual']==10) & (df_train['SalePrice_Log']<12.3)].index)
 df_train = df_train.drop(df_train[(df_train['GrLivArea_Log']>8.3) & (df_train['SalePrice_Log']<12.5)].index)
 ```
 
+**Find columns with strong correlation to target**  
+Only those with r > min_val_corr are used in the ML Regressors in Part 3  
+The value for min_val_corr can be chosen in global settings
 
 ```python
 corr = df_train.corr()
@@ -1614,6 +1549,7 @@ cols_abv_corr_limit = list(ser_corr[ser_corr.values > min_val_corr].index)
 cols_bel_corr_limit = list(ser_corr[ser_corr.values <= min_val_corr].index)
 ```
 
+### List of numerical features and their correlation coefficient to target
 
 ```python
 print(ser_corr)
@@ -1666,10 +1602,8 @@ print(cols_bel_corr_limit)
     ['SalePrice_Log', 'OverallQual', 'GrLivArea_Log', 'GarageCars', 'GarageArea', 'TotalBsmtSF', '1stFlrSF', 'FullBath', 'YearBuilt', 'YearRemodAdd', 'TotRmsAbvGrd', 'GarageYrBlt', 'Fireplaces', 'MasVnrArea', 'LotArea_Log']
     List of numerical features with r below min_val_corr :
     ['BsmtFinSF1', 'LotFrontage', 'WoodDeckSF', 'OpenPorchSF', '2ndFlrSF', 'HalfBath', 'BsmtFullBath', 'BsmtUnfSF', 'BedroomAbvGr', 'EnclosedPorch', 'KitchenAbvGr', 'ScreenPorch', 'PoolArea', 'MSSubClass', 'MoSold', '3SsnPorch', 'LowQualFinSF', 'YrSold', 'OverallCond', 'MiscVal', 'Id', 'BsmtHalfBath', 'BsmtFinSF2']
-    
 
 ### List of categorical features and their unique values
-
 
 ```python
 for catg in list(categorical_feats) :
@@ -2029,10 +1963,8 @@ for catg in list(categorical_feats) :
     AdjLand       4
     Name: SaleCondition, dtype: int64
     ##################################################
-    
 
 ### Relation to SalePrice for all categorical features
-
 
 ```python
 li_cat_feats = list(categorical_feats)
@@ -2046,14 +1978,12 @@ for r in range(0,nr_rows):
         i = r*nr_cols+c
         if i < len(li_cat_feats):
             sns.boxplot(x=li_cat_feats[i], y=target, data=df_train, ax = axs[r][c])
-    
-plt.tight_layout()    
+
+plt.tight_layout()
 plt.show()
 ```
 
-
-![png](notebook_files/notebook_46_0.png)
-
+![png](/images/house-prices/notebook_46_0.png)
 
 **Conclusion from EDA on categorical columns:**
 
@@ -2081,6 +2011,7 @@ catg_weak_corr = ['Street', 'Alley', 'LotShape', 'LandContour', 'Utilities', 'Lo
 ```
 
 ### Correlation matrix 1
+
 **Features with largest correlation to SalePrice_Log**  
 all numerical features with correlation coefficient above threshold 
 
@@ -2095,31 +2026,25 @@ plot_corr_matrix(df_train, nr_feats, target)
 ```
 
 
-![png](notebook_files/notebook_51_0.png)
+![png](/images/house-prices/notebook_51_0.png)
 
 
 **Of those features with the largest correlation to SalePrice, some also are correlated strongly to each other.**
-
-
 **To avoid failures of the ML regression models due to multicollinearity, these are dropped in part 2.**
-
-
 **This is optional and controlled by the switch drop_similar (global settings)**
 
 ## Data Wrangling
 
-**Drop all columns with only small correlation to SalePrice**  
-**Transform Categorical to numerical **  
-**Handling columns with missing data**  
-**Log values**  
-**Drop all columns with strong correlation to similar features**  
+**Drop all columns with only small correlation to SalePrice**
+**Transform Categorical to numerical**
+**Handling columns with missing data**
+**Log values**
+**Drop all columns with strong correlation to similar features**
 
 Numerical columns : drop similar and low correlation
-
 Categorical columns : Transform  to numerical
 
 ### Dropping all columns with weak correlation to SalePrice
-
 
 ```python
 id_test = df_test['Id']
@@ -2133,11 +2058,11 @@ for df in [df_train, df_test]:
     df.drop(cols_to_drop, inplace= True, axis = 1)
 ```
 
-### Convert categorical columns to numerical  
+### Convert categorical columns to numerical
+
 For those categorcial features where the EDA with boxplots seem to show a strong dependence of the SalePrice on the category, we transform the columns to numerical.
 To investigate the relation of the categories to SalePrice in more detail, we make violinplots for these features 
 Also, we look at the mean of SalePrice as function of category.
-
 
 ```python
 catg_list = catg_strong_corr.copy()
@@ -2148,42 +2073,23 @@ for catg in catg_list :
     plt.show()
 ```
 
+![png](/images/house-prices/notebook_59_0.png)
 
-![png](notebook_files/notebook_59_0.png)
+![png](/images/house-prices/notebook_59_1.png)
 
+![png](/images/house-prices/notebook_59_2.png)
 
+![png](/images/house-prices/notebook_59_3.png)
 
-![png](notebook_files/notebook_59_1.png)
+![png](/images/house-prices/notebook_59_4.png)
 
+![png](/images/house-prices/notebook_59_5.png)
 
+![png](/images/house-prices/notebook_59_6.png)
 
-![png](notebook_files/notebook_59_2.png)
+![png](/images/house-prices/notebook_59_7.png)
 
-
-
-![png](notebook_files/notebook_59_3.png)
-
-
-
-![png](notebook_files/notebook_59_4.png)
-
-
-
-![png](notebook_files/notebook_59_5.png)
-
-
-
-![png](notebook_files/notebook_59_6.png)
-
-
-
-![png](notebook_files/notebook_59_7.png)
-
-
-
-![png](notebook_files/notebook_59_8.png)
-
-
+![png](/images/house-prices/notebook_59_8.png)
 
 ```python
 fig, ax = plt.subplots()
@@ -2193,10 +2099,7 @@ plt.xticks(rotation=45)
 plt.show()
 ```
 
-
-![png](notebook_files/notebook_60_0.png)
-
-
+![png](/images/house-prices/notebook_60_0.png)
 
 ```python
 for catg in catg_list :
@@ -2269,7 +2172,6 @@ for catg in catg_list :
     Oth      11.675295
     WD       11.991061
     Name: SalePrice_Log, dtype: float64
-    
 
 
 ```python
@@ -2291,27 +2193,26 @@ SlTy_catg3 = ['CWD']
 SlTy_catg4 = ['New', 'Con']
 ```
 
-
 ```python
 for df in [df_train, df_test]:
-    
-    df['MSZ_num'] = 1  
-    df.loc[(df['MSZoning'].isin(msz_catg2) ), 'MSZ_num'] = 2    
-    df.loc[(df['MSZoning'].isin(msz_catg3) ), 'MSZ_num'] = 3        
-    
-    df['NbHd_num'] = 1       
-    df.loc[(df['Neighborhood'].isin(nbhd_catg2) ), 'NbHd_num'] = 2    
-    df.loc[(df['Neighborhood'].isin(nbhd_catg3) ), 'NbHd_num'] = 3    
 
-    df['Cond2_num'] = 1       
-    df.loc[(df['Condition2'].isin(cond2_catg2) ), 'Cond2_num'] = 2    
-    df.loc[(df['Condition2'].isin(cond2_catg3) ), 'Cond2_num'] = 3    
-    
-    df['Mas_num'] = 1       
-    df.loc[(df['MasVnrType'] == 'Stone' ), 'Mas_num'] = 2 
-    
-    df['ExtQ_num'] = 1       
-    df.loc[(df['ExterQual'] == 'TA' ), 'ExtQ_num'] = 2     
+    df['MSZ_num'] = 1  
+    df.loc[(df['MSZoning'].isin(msz_catg2) ), 'MSZ_num'] = 2
+    df.loc[(df['MSZoning'].isin(msz_catg3) ), 'MSZ_num'] = 3
+
+    df['NbHd_num'] = 1
+    df.loc[(df['Neighborhood'].isin(nbhd_catg2) ), 'NbHd_num'] = 2
+    df.loc[(df['Neighborhood'].isin(nbhd_catg3) ), 'NbHd_num'] = 3
+
+    df['Cond2_num'] = 1
+    df.loc[(df['Condition2'].isin(cond2_catg2) ), 'Cond2_num'] = 2
+    df.loc[(df['Condition2'].isin(cond2_catg3) ), 'Cond2_num'] = 3
+
+    df['Mas_num'] = 1
+    df.loc[(df['MasVnrType'] == 'Stone' ), 'Mas_num'] = 2
+
+    df['ExtQ_num'] = 1
+    df.loc[(df['ExterQual'] == 'TA' ), 'ExtQ_num'] = 2
     df.loc[(df['ExterQual'] == 'Gd' ), 'ExtQ_num'] = 3     
     df.loc[(df['ExterQual'] == 'Ex' ), 'ExtQ_num'] = 4     
    
@@ -2356,22 +2257,18 @@ for r in range(0,nr_rows):
             stp = stats.pearsonr(df_train[new_col_num[i]], df_train[target])
             str_title = "r = " + "{0:.2f}".format(stp[0]) + "      " "p = " + "{0:.2f}".format(stp[1])
             axs[r][c].set_title(str_title,fontsize=11)
-            
-plt.tight_layout()    
+
+plt.tight_layout()
 plt.show()  
 ```
 
-
-![png](notebook_files/notebook_65_0.png)
-
+![png](/images/house-prices/notebook_65_0.png)
 
 There are few columns with quite large correlation to SalePrice (NbHd_num, ExtQ_num, BsQ_num, KiQ_num).  
 These will probably be useful for optimal performance of the Regressors in part 3.
 
 **Dropping the converted categorical columns and the new numerical columns with weak correlation**
-
 **columns and correlation before dropping**
-
 
 ```python
 catg_cols_to_drop = ['Neighborhood' , 'Condition2', 'MasVnrType', 'ExterQual', 'BsmtQual','CentralAir', 'Electrical', 'KitchenQual', 'SaleType']
@@ -2417,10 +2314,9 @@ for df in [df_train, df_test] :
     Elc_num          0.304857
     Cond2_num        0.107610
     Name: SalePrice_Log, dtype: float64
-    
+
 
 **columns and correlation after dropping**
-
 
 ```python
 corr2 = df_train.corr()
@@ -2457,13 +2353,9 @@ print(ser_corr_2)
 
 **new dataframes**
 
-
 ```python
 df_train.head()
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -2632,15 +2524,9 @@ df_train.head()
 <p>5 rows × 21 columns</p>
 </div>
 
-
-
-
 ```python
 df_test.head()
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -2802,11 +2688,8 @@ df_test.head()
 </table>
 </div>
 
-
-
 **List of all features with strong correlation to SalePrice_Log**  
 after dropping all coumns with weak correlation
-
 
 ```python
 corr = df_train.corr()
@@ -2837,19 +2720,16 @@ print (corr_abs.nlargest(nr_all_cols, target)[target])
     MSZ_num          0.409423
     LotArea_Log      0.402814
     Name: SalePrice_Log, dtype: float64
-    
+
 
 ### Correlation Matrix 2 : All features with strong correlation to SalePrice
-
 
 ```python
 nr_feats=len(df_train.columns)
 plot_corr_matrix(df_train, nr_feats, target)
 ```
 
-
-![png](notebook_files/notebook_78_0.png)
-
+![png](/images/house-prices/notebook_78_0.png)
 
 **Check for Multicollinearity**
 
@@ -2865,17 +2745,15 @@ Strong correlation of these features to other, similar features:
 
 **Of those features we drop the one that has smaller correlation coeffiecient to Target.**
 
-
 ```python
 cols = corr_abs.nlargest(nr_all_cols, target)[target].index
 cols = list(cols)
 
 if drop_similar == 1 :
     for col in ['GarageArea','1stFlrSF','TotRmsAbvGrd','GarageYrBlt'] :
-        if col in cols: 
+        if col in cols:
             cols.remove(col)
 ```
-
 
 ```python
 cols = list(cols)
@@ -2883,7 +2761,7 @@ print(cols)
 ```
 
     ['SalePrice_Log', 'OverallQual', 'GrLivArea_Log', 'NbHd_num', 'ExtQ_num', 'GarageCars', 'KiQ_num', 'BsQ_num', 'TotalBsmtSF', 'FullBath', 'YearBuilt', 'YearRemodAdd', 'Fireplaces', 'MasVnrArea', 'MSZ_num', 'LotArea_Log']
-    
+
 
 **List of features used for the Regressors in Part 3**
 
@@ -2896,7 +2774,6 @@ print(feats)
 ```
 
     ['OverallQual', 'GrLivArea_Log', 'NbHd_num', 'ExtQ_num', 'GarageCars', 'KiQ_num', 'BsQ_num', 'TotalBsmtSF', 'FullBath', 'YearBuilt', 'YearRemodAdd', 'Fireplaces', 'MasVnrArea', 'MSZ_num', 'LotArea_Log']
-    
 
 
 ```python
@@ -2908,7 +2785,6 @@ y = df_train[target]
 
 ### StandardScaler
 
-
 ```python
 from sklearn.preprocessing import StandardScaler
 
@@ -2917,14 +2793,10 @@ df_train_ml_sc = sc.fit_transform(df_train_ml)
 df_test_ml_sc = sc.transform(df_test_ml)
 ```
 
-
 ```python
 df_train_ml_sc = pd.DataFrame(df_train_ml_sc)
 df_train_ml_sc.head()
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -3057,9 +2929,7 @@ df_train_ml_sc.head()
 </div>
 
 
-
 **Creating Datasets for ML algorithms**
-
 
 ```python
 X = df_train_ml.copy()
@@ -3114,15 +2984,10 @@ X_test.info()
     LotArea_Log      1459 non-null float64
     dtypes: float64(5), int64(10)
     memory usage: 171.1 KB
-    
-
 
 ```python
 X.head()
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -3254,15 +3119,9 @@ X.head()
 </table>
 </div>
 
-
-
-
 ```python
 X_sc.head()
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -3394,21 +3253,18 @@ X_sc.head()
 </table>
 </div>
 
-
-
 # Scikit-learn basic regression models and comparison of results
 
 **Test simple sklearn models and compare by metrics**
 
 **We test the following Regressors from scikit-learn:**  
-LinearRegression   
+Linear Regression
 Stochastic Gradient Descent  
 DecisionTreeRegressor  
 RandomForestRegressor  
 SVR
 
 **Model tuning and selection with GridSearchCV**
-
 
 ```python
 from sklearn.model_selection import GridSearchCV
@@ -3429,20 +3285,8 @@ grid_linear.fit(X, y)
 sc_linear = get_best_score(grid_linear)
 ```
 
-    Fitting 5 folds for each of 8 candidates, totalling 40 fits
-    
-
-    [Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
-    
-
-    0.13623435061672132
-    {'copy_X': True, 'fit_intercept': True, 'normalize': False}
-    LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, normalize=False)
-    
-
-    [Parallel(n_jobs=1)]: Done  40 out of  40 | elapsed:    0.4s finished
-    
-
+> Fitting 5 folds for each of 8 candidates, totalling 40 fits
+> 0.1362343506167217
 
 ```python
 linreg_sc = LinearRegression()
@@ -3453,18 +3297,8 @@ grid_linear_sc.fit(X_sc, y)
 sc_linear_sc = get_best_score(grid_linear_sc)
 ```
 
-    [Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
-    
-
-    Fitting 5 folds for each of 8 candidates, totalling 40 fits
-    0.13623435061672204
-    {'copy_X': True, 'fit_intercept': True, 'normalize': True}
-    LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, normalize=True)
-    
-
-    [Parallel(n_jobs=1)]: Done  40 out of  40 | elapsed:    0.3s finished
-    
-
+> Fitting 5 folds for each of 8 candidates, totalling 40 fits
+> 0.13623435061672204
 
 ```python
 linregr_all = LinearRegression()
@@ -3473,16 +3307,15 @@ pred_linreg_all = linregr_all.predict(X_test)
 pred_linreg_all[pred_linreg_all < 0] = pred_linreg_all.mean()
 ```
 
-
 ```python
 sub_linreg = pd.DataFrame()
 sub_linreg['Id'] = id_test
 sub_linreg['SalePrice'] = pred_linreg_all
 ```
 
-### SGDRegressor  
-Linear model fitted by minimizing a regularized empirical loss with SGD. SGD stands for Stochastic Gradient Descent: the gradient of the loss is estimated each sample at a time and the model is updated along the way with a decreasing strength schedule (aka learning rate). The regularizer is a penalty added to the loss function that shrinks model parameters towards the zero vector using either the squared euclidean norm L2 or the absolute norm L1 or a combination of both (Elastic Net). 
+### Stochastic Gradient Descent Regressor
 
+Linear model fitted by minimizing a regularized empirical loss with SGD. SGD stands for Stochastic Gradient Descent: the gradient of the loss is estimated each sample at a time and the model is updated along the way with a decreasing strength schedule (aka learning rate). The regularizer is a penalty added to the loss function that shrinks model parameters towards the zero vector using either the squared euclidean norm L2 or the absolute norm L1 or a combination of both (Elastic Net).
 
 ```python
 from sklearn.linear_model import SGDRegressor
@@ -3497,23 +3330,10 @@ sc_sgd = get_best_score(grid_sgd)
 pred_sgd = grid_sgd.predict(X_test_sc)
 ```
 
-    Fitting 5 folds for each of 1 candidates, totalling 5 fits
-    0.13740875157743374
-    {'alpha': 1e-05, 'epsilon': 0.01, 'fit_intercept': True, 'max_iter': 10000}
-    SGDRegressor(alpha=1e-05, average=False, early_stopping=False, epsilon=0.01,
-                 eta0=0.01, fit_intercept=True, l1_ratio=0.15,
-                 learning_rate='invscaling', loss='squared_loss', max_iter=10000,
-                 n_iter_no_change=5, penalty='l2', power_t=0.25, random_state=None,
-                 shuffle=True, tol=0.001, validation_fraction=0.1, verbose=0,
-                 warm_start=False)
-    
+> Fitting 5 folds for each of 1 candidates, totalling 5 fits
+> 0.13740875157743374
 
-    [Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
-    [Parallel(n_jobs=1)]: Done   5 out of   5 | elapsed:    0.0s finished
-    
-
-### DecisionTreeRegressor
-
+### Decision Tree Regressor
 
 ```python
 from sklearn.tree import DecisionTreeRegressor
@@ -3521,7 +3341,7 @@ from sklearn.tree import DecisionTreeRegressor
 param_grid = { 'max_depth' : [7,8,9,10] , 'max_features' : [11,12,13,14] ,
                'max_leaf_nodes' : [None, 12,15,18,20] ,'min_samples_split' : [20,25,30],
                 'presort': [False,True] , 'random_state': [5] }
-            
+
 grid_dtree = GridSearchCV(DecisionTreeRegressor(), param_grid, cv=nr_cv, refit=True, verbose=1, scoring = score_calc)
 grid_dtree.fit(X, y)
 
@@ -3530,24 +3350,8 @@ sc_dtree = get_best_score(grid_dtree)
 pred_dtree = grid_dtree.predict(X_test)
 ```
 
-    Fitting 5 folds for each of 480 candidates, totalling 2400 fits
-    
-
-    [Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
-    
-
-    0.18299182249476628
-    {'max_depth': 8, 'max_features': 14, 'max_leaf_nodes': None, 'min_samples_split': 20, 'presort': False, 'random_state': 5}
-    DecisionTreeRegressor(criterion='mse', max_depth=8, max_features=14,
-                          max_leaf_nodes=None, min_impurity_decrease=0.0,
-                          min_impurity_split=None, min_samples_leaf=1,
-                          min_samples_split=20, min_weight_fraction_leaf=0.0,
-                          presort=False, random_state=5, splitter='best')
-    
-
-    [Parallel(n_jobs=1)]: Done 2400 out of 2400 | elapsed:   19.4s finished
-    
-
+> Fitting 5 folds for each of 480 candidates, totalling 2400 fits
+> 0.18299182249476628
 
 ```python
 dtree_pred = grid_dtree.predict(X_test)
@@ -3556,8 +3360,7 @@ sub_dtree['Id'] = id_test
 sub_dtree['SalePrice'] = dtree_pred
 ```
 
-### RandomForestRegressor
-
+### Random Forest Regressor
 
 ```python
 from sklearn.ensemble import RandomForestRegressor
@@ -3569,26 +3372,8 @@ grid_rf.fit(X, y)
 sc_rf = get_best_score(grid_rf)
 ```
 
-    [Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
-    
-
-    Fitting 5 folds for each of 8 candidates, totalling 40 fits
-    
-
-    [Parallel(n_jobs=1)]: Done  40 out of  40 | elapsed:   20.1s finished
-    
-
-    0.1465978663015509
-    {'min_samples_split': 4, 'n_estimators': 100, 'random_state': 5}
-    RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
-                          max_features='auto', max_leaf_nodes=None,
-                          min_impurity_decrease=0.0, min_impurity_split=None,
-                          min_samples_leaf=1, min_samples_split=4,
-                          min_weight_fraction_leaf=0.0, n_estimators=100,
-                          n_jobs=None, oob_score=False, random_state=5, verbose=0,
-                          warm_start=False)
-    
-
+> Fitting 5 folds for each of 8 candidates, totalling 40 fits
+> 0.1465978663015509
 
 ```python
 pred_rf = grid_rf.predict(X_test)
@@ -3603,13 +3388,9 @@ if use_logvals == 1:
 sub_rf.to_csv('rf.csv',index=False)
 ```
 
-
 ```python
 sub_rf.head(10)
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -3689,14 +3470,12 @@ sub_rf.head(10)
 </div>
 
 
-
 ### KNN Regressor
-
 
 ```python
 from sklearn.neighbors import KNeighborsRegressor
 
-param_grid = {'n_neighbors' : [3,4,5,6,7,10,15] ,    
+param_grid = {'n_neighbors' : [3,4,5,6,7,10,15] ,
               'weights' : ['uniform','distance'] ,
               'algorithm' : ['ball_tree', 'kd_tree', 'brute']}
 
@@ -3706,22 +3485,8 @@ grid_knn.fit(X_sc, y_sc)
 sc_knn = get_best_score(grid_knn)
 ```
 
-    Fitting 5 folds for each of 42 candidates, totalling 210 fits
-    
-
-    [Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
-    
-
-    0.15615217437688825
-    {'algorithm': 'brute', 'n_neighbors': 5, 'weights': 'distance'}
-    KNeighborsRegressor(algorithm='brute', leaf_size=30, metric='minkowski',
-                        metric_params=None, n_jobs=None, n_neighbors=5, p=2,
-                        weights='distance')
-    
-
-    [Parallel(n_jobs=1)]: Done 210 out of 210 | elapsed:    2.9s finished
-    
-
+> Fitting 5 folds for each of 42 candidates, totalling 210 fits
+> 0.15615217437688825
 
 ```python
 pred_knn = grid_knn.predict(X_test_sc)
@@ -3738,12 +3503,10 @@ sub_knn.to_csv('knn.csv',index=False)
 
 ### Comparison plot: RMSE of all models
 
-
 ```python
 list_scores = [sc_linear, sc_sgd, sc_dtree, sc_rf, sc_knn]
 list_regressors = ['Linear','SGD','DTr','RF','KNN']
 ```
-
 
 ```python
 fig, ax = plt.subplots()
@@ -3753,12 +3516,9 @@ plt.ylabel('RMSE')
 plt.show()
 ```
 
-
-![png](notebook_files/notebook_115_0.png)
-
+![png](/images/house-prices/notebook_115_0.png)
 
 ### Correlation of model results
-
 
 ```python
 predictions = {'Linear': pred_linreg_all, 'SGD': pred_sgd, 'DTr': pred_dtree, 'RF': pred_rf,
@@ -3766,9 +3526,6 @@ predictions = {'Linear': pred_linreg_all, 'SGD': pred_sgd, 'DTr': pred_dtree, 'R
 df_predictions = pd.DataFrame(data=predictions) 
 df_predictions.corr()
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -3840,23 +3597,21 @@ df_predictions.corr()
 </table>
 </div>
 
-
-
-
 ```python
 plt.figure(figsize=(5, 5))
 sns.set(font_scale=1.25)
-sns.heatmap(df_predictions.corr(), linewidths=1.5, annot=True, square=True, 
+sns.heatmap(df_predictions.corr(), linewidths=1.5, annot=True, square=True,
                 fmt='.2f', annot_kws={'size': 10}, 
                 yticklabels=df_predictions.columns , xticklabels=df_predictions.columns
             )
 plt.show()
 ```
 
+![png](/images/house-prices/notebook_118_0.png)
 
-![png](notebook_files/notebook_118_0.png)
+Only for Random Forest and Decision Tree, the results are less correlated with the other Regressors.
 
-
+## Submission
 
 ```python
 sub_mean = pd.DataFrame()
@@ -3864,9 +3619,4 @@ sub_mean['Id'] = id_test
 sub_mean['SalePrice'] = np.round( ( pred_rf + pred_sgd) / 2.0 ) 
 sub_mean['SalePrice'] = sub_mean['SalePrice'].astype(float)
 sub_mean.to_csv('mean.csv',index=False)
-```
-
-
-```python
-
 ```

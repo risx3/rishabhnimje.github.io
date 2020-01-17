@@ -1718,10 +1718,10 @@ def reduce_mem_usage(df):
 train, NAlist = reduce_mem_usage(train)
 ```
 
-> Memory usage of properties dataframe is : 2005.0758361816406  MB
-> ******************************
-> Column:  building_id
-> dtype before:  int64
+    Memory usage of properties dataframe is : 2005.0758361816406  MB
+    ******************************
+    Column:  building_id
+    dtype before:  int64
     min for this col:  0
     max for this col:  1448
     dtype after:  uint16
@@ -1807,7 +1807,6 @@ train, NAlist = reduce_mem_usage(train)
     Memory usage is:  597.6668357849121  MB
     This is  29.807692307692307 % of the initial size
 
-
 ## LightGBM
 
 ```python
@@ -1869,6 +1868,7 @@ for i, (train_index, val_index) in enumerate(kf.split(train)):
     break
 print(error)
 ```
+
     16172879 16172880
     Training until validation scores don't improve for 20 rounds
     [20]	training's binary_logloss: 0.179465	valid_1's binary_logloss: 0.179322
@@ -1904,18 +1904,18 @@ print(error)
 sorted(zip(gbm_regress.feature_importance(), gbm_regress.feature_name()),reverse = True)
 ```
 
-    [(2349, 'building_id'),
-     (2111, 'square_feet'),
-     (1085, 'meter'),
-     (803, 'primary_use'),
-     (767, 'year_built'),
-     (740, 'month'),
-     (680, 'hour'),
-     (514, 'air_temperature'),
-     (253, 'dew_temperature'),
-     (205, 'weekend'),
-     (158, 'day'),
-     (25, 'cloud_coverage')]
+> [(2349, 'building_id'),
+> (2111, 'square_feet'),
+> (1085, 'meter'),
+> (803, 'primary_use'),
+> (767, 'year_built'),
+> (740, 'month'),
+> (680, 'hour'),
+> (514, 'air_temperature'),
+> (253, 'dew_temperature'),
+> (205, 'weekend'),
+> (158, 'day'),
+> (25, 'cloud_coverage')]
 
 ```python
 import gc
@@ -1929,8 +1929,10 @@ gc.collect()
 
 > 7550
 
+### Preparing test data
+
 ```python
-#preparing test data
+
 test = pd.read_csv("../input/ashrae-energy-prediction/test.csv")
 test = test.merge(building_df, left_on = "building_id", right_on = "building_id", how = "left")
 del building_df
