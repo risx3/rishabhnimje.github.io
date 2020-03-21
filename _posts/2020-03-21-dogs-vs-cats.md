@@ -12,7 +12,8 @@ mathjax: "true"
 ## Overview
 Here you'll write an algorithm to classify whether images contain either a dog or a cat. This is easy for humans, dogs, and cats. Your computer will find it a bit more difficult.
 
-*The Asirra data set*
+**The Asirra data set**
+
 Web services are often protected with a challenge that's supposed to be easy for people to solve, but difficult for computers. Such a challenge is often called a CAPTCHA (Completely Automated Public Turing test to tell Computers and Humans Apart) or HIP (Human Interactive Proof). HIPs are used for many purposes, such as to reduce email and blog spam and prevent brute-force attacks on web site passwords.
 
 Asirra (Animal Species Image Recognition for Restricting Access) is a HIP that works by asking users to identify photographs of cats and dogs. This task is difficult for computers, but studies have shown that people can accomplish it quickly and accurately. Many even think it's fun! Here is an example of the Asirra interface:
@@ -56,7 +57,7 @@ with ZipFile(file_test,'r') as zip:
     print('Test Extract Done!')
 ```
 
-> Train Extract Done!
+> Train Extract Done!<br>
 > Test Extract Done!
     
 
@@ -65,7 +66,7 @@ print('Train Data ',len(os.listdir('/train/train/')))
 print('Test Data ',len(os.listdir('/test1/test1/')))
 ```
 
-> Train Data  25000
+> Train Data  25000<br>
 > Test Data  12500
     
 
@@ -98,6 +99,8 @@ X_train = np.array(X_train).reshape(-1, 80,80,1)
 y_train = np.array(y_train)
 X_train = X_train/255.0
 ```
+
+## Creating Model
 
 ```python
 model = Sequential()
