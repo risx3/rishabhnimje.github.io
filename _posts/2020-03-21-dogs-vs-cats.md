@@ -31,7 +31,6 @@ import os
     Using TensorFlow backend.
     
 
-
 ```python
 file_name = "/kaggle/input/dogs-vs-cats/train.zip"
 file_test = "/kaggle/input/dogs-vs-cats/test1.zip"
@@ -49,7 +48,6 @@ with ZipFile(file_test,'r') as zip:
     Test Extract Done!
     
 
-
 ```python
 print('Train Data ',len(os.listdir('/train/train/')))
 print('Test Data ',len(os.listdir('/test1/test1/')))
@@ -58,7 +56,6 @@ print('Test Data ',len(os.listdir('/test1/test1/')))
     Train Data  25000
     Test Data  12500
     
-
 
 ```python
 train_path = '/train/train/'
@@ -70,10 +67,7 @@ for p in os.listdir(train_path):
     break
 ```
 
-
-![png](notebook_files/notebook_3_0.png)
-
-
+![png](/images/dogs-vs-cats/notebook_3_0.png)
 
 ```python
 X_train = []
@@ -92,7 +86,6 @@ X_train = np.array(X_train).reshape(-1, 80,80,1)
 y_train = np.array(y_train)
 X_train = X_train/255.0
 ```
-
 
 ```python
 model = Sequential()
@@ -150,7 +143,6 @@ model.summary()
     _________________________________________________________________
     
 
-
 ```python
 history = model.fit(X_train, y_train, epochs=20, batch_size=200, validation_split=0.2)
 ```
@@ -198,7 +190,6 @@ history = model.fit(X_train, y_train, epochs=20, batch_size=200, validation_spli
     20000/20000 [==============================] - 2s 110us/step - loss: 0.0310 - accuracy: 0.9904 - val_loss: 0.9238 - val_accuracy: 0.8246
     
 
-
 ```python
 import matplotlib.pyplot as plt
 acc = history.history['accuracy']
@@ -215,14 +206,7 @@ plt.figure()
 plt.show()
 ```
 
-
-![png](notebook_files/notebook_7_0.png)
-
-
-
-    <Figure size 432x288 with 0 Axes>
-
-
+![png](/images/dogs-vs-cats/notebook_7_0.png)
 
 ```python
 test_path = "/test1/test1/"
@@ -240,12 +224,10 @@ X_test = np.array(X_test).reshape(-1,80,80,1)
 X_test = X_test/255
 ```
 
-
 ```python
 predictions = model.predict(X_test)
 predicted_val = [int(round(p[0])) for p in predictions]
 ```
-
 
 ```python
 submission_df = pd.DataFrame({'id':id_line, 'label':predicted_val})
