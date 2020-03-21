@@ -10,10 +10,22 @@ mathjax: "true"
 ---
 
 ## Overview
+Here you'll write an algorithm to classify whether images contain either a dog or a cat. This is easy for humans, dogs, and cats. Your computer will find it a bit more difficult.
+
+*The Asirra data set*
+Web services are often protected with a challenge that's supposed to be easy for people to solve, but difficult for computers. Such a challenge is often called a CAPTCHA (Completely Automated Public Turing test to tell Computers and Humans Apart) or HIP (Human Interactive Proof). HIPs are used for many purposes, such as to reduce email and blog spam and prevent brute-force attacks on web site passwords.
+
+Asirra (Animal Species Image Recognition for Restricting Access) is a HIP that works by asking users to identify photographs of cats and dogs. This task is difficult for computers, but studies have shown that people can accomplish it quickly and accurately. Many even think it's fun! Here is an example of the Asirra interface:
+
+Asirra is unique because of its partnership with Petfinder.com, the world's largest site devoted to finding homes for homeless pets. They've provided Microsoft Research with over three million images of cats and dogs, manually classified by people at thousands of animal shelters across the United States. Kaggle is fortunate to offer a subset of this data for fun and research.
 
 ## Data Description
+The training archive contains 25,000 images of dogs and cats. Train your algorithm on these files and predict the labels for test1.zip (1 = dog, 0 = cat).
 
 ## Files
+
+* test1.zip
+* train.zip
 
 ## So let's begin here...
 
@@ -28,7 +40,7 @@ from zipfile import ZipFile
 import os
 ```
 
-    Using TensorFlow backend.
+> Using TensorFlow backend.
     
 
 ```python
@@ -44,8 +56,8 @@ with ZipFile(file_test,'r') as zip:
     print('Test Extract Done!')
 ```
 
-    Train Extract Done!
-    Test Extract Done!
+> Train Extract Done!
+> Test Extract Done!
     
 
 ```python
@@ -53,8 +65,8 @@ print('Train Data ',len(os.listdir('/train/train/')))
 print('Test Data ',len(os.listdir('/test1/test1/')))
 ```
 
-    Train Data  25000
-    Test Data  12500
+> Train Data  25000
+> Test Data  12500
     
 
 ```python
