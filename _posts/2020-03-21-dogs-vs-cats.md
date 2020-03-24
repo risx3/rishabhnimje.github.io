@@ -43,6 +43,7 @@ import os
 
 > Using TensorFlow backend.
     
+### Extracting Files from zip file
 
 ```python
 file_name = "/kaggle/input/dogs-vs-cats/train.zip"
@@ -60,6 +61,7 @@ with ZipFile(file_test,'r') as zip:
 > Train Extract Done!<br>
 > Test Extract Done!
     
+### Number of training data and testing data
 
 ```python
 print('Train Data ',len(os.listdir('/train/train/')))
@@ -157,6 +159,7 @@ model.summary()
     Non-trainable params: 0
     _________________________________________________________________
     
+## Fitting Data in Model
 
 ```python
 history = model.fit(X_train, y_train, epochs=20, batch_size=200, validation_split=0.2)
@@ -205,6 +208,8 @@ history = model.fit(X_train, y_train, epochs=20, batch_size=200, validation_spli
     20000/20000 [==============================] - 2s 110us/step - loss: 0.0310 - accuracy: 0.9904 - val_loss: 0.9238 - val_accuracy: 0.8246
     
 
+## Plotting Training and Validation Accuracy
+
 ```python
 import matplotlib.pyplot as plt
 acc = history.history['accuracy']
@@ -247,4 +252,28 @@ predicted_val = [int(round(p[0])) for p in predictions]
 ```python
 submission_df = pd.DataFrame({'id':id_line, 'label':predicted_val})
 submission_df.to_csv("submission.csv", index=False)
+```
+
+```python
+sample_test = submission_df.head(60)
+plt.figure(figsize=(12, 24))
+for index, row in sample_test.iterrows():
+    filename = row['id']
+    category = row['label']
+    img = load_img("/test1/test1/"+filename+".jpg", target_size=(128,128))
+    plt.subplot(10, 6, index+1)
+    plt.imshow(img)
+    if(category == 1):
+        plt.xlabel( '(' + "Dog"+ ')' )
+    else:
+        plt.xlabel( '(' + "Cat"+ ')' )
+plt.tight_layout()
+plt.show()
+```
+
+![png](/images/dogs-vs-cats/notebook_17_0.png)
+
+
+```python
+model.save_weights("model.h5")
 ```
