@@ -71,6 +71,7 @@ print('Test Data ',len(os.listdir('/test1/test1/')))
 > Train Data  25000<br>
 > Test Data  12500
     
+### Opening a Train Image
 
 ```python
 train_path = '/train/train/'
@@ -228,6 +229,8 @@ plt.show()
 
 ![png](/images/dogs-vs-cats/notebook_7_0.png)
 
+## Preprocessing Test Data
+
 ```python
 test_path = "/test1/test1/"
 
@@ -254,6 +257,14 @@ submission_df = pd.DataFrame({'id':id_line, 'label':predicted_val})
 submission_df.to_csv("submission.csv", index=False)
 ```
 
+## Saving Model
+
+```python
+model.save_weights("model.h5")
+```
+
+## Predicting Test Images
+
 ```python
 sample_test = submission_df.head(60)
 plt.figure(figsize=(12, 24))
@@ -272,8 +283,3 @@ plt.show()
 ```
 
 ![png](/images/dogs-vs-cats/notebook_17_0.png)
-
-
-```python
-model.save_weights("model.h5")
-```
