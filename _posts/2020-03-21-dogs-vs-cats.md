@@ -283,3 +283,5 @@ plt.show()
 ```
 
 ![png](/images/dogs-vs-cats/notebook_17_0.png)
+
+## Model Deployment
