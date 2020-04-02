@@ -260,7 +260,7 @@ submission_df.to_csv("submission.csv", index=False)
 ## Saving Model
 
 ```python
-model.save_weights("model.h5")
+model.save("model.h5")
 ```
 
 ## Predicting Test Images

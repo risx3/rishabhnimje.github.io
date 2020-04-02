@@ -54,932 +54,290 @@ The evaluation metric for this contest is the categorization accuracy, or the pr
 
 You can find the dataset [here](https://www.kaggle.com/c/digit-recognizer/data).
 
+
 ## So let's begin here...
+
 
 ```python
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
-from collections import Counter
-from subprocess import check_output
-from sklearn.metrics import confusion_matrix
-import itertools
-%matplotlib inline
-
-# Input data files are available in the "../input/" directory.
-
+import warnings
+warnings.filterwarnings('ignore')
 import os
-for dirname, _, filenames in os.walk('/kaggle/input'):
-    for filename in filenames:
-        print(os.path.join(dirname, filename))
-
+print(os.listdir("../input/digit-recognizer"))
 ```
 
-> /kaggle/input/digit-recognizer/train.csv<br>
-> /kaggle/input/digit-recognizer/sample_submission.csv<br>
-> /kaggle/input/digit-recognizer/test.csv<br>
-
-## Load Data
+> ['sample_submission.csv', 'test.csv', 'train.csv']
 
 ```python
-train = pd.read_csv("/kaggle/input/digit-recognizer/train.csv")
-test = pd.read_csv("/kaggle/input/digit-recognizer/test.csv")
-print(train.shape)
-train.head()
+FAST_RUN=False
+batch_size=32
+epochs=100
+if FAST_RUN:
+    epochs=1
 ```
 
-> (42000, 785)
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>label</th>
-      <th>pixel0</th>
-      <th>pixel1</th>
-      <th>pixel2</th>
-      <th>pixel3</th>
-      <th>pixel4</th>
-      <th>pixel5</th>
-      <th>pixel6</th>
-      <th>pixel7</th>
-      <th>pixel8</th>
-      <th>...</th>
-      <th>pixel774</th>
-      <th>pixel775</th>
-      <th>pixel776</th>
-      <th>pixel777</th>
-      <th>pixel778</th>
-      <th>pixel779</th>
-      <th>pixel780</th>
-      <th>pixel781</th>
-      <th>pixel782</th>
-      <th>pixel783</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>4</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 785 columns</p>
-</div>
-
-## Count for each digit
-
-```python
-z_train = Counter(train['label'])
-z_train
-```
-
-    Counter({1: 4684,
-             0: 4132,
-             4: 4072,
-             7: 4401,
-             3: 4351,
-             5: 3795,
-             8: 4063,
-             9: 4188,
-             2: 4177,
-             6: 4137})
+## Load data
+Data input train and test data
 
 
 ```python
-sns.countplot(train['label'])
+train_data = pd.read_csv("../input/digit-recognizer/train.csv")
+test_data = pd.read_csv("../input/digit-recognizer/test.csv")
 ```
 
-![png](/images/digit-recognizer/digit-recognizer_4_1.png)
+## Data exploration
 
-## Reshaping Data
+**Columns**
 
 ```python
-print(test.shape)
-test.head()
+print(train_data.columns)
 ```
 
-> (28000, 784)
+    Index(['label', 'pixel0', 'pixel1', 'pixel2', 'pixel3', 'pixel4', 'pixel5',
+           'pixel6', 'pixel7', 'pixel8',
+           ...
+           'pixel774', 'pixel775', 'pixel776', 'pixel777', 'pixel778', 'pixel779',
+           'pixel780', 'pixel781', 'pixel782', 'pixel783'],
+          dtype='object', length=785)
 
+Our data have label and pixels column where label represent the digit and pixel presents pixel of image.
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>pixel0</th>
-      <th>pixel1</th>
-      <th>pixel2</th>
-      <th>pixel3</th>
-      <th>pixel4</th>
-      <th>pixel5</th>
-      <th>pixel6</th>
-      <th>pixel7</th>
-      <th>pixel8</th>
-      <th>pixel9</th>
-      <th>...</th>
-      <th>pixel774</th>
-      <th>pixel775</th>
-      <th>pixel776</th>
-      <th>pixel777</th>
-      <th>pixel778</th>
-      <th>pixel779</th>
-      <th>pixel780</th>
-      <th>pixel781</th>
-      <th>pixel782</th>
-      <th>pixel783</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 784 columns</p>
-</div>
+**Show Image**<br>
+Lets form images from pixel data
 
 ```python
-x_train = (train.iloc[:,1:].values).astype('float32') # all pixel values
-y_train = train.iloc[:,0].values.astype('int32') # only labels
-x_test = test.values.astype('float32')
+def show_image(train_image, label, index):
+    image_shaped = train_image.values.reshape(28,28)
+    plt.subplot(3, 6, index+1)
+    plt.imshow(image_shaped, cmap=plt.cm.gray)
+    plt.title(label)
+
+
+plt.figure(figsize=(18, 8))
+sample_image = train_data.sample(18).reset_index(drop=True)
+for index, row in sample_image.iterrows():
+    label = row['label']
+    image_pixels = row.drop('label')
+    show_image(image_pixels, label, index)
+plt.tight_layout()
 ```
 
-```python
-%matplotlib inline
-# preview the images first
-plt.figure(figsize=(12,10))
-x, y = 10, 4
-for i in range(40):  
-    plt.subplot(y, x, i+1)
-    plt.imshow(x_train[i].reshape((28,28)),interpolation='nearest')
-plt.show()
-```
+![png](/images/digit-recognizer/notebook_10_0.png)
 
-![png](/images/digit-recognizer/digit-recognizer_7_0.png)
-
-## Normalizing The Data
+## Data Preparation
+We split data for test and train
 
 ```python
-x_train = x_train/255.0
-x_test = x_test/255.0
-```
-
-```python
-y_train
-```
-
-> array([1, 0, 1, ..., 7, 6, 9], dtype=int32)
-
-## Shape of the Datasets
-
-```python
-print('x_train shape:', x_train.shape)
-print(x_train.shape[0], 'train samples')
-print(x_test.shape[0], 'test samples')
-```
-
-> x_train shape: (42000, 784)<br>
-> 42000 train samples<br>
-> 28000 test samples<br>
-
-> ## Reshape our data
-
-```python
-X_train = x_train.reshape(x_train.shape[0], 28, 28,1)
-X_test = x_test.reshape(x_test.shape[0], 28, 28,1)
-```
-
-## Implementing Keras
-
-```python
-import keras
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPool2D
-from keras.layers.normalization import BatchNormalization
-from keras.preprocessing.image import ImageDataGenerator
-from keras.callbacks import ReduceLROnPlateau
 from sklearn.model_selection import train_test_split
-batch_size = 64
-num_classes = 10
-epochs = 20
-input_shape = (28, 28, 1)
-```
+from keras.utils import to_categorical
 
-### convert class vectors to binary class matrices
+x = train_data.drop(columns=['label']).values.reshape(train_data.shape[0],28,28,1)
+y = to_categorical(train_data['label'])
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.1)
+```
+> Using TensorFlow backend.
 
 ```python
-y_train = keras.utils.to_categorical(y_train, num_classes)
-X_train, X_val, Y_train, Y_val = train_test_split(X_train, y_train, test_size = 0.1, random_state=42)
+from keras.preprocessing.image import ImageDataGenerator
+
+train_datagen = ImageDataGenerator(
+    rotation_range=10, # randomly rotate images in the range (degrees, 0 to 180)
+    rescale=1./255,
+    shear_range=0.1,
+    zoom_range=0.1, # Randomly zoom image
+    width_shift_range=0.1, # randomly shift images horizontally (fraction of total width)
+    height_shift_range=0.1 # randomly shift images vertically (fraction of total height)
+)
+train_datagen.fit(x_train)
+train_generator = train_datagen.flow(
+    x_train,
+    y_train,
+    batch_size=batch_size
+)
+
+validation_datagen = ImageDataGenerator(rescale=1./255)
+train_datagen.fit(x_test)
+validation_generator = validation_datagen.flow(
+    x_test,
+    y_test
+)
 ```
 
-## Creating Linear Model
+## Build CNN Model
 
 ```python
+from keras.models import Sequential
+from keras.layers import Dense, Conv2D, Flatten, MaxPooling2D
+
 model = Sequential()
-model.add(Conv2D(32, kernel_size=(3, 3),activation='relu',kernel_initializer='he_normal',input_shape=input_shape))
-model.add(Conv2D(32, kernel_size=(3, 3),activation='relu',kernel_initializer='he_normal'))
-model.add(MaxPool2D((2, 2)))
-model.add(Dropout(0.20))
-model.add(Conv2D(64, (3, 3), activation='relu',padding='same',kernel_initializer='he_normal'))
-model.add(Conv2D(64, (3, 3), activation='relu',padding='same',kernel_initializer='he_normal'))
-model.add(MaxPool2D(pool_size=(2, 2)))
-model.add(Dropout(0.25))
-model.add(Conv2D(128, (3, 3), activation='relu',padding='same',kernel_initializer='he_normal'))
-model.add(Dropout(0.25))
+model.add(Conv2D(64, kernel_size=3, activation='relu', input_shape=(28,28,1)))
+model.add(Conv2D(32, kernel_size=3, activation='relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Flatten())
-model.add(Dense(128, activation='relu'))
-model.add(BatchNormalization())
-model.add(Dropout(0.25))
-model.add(Dense(num_classes, activation='softmax'))
-
-model.compile(loss=keras.losses.categorical_crossentropy,
-              optimizer=keras.optimizers.RMSprop(),
-              metrics=['accuracy'])
-
-learning_rate_reduction = ReduceLROnPlateau(monitor='val_acc', 
-                                            patience=3, 
-                                            verbose=1, 
-                                            factor=0.5, 
-                                            min_lr=0.0001)
-
-datagen = ImageDataGenerator(
-        featurewise_center=False,  # set input mean to 0 over the dataset
-        samplewise_center=False,  # set each sample mean to 0
-        featurewise_std_normalization=False,  # divide inputs by std of the dataset
-        samplewise_std_normalization=False,  # divide each input by its std
-        zca_whitening=False,  # apply ZCA whitening
-        rotation_range=15, # randomly rotate images in the range (degrees, 0 to 180)
-        zoom_range = 0.1, # Randomly zoom image 
-        width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
-        height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
-        horizontal_flip=False,  # randomly flip images
-        vertical_flip=False)  # randomly flip images
+model.add(Dense(10, activation='softmax'))
 ```
+
+## Compile Model
 
 ```python
-model.summary()
+model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
 ```
 
-    Model: "sequential_1"
-    _________________________________________________________________
-    Layer (type)                 Output Shape              Param #   
-    =================================================================
-    conv2d_1 (Conv2D)            (None, 26, 26, 32)        320       
-    _________________________________________________________________
-    conv2d_2 (Conv2D)            (None, 24, 24, 32)        9248      
-    _________________________________________________________________
-    max_pooling2d_1 (MaxPooling2 (None, 12, 12, 32)        0         
-    _________________________________________________________________
-    dropout_1 (Dropout)          (None, 12, 12, 32)        0         
-    _________________________________________________________________
-    conv2d_3 (Conv2D)            (None, 12, 12, 64)        18496     
-    _________________________________________________________________
-    conv2d_4 (Conv2D)            (None, 12, 12, 64)        36928     
-    _________________________________________________________________
-    max_pooling2d_2 (MaxPooling2 (None, 6, 6, 64)          0         
-    _________________________________________________________________
-    dropout_2 (Dropout)          (None, 6, 6, 64)          0         
-    _________________________________________________________________
-    conv2d_5 (Conv2D)            (None, 6, 6, 128)         73856     
-    _________________________________________________________________
-    dropout_3 (Dropout)          (None, 6, 6, 128)         0         
-    _________________________________________________________________
-    flatten_1 (Flatten)          (None, 4608)              0         
-    _________________________________________________________________
-    dense_1 (Dense)              (None, 128)               589952    
-    _________________________________________________________________
-    batch_normalization_1 (Batch (None, 128)               512       
-    _________________________________________________________________
-    dropout_4 (Dropout)          (None, 128)               0         
-    _________________________________________________________________
-    dense_2 (Dense)              (None, 10)                1290      
-    =================================================================
-    Total params: 730,602
-    Trainable params: 730,346
-    Non-trainable params: 256
-    _________________________________________________________________
-
+## Callbacks
 
 ```python
-datagen.fit(X_train)
-h = model.fit_generator(datagen.flow(X_train,Y_train, batch_size=batch_size),
-                              epochs = epochs, validation_data = (X_val,Y_val),
-                              verbose = 1, steps_per_epoch=X_train.shape[0] // batch_size
-                              , callbacks=[learning_rate_reduction],)
+from keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
+
+callbacks = [
+    EarlyStopping(patience=10, verbose=1),
+    ReduceLROnPlateau(factor=0.1, patience=3, min_lr=0.00001, verbose=1),
+    ModelCheckpoint('model.h5', verbose=1, save_best_only=True, save_weights_only=True)
+]
 ```
-
-    Epoch 1/20
-    590/590 [==============================] - 15s 26ms/step - loss: 0.3556 - accuracy: 0.8882 - val_loss: 0.0583 - val_accuracy: 0.9817
-    Epoch 2/20
-    590/590 [==============================] - 11s 19ms/step - loss: 0.1105 - accuracy: 0.9662 - val_loss: 0.0560 - val_accuracy: 0.9838
-    Epoch 3/20
-    590/590 [==============================] - 12s 20ms/step - loss: 0.0859 - accuracy: 0.9731 - val_loss: 0.0278 - val_accuracy: 0.9917
-    Epoch 4/20
-    590/590 [==============================] - 12s 20ms/step - loss: 0.0708 - accuracy: 0.9780 - val_loss: 0.0526 - val_accuracy: 0.9826
-    Epoch 5/20
-    590/590 [==============================] - 11s 19ms/step - loss: 0.0600 - accuracy: 0.9818 - val_loss: 0.0292 - val_accuracy: 0.9912
-    Epoch 6/20
-    590/590 [==============================] - 12s 20ms/step - loss: 0.0571 - accuracy: 0.9823 - val_loss: 0.0280 - val_accuracy: 0.9910
-    Epoch 7/20
-    590/590 [==============================] - 11s 19ms/step - loss: 0.0514 - accuracy: 0.9849 - val_loss: 0.0279 - val_accuracy: 0.9900
-    Epoch 8/20
-    590/590 [==============================] - 12s 20ms/step - loss: 0.0528 - accuracy: 0.9835 - val_loss: 0.0203 - val_accuracy: 0.9933
-    Epoch 9/20
-    590/590 [==============================] - 11s 19ms/step - loss: 0.0449 - accuracy: 0.9859 - val_loss: 0.0371 - val_accuracy: 0.9883
-    Epoch 10/20
-    590/590 [==============================] - 12s 20ms/step - loss: 0.0432 - accuracy: 0.9871 - val_loss: 0.0231 - val_accuracy: 0.9924
-    Epoch 11/20
-    590/590 [==============================] - 12s 20ms/step - loss: 0.0445 - accuracy: 0.9864 - val_loss: 0.0284 - val_accuracy: 0.9914
-    Epoch 12/20
-    590/590 [==============================] - 12s 21ms/step - loss: 0.0429 - accuracy: 0.9867 - val_loss: 0.0312 - val_accuracy: 0.9902
-    Epoch 13/20
-    590/590 [==============================] - 12s 20ms/step - loss: 0.0386 - accuracy: 0.9882 - val_loss: 0.0243 - val_accuracy: 0.9938
-    Epoch 14/20
-    590/590 [==============================] - 12s 20ms/step - loss: 0.0372 - accuracy: 0.9888 - val_loss: 0.0227 - val_accuracy: 0.9936
-    Epoch 15/20
-    590/590 [==============================] - 11s 19ms/step - loss: 0.0363 - accuracy: 0.9889 - val_loss: 0.0196 - val_accuracy: 0.9940
-    Epoch 16/20
-    590/590 [==============================] - 11s 19ms/step - loss: 0.0355 - accuracy: 0.9895 - val_loss: 0.0172 - val_accuracy: 0.9938
-    Epoch 17/20
-    590/590 [==============================] - 11s 19ms/step - loss: 0.0353 - accuracy: 0.9887 - val_loss: 0.0220 - val_accuracy: 0.9931
-    Epoch 18/20
-    590/590 [==============================] - 11s 19ms/step - loss: 0.0355 - accuracy: 0.9892 - val_loss: 0.0170 - val_accuracy: 0.9945
-    Epoch 19/20
-    590/590 [==============================] - 12s 20ms/step - loss: 0.0341 - accuracy: 0.9898 - val_loss: 0.0172 - val_accuracy: 0.9950
-    Epoch 20/20
-    590/590 [==============================] - 16s 27ms/step - loss: 0.0334 - accuracy: 0.9905 - val_loss: 0.0169 - val_accuracy: 0.9955
-
-
-## Basic Plot And Evaluation
+## Fit model
 
 ```python
-final_loss, final_acc = model.evaluate(X_val, Y_val, verbose=0)
-print("Final loss: {0:.6f}, final accuracy: {1:.6f}".format(final_loss, final_acc))
+model.fit_generator(
+    train_generator, 
+    steps_per_epoch=len(x_train) // batch_size, 
+    validation_data=validation_generator,
+    validation_steps=len(x_test) // batch_size,
+    epochs=epochs,
+    callbacks=callbacks
+)
 ```
-
-> Final loss: 0.016873, final accuracy: 0.995476
+    Epoch 1/100
+    1181/1181 [==============================] - 20s 17ms/step - loss: 0.3980 - accuracy: 0.8756 - val_loss: 0.0356 - val_accuracy: 0.9697
     
-```python
-# Look at confusion matrix
-# Note, this code is taken straight from the SKLEARN website, an nice way of viewing confusion matrix.
-def plot_confusion_matrix(cm, classes,
-                          normalize=False,
-                          title='Confusion matrix',
-                          cmap=plt.cm.Blues):
-    """
-    This function prints and plots the confusion matrix.
-    Normalization can be applied by setting `normalize=True`.
-    """
-    plt.imshow(cm, interpolation='nearest', cmap=cmap)
-    plt.title(title)
-    plt.colorbar()
-    tick_marks = np.arange(len(classes))
-    plt.xticks(tick_marks, classes, rotation=45)
-    plt.yticks(tick_marks, classes)
+    Epoch 00001: val_loss improved from inf to 0.03563, saving model to model.h5
+    Epoch 2/100
+    1181/1181 [==============================] - 17s 14ms/step - loss: 0.1723 - accuracy: 0.9492 - val_loss: 0.0228 - val_accuracy: 0.9777
+    
+    Epoch 00002: val_loss improved from 0.03563 to 0.02276, saving model to model.h5
+    Epoch 3/100
+    1181/1181 [==============================] - 16s 13ms/step - loss: 0.1320 - accuracy: 0.9618 - val_loss: 0.0169 - val_accuracy: 0.9834
+    
+    Epoch 00003: val_loss improved from 0.02276 to 0.01686, saving model to model.h5
+    Epoch 4/100
+    1181/1181 [==============================] - 16s 13ms/step - loss: 0.1109 - accuracy: 0.9674 - val_loss: 0.0058 - val_accuracy: 0.9760
+    
+    Epoch 00004: val_loss improved from 0.01686 to 0.00576, saving model to model.h5
+    Epoch 5/100
+    1181/1181 [==============================] - 16s 14ms/step - loss: 0.1041 - accuracy: 0.9697 - val_loss: 0.0063 - val_accuracy: 0.9837
+    
+    Epoch 00005: val_loss did not improve from 0.00576
+    Epoch 6/100
+    1181/1181 [==============================] - 16s 13ms/step - loss: 0.0930 - accuracy: 0.9722 - val_loss: 0.0047 - val_accuracy: 0.9846
+    
+    Epoch 00006: val_loss improved from 0.00576 to 0.00466, saving model to model.h5
+    Epoch 7/100
+    1181/1181 [==============================] - 15s 13ms/step - loss: 0.0925 - accuracy: 0.9726 - val_loss: 0.0150 - val_accuracy: 0.9858
+    
+    Epoch 00007: val_loss did not improve from 0.00466
+    Epoch 8/100
+    1181/1181 [==============================] - 16s 13ms/step - loss: 0.0903 - accuracy: 0.9741 - val_loss: 0.0624 - val_accuracy: 0.9854
+    
+    Epoch 00008: val_loss did not improve from 0.00466
+    Epoch 9/100
+    1181/1181 [==============================] - 16s 14ms/step - loss: 0.0873 - accuracy: 0.9750 - val_loss: 0.0058 - val_accuracy: 0.9810
+    
+    Epoch 00009: ReduceLROnPlateau reducing learning rate to 0.00010000000474974513.
+    
+    Epoch 00009: val_loss did not improve from 0.00466
+    Epoch 10/100
+    1181/1181 [==============================] - 15s 13ms/step - loss: 0.0744 - accuracy: 0.9786 - val_loss: 0.0115 - val_accuracy: 0.9866
+    
+    Epoch 00010: val_loss did not improve from 0.00466
+    Epoch 11/100
+    1181/1181 [==============================] - 15s 13ms/step - loss: 0.0696 - accuracy: 0.9796 - val_loss: 0.0019 - val_accuracy: 0.9866
+    
+    Epoch 00011: val_loss improved from 0.00466 to 0.00186, saving model to model.h5
+    Epoch 12/100
+    1181/1181 [==============================] - 15s 13ms/step - loss: 0.0674 - accuracy: 0.9805 - val_loss: 0.0052 - val_accuracy: 0.9873
+    
+    Epoch 00012: val_loss did not improve from 0.00186
+    Epoch 13/100
+    1181/1181 [==============================] - 16s 14ms/step - loss: 0.0680 - accuracy: 0.9790 - val_loss: 0.0015 - val_accuracy: 0.9868
+    
+    Epoch 00013: val_loss improved from 0.00186 to 0.00152, saving model to model.h5
+    Epoch 14/100
+    1181/1181 [==============================] - 15s 13ms/step - loss: 0.0672 - accuracy: 0.9799 - val_loss: 0.1304 - val_accuracy: 0.9880
+    
+    Epoch 00014: val_loss did not improve from 0.00152
+    Epoch 15/100
+    1181/1181 [==============================] - 15s 13ms/step - loss: 0.0687 - accuracy: 0.9802 - val_loss: 0.0011 - val_accuracy: 0.9875
+    
+    Epoch 00015: val_loss improved from 0.00152 to 0.00113, saving model to model.h5
+    Epoch 16/100
+    1181/1181 [==============================] - 15s 13ms/step - loss: 0.0671 - accuracy: 0.9805 - val_loss: 0.0344 - val_accuracy: 0.9863
+    
+    Epoch 00016: val_loss did not improve from 0.00113
+    Epoch 17/100
+    1181/1181 [==============================] - 16s 14ms/step - loss: 0.0650 - accuracy: 0.9807 - val_loss: 0.0010 - val_accuracy: 0.9880
+    
+    Epoch 00017: val_loss improved from 0.00113 to 0.00103, saving model to model.h5
+    Epoch 18/100
+    1181/1181 [==============================] - 15s 13ms/step - loss: 0.0678 - accuracy: 0.9807 - val_loss: 0.0179 - val_accuracy: 0.9861
+    
+    Epoch 00018: ReduceLROnPlateau reducing learning rate to 1.0000000474974514e-05.
+    
+    Epoch 00018: val_loss did not improve from 0.00103
+    Epoch 19/100
+     898/1181 [=====================>........] - ETA: 3s - loss: 0.0631 - accuracy: 0.9809
 
-    if normalize:
-        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-
-    thresh = cm.max() / 2.
-    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
-        plt.text(j, i, cm[i, j],
-                 horizontalalignment="center",
-                 color="white" if cm[i, j] > thresh else "black")
-
-    plt.tight_layout()
-    plt.ylabel('True label')
-    plt.xlabel('Predicted label')
-
-# Predict the values from the validation dataset
-Y_pred = model.predict(X_val)
-# Convert predictions classes to one hot vectors 
-Y_pred_classes = np.argmax(Y_pred, axis = 1) 
-# Convert validation observations to one hot vectors
-Y_true = np.argmax(Y_val, axis = 1) 
-# compute the confusion matrix
-confusion_mtx = confusion_matrix(Y_true, Y_pred_classes) 
-# plot the confusion matrix
-plot_confusion_matrix(confusion_mtx, classes = range(10))
-```
-
-![png](/images/digit-recognizer/digit-recognizer_22_0.png)
-
-```python
-print(h.history.keys())
-```
-
-> dict_keys(['val_loss', 'val_accuracy', 'loss', 'accuracy', 'lr'])
-
-```python
-accuracy = h.history['accuracy']
-val_accuracy = h.history['val_accuracy']
-loss = h.history['loss']
-val_loss = h.history['val_loss']
-epochs = range(len(accuracy))
-plt.plot(epochs, accuracy, 'bo', label='Training accuracy')
-plt.plot(epochs, val_accuracy, 'b', label='Validation accuracy')
-plt.title('Training and validation accuracy')
-plt.legend()
-plt.show()
-plt.figure()
-plt.plot(epochs, loss, 'bo', label='Training loss')
-plt.plot(epochs, val_loss, 'b', label='Validation loss')
-plt.title('Training and validation loss')
-plt.legend()
-plt.show()
-```
-
-![png](/images/digit-recognizer/digit-recognizer_24_0.png)
-
-![png](/images/digit-recognizer/digit-recognizer_24_1.png)
-
-```python
-# Errors are difference between predicted labels and true labels
-errors = (Y_pred_classes - Y_true != 0)
-
-Y_pred_classes_errors = Y_pred_classes[errors]
-Y_pred_errors = Y_pred[errors]
-Y_true_errors = Y_true[errors]
-X_val_errors = X_val[errors]
-
-def display_errors(errors_index,img_errors,pred_errors, obs_errors):
-    """ This function shows 6 images with their predicted and real labels"""
-    n = 0
-    nrows = 2
-    ncols = 3
-    fig, ax = plt.subplots(nrows,ncols,sharex=True,sharey=True)
-    for row in range(nrows):
-        for col in range(ncols):
-            error = errors_index[n]
-            ax[row,col].imshow((img_errors[error]).reshape((28,28)))
-            ax[row,col].set_title("Predicted label :{}\nTrue label :{}".format(pred_errors[error],obs_errors[error]))
-            n += 1
-
-# Probabilities of the wrong predicted numbers
-Y_pred_errors_prob = np.max(Y_pred_errors,axis = 1)
-
-# Predicted probabilities of the true values in the error set
-true_prob_errors = np.diagonal(np.take(Y_pred_errors, Y_true_errors, axis=1))
-
-# Difference between the probability of the predicted label and the true label
-delta_pred_true_errors = Y_pred_errors_prob - true_prob_errors
-
-# Sorted list of the delta prob errors
-sorted_dela_errors = np.argsort(delta_pred_true_errors)
-
-# Top 6 errors 
-most_important_errors = sorted_dela_errors[-6:]
-
-# Show the top 6 errors
-display_errors(most_important_errors, X_val_errors, Y_pred_classes_errors, Y_true_errors)
-```
-
-![png](/images/digit-recognizer/digit-recognizer_25_0.png)
-
+## Evaluate Model
 
 ```python
-test_im = X_train[154]
-plt.imshow(test_im.reshape(28,28), cmap='viridis', interpolation='none')
+x_test_recaled = (x_test.astype("float32") / 255)
+scores = model.evaluate(x_test_recaled, y_test, verbose=0)
+print("%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
+print("%s: %.2f%%" % (model.metrics_names[0], scores[0]*100))
 ```
 
-![png](/images/digit-recognizer/digit-recognizer_26_1.png)
+> accuracy: 98.71%<br>
+> loss: 4.27%
 
+## Saving Model
 
 ```python
-from keras import models
-layer_outputs = [layer.output for layer in model.layers[:8]]
-activation_model = models.Model(input=model.input, output=layer_outputs)
-activations = activation_model.predict(test_im.reshape(1,28,28,1))
-
-first_layer_activation = activations[0]
-plt.matshow(first_layer_activation[0, :, :, 4], cmap='viridis')
+model.save('model.h5')
 ```
-
-![png](/images/digit-recognizer/digit-recognizer_27_2.png)
-
-```python
-# Droping The Last Dense Layer
-model.layers[:-1]
-```
-
-```python
-layer_names = []
-for layer in model.layers[:-1]:
-    layer_names.append(layer.name) 
-images_per_row = 16
-for layer_name, layer_activation in zip(layer_names, activations):
-    if layer_name.startswith('conv'):
-        n_features = layer_activation.shape[-1]
-        size = layer_activation.shape[1]
-        n_cols = n_features // images_per_row
-        display_grid = np.zeros((size * n_cols, images_per_row * size))
-        for col in range(n_cols):
-            for row in range(images_per_row):
-                channel_image = layer_activation[0,:, :, col * images_per_row + row]
-                channel_image -= channel_image.mean()
-                channel_image /= channel_image.std()
-                channel_image *= 64
-                channel_image += 128
-                channel_image = np.clip(channel_image, 0, 255).astype('uint8')
-                display_grid[col * size : (col + 1) * size,
-                             row * size : (row + 1) * size] = channel_image
-        scale = 1. / size
-        plt.figure(figsize=(scale * display_grid.shape[1],
-                            scale * display_grid.shape[0]))
-        plt.title(layer_name)
-        plt.grid(False)
-        plt.imshow(display_grid, aspect='auto', cmap='viridis')
-```
-
-![png](/images/digit-recognizer/digit-recognizer_29_1.png)
-
-![png](/images/digit-recognizer/digit-recognizer_29_2.png)
-
-![png](/images/digit-recognizer/digit-recognizer_29_3.png)
-
-![png](/images/digit-recognizer/digit-recognizer_29_4.png)
-
-```python
-layer_names = []
-for layer in model.layers[:-1]:
-    layer_names.append(layer.name) 
-images_per_row = 16
-for layer_name, layer_activation in zip(layer_names, activations):
-    if layer_name.startswith('max'):
-        n_features = layer_activation.shape[-1]
-        size = layer_activation.shape[1]
-        n_cols = n_features // images_per_row
-        display_grid = np.zeros((size * n_cols, images_per_row * size))
-        for col in range(n_cols):
-            for row in range(images_per_row):
-                channel_image = layer_activation[0,:, :, col * images_per_row + row]
-                channel_image -= channel_image.mean()
-                channel_image /= channel_image.std()
-                channel_image *= 64
-                channel_image += 128
-                channel_image = np.clip(channel_image, 0, 255).astype('uint8')
-                display_grid[col * size : (col + 1) * size,
-                             row * size : (row + 1) * size] = channel_image
-        scale = 1. / size
-        plt.figure(figsize=(scale * display_grid.shape[1],
-                            scale * display_grid.shape[0]))
-        plt.title(layer_name)
-        plt.grid(False)
-        plt.imshow(display_grid, aspect='auto', cmap='viridis')
-```
-
-![png](/images/digit-recognizer/digit-recognizer_30_1.png)
-
-![png](/images/digit-recognizer/digit-recognizer_30_2.png)
-
-```python
-layer_names = []
-for layer in model.layers[:-1]:
-    layer_names.append(layer.name) 
-images_per_row = 16
-for layer_name, layer_activation in zip(layer_names, activations):
-    if layer_name.startswith('drop'):
-        n_features = layer_activation.shape[-1]
-        size = layer_activation.shape[1]
-        n_cols = n_features // images_per_row
-        display_grid = np.zeros((size * n_cols, images_per_row * size))
-        for col in range(n_cols):
-            for row in range(images_per_row):
-                channel_image = layer_activation[0,:, :, col * images_per_row + row]
-                channel_image -= channel_image.mean()
-                channel_image /= channel_image.std()
-                channel_image *= 64
-                channel_image += 128
-                channel_image = np.clip(channel_image, 0, 255).astype('uint8')
-                display_grid[col * size : (col + 1) * size,
-                             row * size : (row + 1) * size] = channel_image
-        scale = 1. / size
-        plt.figure(figsize=(scale * display_grid.shape[1],
-                            scale * display_grid.shape[0]))
-        plt.title(layer_name)
-        plt.grid(False)
-        plt.imshow(display_grid, aspect='auto', cmap='viridis')
-```
-
-![png](/images/digit-recognizer/digit-recognizer_31_1.png)
-
-![png](/images/digit-recognizer/digit-recognizer_31_2.png)
 
 ## Prediction
 
 ```python
-# Predict the values from the validation dataset
-Y_pred = model.predict(X_val)
-# Convert predictions classes to one hot vectors
-Y_pred_classes = np.argmax(Y_pred, axis = 1)
-Y_true_classes = np.argmax(Y_val, axis = 1)
+test_digit_data = test_data.values.reshape(test_data.shape[0],28,28,1).astype("float32") / 255
+predictions = model.predict(test_digit_data)
+results = np.argmax(predictions, axis = 1)
 ```
+
+### Set how is our prediction
+
 
 ```python
-Y_pred_classes[:5], Y_true_classes[:5]
+plt.figure(figsize=(18, 8))
+sample_test = test_data.head(18)
+for index, image_pixels in sample_test.iterrows():
+    label = results[index]
+    show_image(image_pixels, label, index)
+plt.tight_layout()
 ```
 
-> (array([8, 1, 9, 9, 8]), array([8, 1, 9, 9, 8]))
+
+![png](/images/digit-recognizer/notebook_27_0.png)
+
+
+### Create submission file
 
 ```python
-from sklearn.metrics import classification_report
-target_names = ["Class {}".format(i) for i in range(num_classes)]
-print(classification_report(Y_true_classes, Y_pred_classes, target_names=target_names))
+submissions = pd.read_csv("../input/digit-recognizer/sample_submission.csv")
+submissions['Label'] = results
+submissions.to_csv('submission.csv', index = False)
 ```
 
-                  precision    recall  f1-score   support
-    
-         Class 0       1.00      1.00      1.00       408
-         Class 1       1.00      1.00      1.00       471
-         Class 2       1.00      0.99      1.00       420
-         Class 3       0.99      1.00      1.00       506
-         Class 4       0.99      1.00      1.00       397
-         Class 5       0.99      0.99      0.99       339
-         Class 6       1.00      1.00      1.00       402
-         Class 7       1.00      1.00      1.00       438
-         Class 8       0.99      0.99      0.99       403
-         Class 9       1.00      1.00      1.00       416
-    
-        accuracy                           1.00      4200
-       macro avg       1.00      1.00      1.00      4200
-    weighted avg       1.00      1.00      1.00      4200
-    
-
-```python
-predicted_classes = model.predict_classes(X_test)
-submissions=pd.DataFrame({"ImageId": list(range(1,len(predicted_classes)+1)),
-                         "Label": predicted_classes})
-submissions.to_csv("prediction.csv", index=False, header=True)
-```
-
-```python
-model.save('my_model_1.h5')
-json_string = model.to_json()
-```
-
-## Download prediction.csv
+### Download submission.csv
 
 > [Google Drive](https://drive.google.com/file/d/1MPBdMjIdckiOQYQL0AWx0VRMyYe9JGKU/view?usp=sharing)<br/>
 > [OneDrive](https://1drv.ms/u/s!AjWO46TOTFj4p1mz_WkWNbyFSEQ-?e=uUYlJA)<br/>
