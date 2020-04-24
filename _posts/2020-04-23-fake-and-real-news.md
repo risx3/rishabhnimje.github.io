@@ -4,8 +4,8 @@ date: 2020-04-23
 tags: [Kaggle, Keras, Machine Learning, Neural Network]
 excerpt: "Classifying the news"
 header:
-  overlay_image: "/images/dogs-vs-cats/home-page.jpg"
-  caption: "Photo by Tran Mau Tri Tam on Unsplash"
+  overlay_image: "/images/fake-and-real-news/home-page.jpg"
+  caption: "Photo by Hayden Walker on Unsplash"
 mathjax: "true"
 ---
 
@@ -16,6 +16,7 @@ Can you use this data set to make an algorithm able to determine if an article i
 ## Data Description
 
 Fake.csv file contains a list of articles considered as "fake" news. True.csv contains a list of articles considered as "real" news. Both the files contain
+
 1. The title of the article
 2. The text of the article
 3. The subject of the article
@@ -27,7 +28,6 @@ Fake.csv file contains a list of articles considered as "fake" news. True.csv co
 * True.csv
 
 ## So let’s begin here…
-
 
 ```python
 import numpy as np
@@ -202,8 +202,7 @@ fake.head()
 </table>
 </div>
 
-
-Let's add another column in data set as category where category will be 1 if news is real and 0 if news is fake.
+Let's add another column in data set as 'category' where category will be 1 if news is real and 0 if news is fake.
 
 ```python
 real['category']=1
@@ -212,11 +211,9 @@ fake['category']=0
 
 Now we will concatenate both the datasets
 
-
 ```python
 df = pd.concat([real,fake])
 ```
-
 
 ```python
 df.head()
@@ -292,17 +289,11 @@ df.head()
 </table>
 </div>
 
-
-
 Check for NULL values
-
 
 ```python
 df.isna().sum()
 ```
-
-
-
 
     title       0
     text        0
@@ -311,32 +302,19 @@ df.isna().sum()
     category    0
     dtype: int64
 
-
-
 Total number of news
 
 
 ```python
 df.title.count()
 ```
-
-
-
-
-    44898
-
-
+> 44898
 
 Number of news grouped by Subject
-
 
 ```python
 df.subject.value_counts()
 ```
-
-
-
-
     politicsNews       11272
     worldnews          10145
     News                9050
@@ -347,10 +325,7 @@ df.subject.value_counts()
     Middle-east          778
     Name: subject, dtype: int64
 
-
-
 We now concatenate Text, Title and Subject in Text.
-
 
 ```python
 df['text'] = df['text'] + " " + df['title'] + " " + df['subject']
@@ -359,13 +334,9 @@ del df['subject']
 del df['date']
 ```
 
-
 ```python
 df.head()
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -419,15 +390,11 @@ df.head()
 </table>
 </div>
 
-
-
-
 ```python
 stop = set(stopwords.words('english'))
 pnc = list(punctuation)
 stop.update(pnc)
 ```
-
 
 ```python
 stemmer = PorterStemmer()
@@ -440,18 +407,15 @@ def stem_text(text):
     return " ".join(final_text)
 ```
 
-
 ```python
 df.text = df.text.apply(stem_text)
 ```
 
 Splitting dataset in train set and test set
 
-
 ```python
 X_train,X_test,y_train,y_test = train_test_split(df.text,df.category)
 ```
-
 
 ```python
 cv = CountVectorizer(min_df=0,max_df=1,ngram_range=(1,2))
@@ -465,9 +429,7 @@ print('BOW_cv_test:',cv_test.shape)
 > BOW_cv_train: (33673, 1950850)<br>
 > BOW_cv_test: (11225, 1950850)
 
-
 ## Defining Model
-
 
 ```python
 model = Sequential()
@@ -480,9 +442,8 @@ model.add(Dense(units = 1 , activation = 'sigmoid'))
 
 ## Compile Model
 
-
 ```python
-model.compile(optimizer = 'adam' , loss = 'binary_crossentropy' , metrics = ['accuracy'])
+model.compile(optimizer = 'adam' , loss = 'binary_crossentropy', metrics = ['accuracy'])
 ```
 
 ## Fit Model
@@ -490,7 +451,6 @@ model.compile(optimizer = 'adam' , loss = 'binary_crossentropy' , metrics = ['ac
 ```python
 model.fit(cv_train,y_train , epochs = 5)
 ```
-
     Epoch 1/5
     33673/33673 [==============================] - 542s 16ms/step - loss: 0.6904 - accuracy: 0.5224
     Epoch 2/5
@@ -501,10 +461,8 @@ model.fit(cv_train,y_train , epochs = 5)
     33673/33673 [==============================] - 575s 17ms/step - loss: 0.0414 - accuracy: 0.9888
     Epoch 5/5
     33673/33673 [==============================] - 568s 17ms/step - loss: 0.0418 - accuracy: 0.9888
-    
 
 ## Prediction
-
 
 ```python
 pred = model.predict(cv_test)
@@ -517,15 +475,15 @@ for i in range(len(pred)):
 
 ## Evaluate Model
 
-Accuracy
-
+### Accuracy
 
 ```python
 accuracy_score(pred,y_test)
 ```
+
 > 0.90271714922049
 
-Classification Report
+### Classification Report
 
 ```python
 cv_report = classification_report(y_test,pred,target_names = ['0','1'])
@@ -540,11 +498,8 @@ print(cv_report)
         accuracy                           0.90     11225
        macro avg       0.90      0.90      0.90     11225
     weighted avg       0.90      0.90      0.90     11225
-    
-    
 
-Confusion Matrix
-
+### Confusion Matrix
 
 ```python
 cm_cv = confusion_matrix(y_test,pred)
