@@ -209,7 +209,7 @@ history = model.fit(X_train, y_train, epochs=20, batch_size=200, validation_spli
     20000/20000 [==============================] - 2s 110us/step - loss: 0.0310 - accuracy: 0.9904 - val_loss: 0.9238 - val_accuracy: 0.8246
     
 
-## Plotting Training and Validation Accuracy
+## Evaluate the model
 
 ```python
 import matplotlib.pyplot as plt
@@ -246,7 +246,7 @@ create_test_data(test_path)
 X_test = np.array(X_test).reshape(-1,80,80,1)
 X_test = X_test/255
 ```
-
+## Prediction
 ```python
 predictions = model.predict(X_test)
 predicted_val = [int(round(p[0])) for p in predictions]

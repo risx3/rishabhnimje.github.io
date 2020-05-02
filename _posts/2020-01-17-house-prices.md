@@ -192,7 +192,7 @@ def plot_corr_matrix(df, nr_c, targ) :
     plt.show()
 ```
 
-### Load Data
+## Load Data
 
 ```python
 df_train = pd.read_csv("/kaggle/input/house-prices-advanced-regression-techniques/train.csv")
@@ -738,7 +738,6 @@ print("Kurtosis: %f" % df_train['SalePrice'].kurt())
 
 As we see, the target variable SalePrice is not normally distributed.<br>
 This can reduce the performance of the ML regression models because some assume normal distribution,<br>
-see [sklearn info on preprocessing](http://scikit-learn.org/stable/modules/preprocessing.html)<br>
 Therefore we make a log transformation, the resulting distribution looks much better.<br>
 
 ```python

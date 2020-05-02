@@ -58,6 +58,7 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 > /kaggle/input/fake-and-real-news-dataset/Fake.csv<br>
 > /kaggle/input/fake-and-real-news-dataset/True.csv
     
+## Load Data
 
 ```python
 real = pd.read_csv("../input/fake-and-real-news-dataset/True.csv")
@@ -201,6 +202,8 @@ fake.head()
   </tbody>
 </table>
 </div>
+
+## Pre-process Data
 
 Let's add another column in data set as 'category' where category will be 1 if news is real and 0 if news is fake.
 

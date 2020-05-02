@@ -126,7 +126,7 @@ plt.tight_layout()
 
 ![png](/images/digit-recognizer/notebook_10_0.png)
 
-## Data Preparation
+## Pre-process Data
 We split data for test and train
 
 ```python
@@ -165,7 +165,7 @@ validation_generator = validation_datagen.flow(
 )
 ```
 
-## Build CNN Model
+## Define Model
 
 ```python
 from keras.models import Sequential
@@ -185,7 +185,7 @@ model.add(Dense(10, activation='softmax'))
 model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
 ```
 
-## Callbacks
+### Callbacks
 
 ```python
 from keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
@@ -299,12 +299,6 @@ print("%s: %.2f%%" % (model.metrics_names[0], scores[0]*100))
 > accuracy: 98.71%<br>
 > loss: 4.27%
 
-## Saving Model
-
-```python
-model.save('model.h5')
-```
-
 ## Prediction
 
 ```python
@@ -335,6 +329,12 @@ plt.tight_layout()
 submissions = pd.read_csv("../input/digit-recognizer/sample_submission.csv")
 submissions['Label'] = results
 submissions.to_csv('submission.csv', index = False)
+```
+
+## Saving Model
+
+```python
+model.save('model.h5')
 ```
 
 ### Download submission.csv

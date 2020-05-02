@@ -31,11 +31,11 @@ We will create two classes here.
 
 Model class will be responsible for creating a model using character dataset and Application class will recognize Hindi characters in runtime.
 
-<img src="{{ site.url }}{{ site.baseurl }}/images/hindi-handwriting/hh_diagram.jpg" alt="hindi handwriting flow">
+<img src="/images/hindi-handwriting/hh_diagram.jpg" alt="hindi handwriting flow">
 
 ## We begin here...
 
-## Creating model (model.py)
+# model.py
 
 ```python
 import numpy as np
@@ -51,6 +51,7 @@ from keras.models import Sequential
 from keras.callbacks import ModelCheckpoint
 ```
 
+## Load Data
 ```python
 data = pd.read_csv("data.csv")
 dataset = np.array(data)
@@ -61,6 +62,7 @@ X = X[:, 0:1024]
 Y = Y[:, 1024]
 ```
 
+## Pre-process Data
 ### Train and Test data variables
 
 ```python
@@ -123,7 +125,7 @@ print("Y_train shape: " + str(train_y.shape))
 > X_train shape: (70000, 32, 32, 1)<br/>
 > Y_train shape: (70000, 37)<br/>
 
-### Back to code...
+## Define Model
 
 ```python
 def keras_model(image_x,image_y):

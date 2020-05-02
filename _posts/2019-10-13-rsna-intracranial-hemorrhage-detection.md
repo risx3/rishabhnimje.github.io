@@ -326,7 +326,7 @@ def weighted_loss(y_true, y_pred):
     return K.mean(loss_samples)
 ```
 
-## Defining Convolutional and Identity Block
+## Define Model
 
 ```python
 def convolutionBlock(X,f,filters,stage,block,s):
