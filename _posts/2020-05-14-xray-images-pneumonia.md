@@ -165,7 +165,7 @@ test_set = test_datagen.flow_from_directory('../input/chest-xray-pneumonia/chest
 > Found 5216 images belonging to 2 classes.<br>
 > Found 16 images belonging to 2 classes.<br>
 > Found 624 images belonging to 2 classes.
-    
+
 ### Model Summary
 
 ```python
@@ -194,7 +194,6 @@ cnn.summary()
     Trainable params: 813,217
     Non-trainable params: 0
     _________________________________________________________________
-    
 
 ## Fit Model
 
