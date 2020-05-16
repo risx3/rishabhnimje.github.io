@@ -1,5 +1,5 @@
 ---
-title: "Chect X-ray Images (Pneumonia)"
+title: "Chest X-ray Images (Pneumonia)"
 date: 2020-05-14
 tags: [Kaggle, Keras, Machine Learning, Neural Network]
 excerpt: "Identify the x-rays with pneumonia"
@@ -69,6 +69,7 @@ test_folder = '../input/chest-xray-pneumonia/chest_xray/test/'
 ```
 
 ### Train Data
+
 ```python
 os.listdir(train_folder)
 train_n = train_folder+'NORMAL/'
@@ -76,14 +77,15 @@ train_p = train_folder+'PNEUMONIA/'
 ```
 
 ```python
-#Normal pic
 print(len(os.listdir(train_n)))
+
+# Normal Chest X-ray
 rand_norm= np.random.randint(0,len(os.listdir(train_n)))
 norm_pic = os.listdir(train_n)[rand_norm]
 print('normal picture title: ',norm_pic)
 norm_pic_address = train_n+norm_pic
 
-#Pneumonia
+# Pneumonia Chest X-ray
 rand_p = np.random.randint(0,len(os.listdir(train_p)))
 sic_pic =  os.listdir(train_p)[rand_norm]
 sic_address = train_p+sic_pic
@@ -93,8 +95,9 @@ print('pneumonia picture title:', sic_pic)
 norm_load = Image.open(norm_pic_address)
 sic_load = Image.open(sic_address)
 
-#Let's plt these images
+# Let's plt these images
 f = plt.figure(figsize= (10,6))
+
 a1 = f.add_subplot(1,2,1)
 img_plot = plt.imshow(norm_load)
 a1.set_title('Normal')
