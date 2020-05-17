@@ -69,11 +69,15 @@ print('Number of passengers in train dataset: ' + str(len(train)))
 
 ## Data Analysis
 
+### Number of passengers Survived
+
 ```python
 sns.countplot(x = 'Survived', data = train)
 ```
 
 ![png](/images/titanic-analysis/notebook_5_1.png)
+
+### Number of passengers Survived based on Passenger Class
 
 ```python
 sns.countplot(x = 'Survived', hue = 'Pclass', data = train)
@@ -81,17 +85,23 @@ sns.countplot(x = 'Survived', hue = 'Pclass', data = train)
 
 ![png](/images/titanic-analysis/notebook_6_1.png)
 
+### Frequency of passengers group by Age
+
 ```python
 train['Age'].plot.hist()
 ```
 
 ![png](/images/titanic-analysis/notebook_7_1.png)
 
+### Frequency of passengers group by Fare
+
 ```python
 train['Fare'].plot.hist()
 ```
 
 ![png](/images/titanic-analysis/notebook_8_1.png)
+
+### Train Dataset Information
 
 ```python
 train.info()
@@ -116,11 +126,15 @@ train.info()
     dtypes: float64(2), int64(5), object(5)
     memory usage: 83.7+ KB
 
+### Number of siblings / spouses aboard the Titanic
+
 ```python
 sns.countplot(x = 'SibSp', data = train)
 ```
 
 ![png](/images/titanic-analysis/notebook_10_1.png)
+
+### Check for NULL values in training set
 
 ```python
 train.isnull().sum()
@@ -140,11 +154,15 @@ train.isnull().sum()
     Embarked         2
     dtype: int64
 
+### Heatmap for NULL values
+
 ```python
 sns.heatmap(train.isnull())
 ```
 
 ![png](/images/titanic-analysis/notebook_12_1.png)
+
+### Passenger Class vs Age
 
 ```python
 sns.boxplot(x = 'Pclass', y = 'Age', data = train)
@@ -162,6 +180,7 @@ embark = pd.get_dummies(train['Embarked'],drop_first=True)
 pcl = pd.get_dummies(train['Pclass'],drop_first=True)
 ```
 
+### Concat new features in train data
 
 ```python
 train = pd.concat([train,sex,embark,pcl],axis=1)
@@ -310,6 +329,7 @@ train.head()
 </table>
 </div>
 
+### Dropping columns from train dataset
 
 ```python
 train.drop(['Pclass','Sex','Embarked','Cabin','PassengerId','Name','Ticket'],axis=1, inplace=True)
@@ -416,6 +436,8 @@ train.head()
 </table>
 </div>
 
+### Check for NULL values
+
 ```python
 train.isnull().sum()
 ```
@@ -431,6 +453,8 @@ train.isnull().sum()
     2             0
     3             0
     dtype: int64
+
+### Handling NULL values
 
 ```python
 train_values = {'Age': round(np.mean(train['Age']))}
@@ -545,6 +569,8 @@ sex = pd.get_dummies(test['Sex'], drop_first = True)
 embark = pd.get_dummies(test['Embarked'],drop_first=True)
 pcl = pd.get_dummies(test['Pclass'],drop_first=True)
 ```
+
+### Concat new features in test data
 
 ```python
 test = pd.concat([test,sex,embark,pcl],axis=1)
@@ -687,9 +713,13 @@ test.head()
 </table>
 </div>
 
+### Dropping columns from train dataset
+
 ```python
 test.drop(['Pclass','Sex','Embarked','Cabin','PassengerId','Name','Ticket'],axis=1, inplace=True)
 ```
+
+### Check for NULL values
 
 ```python
 test.isnull().sum()
@@ -705,6 +735,8 @@ test.isnull().sum()
     2         0
     3         0
     dtype: int64
+
+### Handling NULL values
 
 ```python
 test_values = {'Age':round(np.mean(test['Age'])), 'Fare':round(np.mean(test['Fare']))}
@@ -805,8 +837,6 @@ test.head()
   </tbody>
 </table>
 </div>
-
-## Training
 
 ```python
 X = train.drop('Survived',axis=1)
