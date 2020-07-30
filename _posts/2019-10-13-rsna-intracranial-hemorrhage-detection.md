@@ -53,13 +53,15 @@ All provided images are in DICOM format. DICOM images contain associated metadat
 
 **For this dataset we need to predict whether a hemorrhage exists in a given image, and what type it is.**
 
+You can find the dataset [here](https://www.kaggle.com/c/rsna-intracranial-hemorrhage-detection/data).
+
 ## Files
 
 * stage_1_train.csv - the training set. Contains Ids and target information.
 * stage_1_train_images
 * stage_1_test_images
 
-You can find the dataset [here](https://www.kaggle.com/c/rsna-intracranial-hemorrhage-detection/data).
+
 
 ## So let's begin here...
 

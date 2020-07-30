@@ -32,6 +32,8 @@ The `test.csv` dataset contains similar information but does not disclose the â€
 
 Using the patterns you find in the train.csv data, predict whether the other 418 passengers on board (found in test.csv) survived.
 
+You can find the dataset [here](https://www.kaggle.com/c/titanic/data).
+
 ## Files
 
 The data has been split into two groups:

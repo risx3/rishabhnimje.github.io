@@ -47,13 +47,12 @@ ImageId,Label<br>
 
 The evaluation metric for this contest is the categorization accuracy, or the proportion of test images that are correctly classified. For example, a categorization accuracy of 0.97 indicates that you have correctly classified all but 3% of the images.
 
+You can find the dataset [here](https://www.kaggle.com/c/digit-recognizer/data).
+
 ## Files
 
 * test.csv
 * train.csv
-
-You can find the dataset [here](https://www.kaggle.com/c/digit-recognizer/data).
-
 
 ## So let's begin here...
 

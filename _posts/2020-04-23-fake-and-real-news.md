@@ -22,6 +22,8 @@ Fake.csv file contains a list of articles considered as "fake" news. True.csv co
 3. The subject of the article
 4. The date that this article was posted at
 
+You can find the dataset [here](https://www.kaggle.com/clmentbisaillon/fake-and-real-news-dataset).
+
 ## Files
 
 * Fake.csv

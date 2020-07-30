@@ -19,6 +19,8 @@ With 79 explanatory variables describing (almost) every aspect of residential ho
 
 The Ames Housing dataset was compiled by Dean De Cock for use in data science education. It's an incredible alternative for data scientists looking for a modernized and expanded version of the often cited Boston Housing dataset.
 
+You can find the dataset [here](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data).
+
 ## Files
 
 1. train.csv - the training set

@@ -28,6 +28,8 @@ Assessing the value of energy efficiency improvements can be challenging as ther
 
 This challenges you to build these counterfactual models across four energy types based on historic usage rates and observed weather. The dataset includes three years of hourly meter readings from over one thousand buildings at several different sites around the world.
 
+You can find the dataset [here](https://www.kaggle.com/c/ashrae-energy-prediction/data).
+
 ## Files
 
 **train.csv**
