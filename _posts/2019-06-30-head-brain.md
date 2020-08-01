@@ -4,7 +4,8 @@ date: 2019-06-30
 tags: [Headbrain, Linear regression, data analysis, machine learning, algorithm]
 excerpt: "Linear Regression algorithm basics and implementation"
 header:
-  overlay_image: "/images/titanic-analysis/home-page.png"
+  overlay_image: "/images/head-brain/home-page.jpg"
+  caption: "Photo by Antoine Dautry on Unsplash"
 mathjax: "true"
 ---
 
