@@ -9,8 +9,6 @@ header:
 mathjax: "true"
 ---
 
-# LINEAR REGRESSION
-
 Linear Regression is a statistical model that attempts to show the relationship between two variables using a Linear Equation.
 
 ### What is Regression?
