@@ -166,3 +166,7 @@ print('R^2 value: ',r2)
 ```python
 Y_pred = model.predict(X)
 ```
+
+## Model Deployment
+
+The model for above algorithm is deployed on Heroku. You can check **[here](https://head-brain.herokuapp.com)**.
