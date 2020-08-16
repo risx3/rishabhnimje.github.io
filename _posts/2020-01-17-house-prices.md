@@ -114,4 +114,4 @@ SaleCondition: Condition of sale<br>
 
 ## So lets begin with complete EDA...
 
-![jpeg](/images/wip.jpeg)
+![jpg](/images/wip.jpg)
