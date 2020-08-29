@@ -52,9 +52,9 @@ print("Train Shape: ",train.shape)
 print("Test Shape: ",test.shape)
 ```
 
-    Train Shape:  (1460, 81)
-    Test Shape:  (1459, 80)
-    
+> Train Shape:  (1460, 81)<br>
+> Test Shape:  (1459, 80)
+
 
 train has 81 columns (79 features + id and target SalePrice) and 1460 entries<br>
 test has 80 columns (79 features + id) and 1459 entries
@@ -250,7 +250,6 @@ print(test.info())
 
 ### Train Data
 
-
 ```python
 print(train.isnull().sum())
 ```
@@ -403,7 +402,6 @@ print(test.isnull().sum())
 ```python
 sns.heatmap(test.isnull())
 ```
-
 
 ![png](/images/house-prices/notebook_18_1.png)
 
@@ -586,29 +584,21 @@ final_df.shape
 
 ```python
 final_df = final_df.loc[:,~final_df.columns.duplicated()]
-```
-
-
-```python
 final_df.shape
 ```
 
 > (2919, 177)
 
-
 Let's now divide our data to train and test data.
-
 
 ```python
 df_train = final_df.iloc[:1460,:]
 df_test = final_df.iloc[1460:,:]
 ```
 
-
 ```python
 df_test.drop(['SalePrice'], axis = 1, inplace = True)
 ```
-
 
 ```python
 print("Train Shape: ",df_train.shape)
@@ -617,10 +607,8 @@ print("Test Shape: ",df_test.shape)
 
 > Train Shape:  (1460, 177)<br>
 > Test Shape:  (1459, 176)
-    
 
 ## Training Data
-
 
 ```python
 x_train = df_train.drop(['SalePrice'], axis = 1)
@@ -628,7 +616,6 @@ y_train = df_train['SalePrice']
 ```
 
 ## XGBoost
-
 
 ```python
 import xgboost
@@ -648,50 +635,14 @@ xgb_model.fit(x_train, y_train)
            reg_lambda=1, scale_pos_weight=1, subsample=1, tree_method='exact',
            validate_parameters=1, verbosity=None)
 
-#### Save Model
-
 ```python
-f = "xgb_model.pkl"
-pickle.dump(xgb_model,open(f,'wb'))
-```
-
-#### Prediction
-
-```python
-pred_xgb = xgb_model.predict(df_test)
-print(pred_xgb.shape)
-```
-
-> (1459,)
-    
-
-#### Submission
-
-
-```python
-sub_df = pd.read_csv('sample_submission.csv')
-sub_df['SalePrice'] = pred_xgb
-sub_df.to_csv('sample_sub_xgb.csv', index = False)
-```
-
-## XGBoost with Hyper Parameter Optimization
-
-
-```python
-n_estimators = [100, 500, 900, 1100, 1500]
-max_depth = [2,3,5,10,15]
-booster = ['gbtree','gblinear']
-learning_rate = [0.05, 0.1, 0.15, 0.2]
-min_child_weight = [1,2,3,4]
-base_score = [0.25, 0.5, 0.75, 1]
-
-hyperparameter_grid = {
-    'n_estimators': n_estimators,
-    'max_depth': max_depth,
-    'learning_rate': learning_rate,
-    'min_child_weight':min_child_weight,
-    'booster':booster,
-    'base_score':base_score
+param = {
+    'n_estimators': [100, 500, 900, 1100, 1500],
+    'max_depth': [2,3,5,10,15],
+    'learning_rate': [0.05, 0.1, 0.15, 0.2],
+    'min_child_weight': [1,2,3,4],
+    'booster': ['gbtree','gblinear'],
+    'base_score': [0.25, 0.5, 0.75, 1]
 }
 ```
 
@@ -701,7 +652,7 @@ from sklearn.model_selection import RandomizedSearchCV
 
 ```python
 random_cv = RandomizedSearchCV(estimator=xgb_model,
-                              param_distributions = hyperparameter_grid,
+                              param_distributions = param,
                               cv=5, n_iter=50,
                               scoring = 'neg_mean_absolute_error', n_jobs = 4,
                               verbose = 5,
@@ -714,14 +665,11 @@ random_cv.fit(x_train, y_train)
     
 
     [Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
-    [Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   39.6s
-    [Parallel(n_jobs=4)]: Done  64 tasks      | elapsed:  6.1min
-    [Parallel(n_jobs=4)]: Done 154 tasks      | elapsed: 12.1min
-    [Parallel(n_jobs=4)]: Done 250 out of 250 | elapsed: 17.9min finished
+    [Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   44.3s
+    [Parallel(n_jobs=4)]: Done  64 tasks      | elapsed:  6.9min
+    [Parallel(n_jobs=4)]: Done 154 tasks      | elapsed: 13.1min
+    [Parallel(n_jobs=4)]: Done 250 out of 250 | elapsed: 18.7min finished
     
-
-
-
 
     RandomizedSearchCV(cv=5, error_score='raise-deprecating',
               estimator=XGBRegressor(base_score=0.5, booster='gbtree', colsample_bylevel=1,
@@ -751,19 +699,20 @@ random_cv.best_estimator_
            reg_lambda=1, scale_pos_weight=1, subsample=1, tree_method='exact',
            validate_parameters=1, verbosity=None)
 
+
 ```python
-xgb_model_h = xgboost.XGBRegressor(base_score=0.25, booster='gbtree', colsample_bylevel=1,
-             colsample_bynode=1, colsample_bytree=1, gamma=0, gpu_id=-1,
-             importance_type='gain', interaction_constraints='',
-             learning_rate=0.1, max_delta_step=0, max_depth=2,
-             min_child_weight=1, monotone_constraints='()',
-             n_estimators=900, n_jobs=0, num_parallel_tree=1, random_state=0,
-             reg_alpha=0, reg_lambda=1, scale_pos_weight=1, subsample=1,
-             tree_method='exact', validate_parameters=1, verbosity=None)
+xgb_model = xgboost.XGBRegressor(base_score=0.25, booster='gbtree', colsample_bylevel=1,
+       colsample_bynode=1, colsample_bytree=1, gamma=0, gpu_id=-1,
+       importance_type='gain', interaction_constraints='',
+       learning_rate=0.1, max_delta_step=0, max_depth=2,
+       min_child_weight=1, monotone_constraints='()',
+       n_estimators=900, n_jobs=0, num_parallel_tree=1,
+       objective='reg:squarederror', random_state=0, reg_alpha=0,
+       reg_lambda=1, scale_pos_weight=1, subsample=1, tree_method='exact',
+       validate_parameters=1, verbosity=None)
 
-xgb_model_h.fit(x_train, y_train)
+xgb_model.fit(x_train, y_train)
 ```
-
 
     XGBRegressor(base_score=0.25, booster='gbtree', colsample_bylevel=1,
            colsample_bynode=1, colsample_bytree=1, gamma=0, gpu_id=-1,
@@ -775,34 +724,32 @@ xgb_model_h.fit(x_train, y_train)
            reg_lambda=1, scale_pos_weight=1, subsample=1, tree_method='exact',
            validate_parameters=1, verbosity=None)
 
+
 #### Save Model
 
 ```python
-f = "xgb_model_h.pkl"
-pickle.dump(xgb_model_h,open(f,'wb'))
+f = "xgb_model.pkl"
+pickle.dump(xgb_model,open(f,'wb'))
 ```
 
 #### Predictions
 
 ```python
-pred_xgb_h = xgb_model_h.predict(df_test)
-print(pred_xgb_h.shape)
+pred_xgb = xgb_model.predict(df_test)
+print(pred_xgb.shape)
 ```
 
 > (1459,)
-    
 
 #### Submission
 
-
 ```python
 sub_df = pd.read_csv('sample_submission.csv')
-sub_df['SalePrice'] = pred_xgb_h
-sub_df.to_csv('sample_sub_xgb_h.csv', index = False)
+sub_df['SalePrice'] = pred_xgb
+sub_df.to_csv('sample_sub_xgb.csv', index = False)
 ```
 
 ## Decision Tree
-
 
 ```python
 from sklearn.tree import DecisionTreeClassifier
@@ -826,7 +773,6 @@ print(pred_dt.shape)
 ```
 
 > (1459,)
-    
 
 #### Submissions
 
@@ -851,7 +797,6 @@ def root_mean_squared_error(y_true, y_pred):
 ```
 
 #### Model
-
 
 ```python
 nn_model = Sequential()
@@ -901,7 +846,6 @@ print(pred_nn.shape)
 ```
 
 > (1459, 1)
-
 
 #### Submission
 
