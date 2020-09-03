@@ -28,7 +28,6 @@ https://unsplash.com/@ekamelev
 ## Inspiration
 Save humans by detecting and deploying Image Cells that contain Malaria or not!
 
-
 ## So let's begin here...
 
 ```python
@@ -132,7 +131,7 @@ valDatagen = datagen.flow_from_directory(directory='../input/cell-images-for-det
 
 > Found 5510 images belonging to 2 classes.
 
-## Model
+## Create Model
 
 We will create a CNN model where we will put 128x128 image with 3 channels(RGB) and will get a result as Infected or Uninfected.
 
@@ -163,6 +162,8 @@ model.add(Dense(1,activation='sigmoid'))
 ```python
 model.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy'])
 ```
+
+## Fit Model
 
 ```python
 cnn_model = model.fit_generator(generator = trainDatagen,
@@ -213,6 +214,7 @@ cnn_model = model.fit_generator(generator = trainDatagen,
     Epoch 20/20
     1378/1378 [==============================] - 47s 34ms/step - loss: 0.1068 - accuracy: 0.9641 - val_loss: 0.1833 - val_accuracy: 0.9459
 
+## Evaluation
 #### Accuracy
 
 ```python
