@@ -2,7 +2,7 @@
 title: "Malaria Cell Images Database"
 date: 2020-06-07
 tags: [Kaggle, Classification, Deep Learning, Machine Learning]
-excerpt: "Save humans by detecting and deploying Image Cells that contain Malaria or not!"
+excerpt: "Cell Images for Detecting Malaria"
 header:
   overlay_image: "/images/malaria-detection/homepage.jpg"
   caption: ""
