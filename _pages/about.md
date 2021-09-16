@@ -6,6 +6,6 @@ header:
   caption: "Photo by Ian Schneider on Unsplash"
 ---
 
-Software engineer with good experience in building Machine Learning models and with a demonstrated history of working in the Information Technology industry. Computer Science graduate with certifications in Machine Learning with good practice in Machine Learning, Python Programming, Data Analysis, and Problem-solving.<br>
+Adaptable professional with 3+ years of experience and proven knowledge of application development. Aiming to leverage my skills to successfully contribute in the field of Machine Learning and Data Science.<br>
 <br>
 Have a look at my [Resume](/_pages/resume.html)<br>
