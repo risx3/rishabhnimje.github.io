@@ -86,7 +86,7 @@ analytics:
 author:
   name             : "Rishabh Nimje"
   avatar           : "/images/bio-pic-org-1.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Python Developer | Machine Learning Engineer"
+  bio              : "Software Engineer | Data Science and Engineering"
   location         : "Nagpur, Maharashtra, India"
   email            : "rishabhnimje123@gmail.com"
   uri              :
@@ -113,7 +113,7 @@ author:
   vine             :
   weibo            :
   xing             :
-  youtube          : # "https://youtube.com/c/MichaelRoseDesign"
+  youtube          : # ""
 
 
 # Reading Files
