@@ -10,18 +10,22 @@ mathjax: "true"
 ---
 
 ## Context
+
 This dataset is originally from the National Institute of Diabetes and Digestive and Kidney Diseases. The objective of the dataset is to diagnostically predict whether or not a patient has diabetes, based on certain diagnostic measurements included in the dataset. Several constraints were placed on the selection of these instances from a larger database. In particular, all patients here are females at least 21 years old of Pima Indian heritage.
 
 ## Content
+
 The datasets consists of several medical predictor variables and one target variable, Outcome. Predictor variables includes the number of pregnancies the patient has had, their BMI, insulin level, age, and so on.
 
 ## Acknowledgements
+
 Smith, J.W., Everhart, J.E., Dickson, W.C., Knowler, W.C., & Johannes, R.S. (1988). Using the ADAP learning algorithm to forecast the onset of diabetes mellitus. In Proceedings of the Symposium on Computer Applications and Medical Care (pp. 261--265). IEEE Computer Society Press.
 
 ## Inspiration
+
 Can you build a machine learning model to accurately predict whether or not the patients in the dataset have diabetes or not?
 
-## So let's begin here...
+## So let's begin here
 
 ```python
 import numpy as np
@@ -172,7 +176,6 @@ data.isnull().sum()
     Age                         0
     Outcome                     0
     dtype: int64
-
 
 ### Correlation
 
@@ -332,29 +335,23 @@ data.corr()
 </table>
 </div>
 
-
 ```python
 sns.countplot(data['Outcome'])
 ```
 
-
 ![png](/images/pima-diabetes/notebook_12_1.png)
 
-
 ## Train Data
-
 
 ```python
 X = data.drop(['Outcome'], axis = 1)
 y = data['Outcome']
 ```
 
-
 ```python
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 10)
 ```
-
 
 ```python
 from sklearn.metrics import confusion_matrix, accuracy_score
@@ -402,7 +399,6 @@ random_search.fit(X_train,y_train)
               pre_dispatch='2*n_jobs', random_state=None, refit=True,
               return_train_score='warn', scoring='roc_auc', verbose=3)
 
-
 ```python
 random_search.best_estimator_
 ```
@@ -442,6 +438,7 @@ xgb_model.fit(X_train,y_train)
            validate_parameters=1, verbosity=None)
 
 ### Predictions
+
 ```python
 pred_xgb = xgb_model.predict(X_test)
 
@@ -479,6 +476,7 @@ svc_model.fit(X_train, y_train)
       tol=0.001, verbose=False))])
 
 ### Predictions
+
 ```python
 pred_svc = svc_model.predict(X_test)
 
@@ -497,7 +495,6 @@ sns.heatmap(cm_svc, annot=True)
 Confusion Matrix
 
 ![png](/images/pima-diabetes/notebook_29_1.png)
-
 
 **Accuracy for other algorithms**
 
