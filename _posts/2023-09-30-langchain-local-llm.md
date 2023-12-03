@@ -1,11 +1,11 @@
 ---
-title: "LangChain: A Powerful Tool for Local LLM Execution"
-date: 2023-09-30
-tags: [LLM, Local LLM, Generative AI, Langchain, Chroma]
-excerpt: "Working with Local LLMs"
+title: "Malaria Cell Images Database 2"
+date: 2020-06-07
+tags: [Kaggle, Classification, Deep Learning, Machine Learning]
+excerpt: "Cell Images for Detecting Malaria"
 header:
-  overlay_image: "/images/local-llm/home-page.jpg"
-  caption: "Photo by <a href="https://unsplash.com/@omilaev?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Igor Omilaev</a> on <a href="https://unsplash.com/photos/a-computer-chip-with-the-letter-a-on-top-of-it-eGGFZ5X2LnA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>"  
+  overlay_image: "/images/malaria-detection/homepage.jpg"
+  caption: ""
 mathjax: "true"
 ---
 
