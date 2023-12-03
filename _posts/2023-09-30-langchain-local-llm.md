@@ -4,7 +4,7 @@ date: 2023-09-30
 tags: [LLM, Local LLM, Generative AI, Langchain, Chroma]
 excerpt: "Working with Local LLMs"
 header:
-  overlay_image: "\images\local-llm\home-page.jpg"
+  overlay_image: "/images/local-llm/home-page.jpg"
   caption: "Photo by <a href="https://unsplash.com/@omilaev?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Igor Omilaev</a> on <a href="https://unsplash.com/photos/a-computer-chip-with-the-letter-a-on-top-of-it-eGGFZ5X2LnA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>"  
 mathjax: "true"
 ---

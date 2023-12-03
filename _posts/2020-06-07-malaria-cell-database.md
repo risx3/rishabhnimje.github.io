@@ -14,11 +14,12 @@ mathjax: "true"
 The dataset contains 2 folders
 
 * Infected
-* Uninfected<br>
+* Uninfected
 
 And a total of 27,558 images.
 
 ## Acknowledgements
+
 This Dataset is taken from the official NIH Website: https://ceb.nlm.nih.gov/repositories/malaria-datasets/
 And uploaded here, so anybody trying to start working with this dataset can get started immediately, as to download the
 dataset from NIH website is quite slow.
@@ -26,6 +27,7 @@ Photo by Егор Камелев on Unsplash
 https://unsplash.com/@ekamelev
 
 ## Inspiration
+
 Save humans by detecting and deploying Image Cells that contain Malaria or not!
 
 ## So let's begin here...
@@ -215,6 +217,7 @@ cnn_model = model.fit_generator(generator = trainDatagen,
     1378/1378 [==============================] - 47s 34ms/step - loss: 0.1068 - accuracy: 0.9641 - val_loss: 0.1833 - val_accuracy: 0.9459
 
 ## Evaluation
+
 #### Accuracy
 
 ```python
