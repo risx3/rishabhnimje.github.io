@@ -12,7 +12,7 @@ locale                   : "en-US"
 title                    : "Rishabh Nimje"
 title_separator          : "-"
 name                     : "Rishabh Nimje"
-description              : "Data Science Portfolio"
+description              : "Portfolio"
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -86,7 +86,7 @@ analytics:
 author:
   name             : "Rishabh Nimje"
   avatar           : "/images/bio-pic-org-1.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Software Engineer | Data Science and Engineering"
+  bio              : "Generative AI | NLP"
   location         : "Nagpur, Maharashtra, India"
   email            : "rishabhnimje123@gmail.com"
   uri              :
