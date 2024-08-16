@@ -5,7 +5,6 @@ header:
   image: "/images/resume-bg.jpg"
   caption: "Photo by Ian Schneider on Unsplash"
 ---
-
-Adaptable professional with 4+ years of experience and proven knowledge of application development with a good experience in building Machine Learning models. Computer Science graduate with good practice in Machine Learning, Python Programming, Data Analysis, and Problem-solving.<br>
+Skilled Software Engineer with 6+ years of experience in Software Development, Machine Learning, Natural Language Processing (NLP), and Generative AI. Successfully delivered projects across diverse industries. Proficient in building backend systems, web apps, data pipelines, and APIs.
 <br>
 Have a look at my [Resume](/_pages/resume.html)<br>
